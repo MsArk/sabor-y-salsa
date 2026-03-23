@@ -1,4 +1,9 @@
 # Astro static site — do not use jekyll-build-pages; Jekyll parses .astro front matter and fails.
+#
+# If "pages build and deployment" / jekyll-build-pages still fails on push:
+# 1) Repo → Settings → Pages → Build and deployment → Source = "GitHub Actions" (NOT "Deploy from a branch").
+# 2) Actions → workflow "pages build and deployment" → … → Disable workflow.
+#    That workflow is GitHub-managed (path dynamic/pages/pages-build-deployment) and runs Jekyll on the repo root.
 name: Deploy Astro site to Pages
 
 on:
