@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Términos y Condiciones | Sabor &amp; Salsa</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@300;400;600;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "peru-red": "#D91023",
+            "surface-container-low": "#1c1b1b",
+            "on-tertiary": "#562000",
+            "outline-variant": "#4d4635",
+            "on-secondary-fixed-variant": "#753401",
+            "on-primary": "#3c2f00",
+            "on-error": "#690005",
+            "on-tertiary-container": "#772f00",
+            "inverse-surface": "#e5e2e1",
+            "primary-fixed-dim": "#e9c349",
+            "secondary": "#ffb68c",
+            "on-tertiary-fixed": "#351000",
+            "surface-bright": "#3a3939",
+            "on-error-container": "#ffdad6",
+            "surface-container-high": "#2a2a2a",
+            "outline": "#99907c",
+            "error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb68c",
+            "surface-container-lowest": "#0e0e0e",
+            "primary-fixed": "#ffe088",
+            "primary": "#f2ca50",
+            "on-primary-fixed": "#241a00",
+            "tertiary": "#ffc1a4",
+            "secondary-fixed": "#ffdbc9",
+            "on-secondary-container": "#fb9f66",
+            "inverse-primary": "#735c00",
+            "on-primary-fixed-variant": "#574500",
+            "surface-dim": "#131313",
+            "background": "#131313",
+            "on-background": "#e5e2e1",
+            "surface-container-highest": "#353534",
+            "on-surface-variant": "#d0c5af",
+            "on-tertiary-fixed-variant": "#7a3000",
+            "primary-container": "#d4af37",
+            "inverse-on-surface": "#313030",
+            "error": "#ffb4ab",
+            "surface-tint": "#e9c349",
+            "surface": "#131313",
+            "on-secondary": "#532200",
+            "on-secondary-fixed": "#321200",
+            "tertiary-fixed-dim": "#ffb693",
+            "surface-variant": "#353534",
+            "on-surface": "#e5e2e1",
+            "secondary-container": "#753401",
+            "tertiary-fixed": "#ffdbcc",
+            "surface-container": "#201f1f",
+            "on-primary-container": "#554300",
+            "tertiary-container": "#ff9965"
+          },
+          fontFamily: {
+            "headline": ["Noto Serif"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+        },
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+  class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary bg-flares noisy-night burst-grid">
+  <!-- Top Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-nav">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-5 md:px-8 py-4 md:py-6">
+      <a class="header-logo" href="index.html" aria-label="Sabor y Salsa inicio">
+        <img alt="Sabor &amp; Salsa Logo" class="h-10 md:h-12 w-auto object-contain" src="logo.jpeg" />
+      </a>
+      <div class="hidden md:flex items-center gap-10">
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="index.html#carta">Carta</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="index.html#manifiesto">Manifiesto</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="index.html#barra">Barra Premium</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="index.html#reservas">Reservas</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="index.html#historia">Historia</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a class="hidden md:inline-flex metallic-gradient text-on-primary font-label font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest btn-hover-strong shadow-[0_0_20px_rgba(242,202,80,0.2)]"
+          href="index.html#reservas">
+          Reservar mesa
+        </a>
+        <button aria-controls="mobile-menu" aria-expanded="false"
+          class="md:hidden w-11 h-11 rounded-lg border border-primary/20 text-primary flex items-center justify-center"
+          id="mobile-menu-toggle" type="button">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+    <div class="md:hidden hidden fixed inset-0 top-[72px] h-[calc(100vh-72px)] z-40 bg-surface" id="mobile-menu">
+      <div class="flex flex-col items-center justify-center h-full w-full p-4 space-y-6">
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
+          href="index.html#carta">Carta</a>
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
+          href="index.html#manifiesto">Manifiesto</a>
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
+          href="index.html#barra">Barra Premium</a>
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
+          href="index.html#reservas">Reservas</a>
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
+          href="index.html#historia">Historia</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-32 pb-24">
+    <!-- Header Section -->
+    <section class="max-w-4xl mx-auto px-5 md:px-8 mb-16">
+      <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">Legal</span>
+      <h1 class="font-headline text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">
+        Términos y <span class="italic text-primary font-normal">Condiciones</span>
+      </h1>
+      <p class="text-on-surface-variant text-lg leading-relaxed">
+        Última actualización: Marzo 2026
+      </p>
+    </section>
+
+    <!-- Terms Content -->
+    <section class="max-w-4xl mx-auto px-5 md:px-8">
+      <div class="space-y-12">
+
+        <!-- 1. Información General -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">info</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">1. Información General</h2>
+          </div>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <p>
+              Bienvenido a <strong class="text-on-surface">Sabor & Salsa</strong>. Estos términos y condiciones regulan el uso de nuestro sitio web y los servicios de reserva ofrecidos por nuestro restaurante.
+            </p>
+            <p>
+              <strong class="text-on-surface">Datos del titular:</strong>
+            </p>
+            <ul class="list-none space-y-2 pl-4">
+              <li><span class="text-primary">•</span> Razón social: Sabor & Salsa Restauración S.L.</li>
+              <li><span class="text-primary">•</span> CIF: B-12345678</li>
+              <li><span class="text-primary">•</span> Domicilio: Calle Principal 123, 28001 Madrid, España</li>
+              <li><span class="text-primary">•</span> Email: info@saborysalsa.es</li>
+              <li><span class="text-primary">•</span> Teléfono: +34 91 123 45 67</li>
+            </ul>
+            <p>
+              Al acceder y utilizar este sitio web, usted acepta quedar vinculado por estos términos y condiciones. Si no está de acuerdo con alguna parte de estos términos, le rogamos que no utilice nuestro sitio web.
+            </p>
+          </div>
+        </article>
+
+        <!-- 2. Uso del Sitio Web -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">computer</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">2. Uso del Sitio Web</h2>
+          </div>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <p>
+              El usuario se compromete a utilizar este sitio web de conformidad con la ley, estos términos y condiciones, y las buenas costumbres generalmente aceptadas.
+            </p>
+            <p><strong class="text-on-surface">El usuario se obliga a:</strong></p>
+            <ul class="list-none space-y-2 pl-4">
+              <li><span class="text-primary">•</span> No utilizar el sitio web con fines ilícitos o fraudulentos.</li>
+              <li><span class="text-primary">•</span> No intentar acceder a áreas restringidas del sitio.</li>
+              <li><span class="text-primary">•</span> No introducir virus, código malicioso o cualquier otro elemento que pueda dañar el sitio.</li>
+              <li><span class="text-primary">•</span> Proporcionar información veraz y actualizada en los formularios de reserva.</li>
+              <li><span class="text-primary">•</span> No realizar reservas falsas o con intención de no acudir.</li>
+            </ul>
+            <p>
+              Sabor & Salsa se reserva el derecho de denegar el acceso al sitio web y/o cancelar reservas a aquellos usuarios que incumplan estos términos.
+            </p>
+          </div>
+        </article>
+
+        <!-- 3. Reservas -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">calendar_month</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">3. Reservas</h2>
+          </div>
+          <div class="space-y-6 text-on-surface-variant leading-relaxed">
+            <div>
+              <h3 class="font-headline text-xl font-bold text-on-surface mb-3">3.1 Proceso de Reserva</h3>
+              <p>
+                Las reservas pueden realizarse a través de nuestro sitio web, por teléfono o presencialmente. Al realizar una reserva, el cliente acepta estas condiciones y se compromete a cumplirlas.
+              </p>
+            </div>
+            
+            <div>
+              <h3 class="font-headline text-xl font-bold text-on-surface mb-3">3.2 Política de Cancelación</h3>
+              <div class="bg-surface p-6 rounded-lg border border-primary/20">
+                <ul class="list-none space-y-3">
+                  <li><span class="text-peru-red font-bold">•</span> <strong class="text-on-surface">Cancelación gratuita:</strong> hasta 24 horas antes de la hora reservada.</li>
+                  <li><span class="text-peru-red font-bold">•</span> <strong class="text-on-surface">Cancelación tardía:</strong> menos de 24 horas de antelación podrá conllevar un cargo de 15€ por persona.</li>
+                  <li><span class="text-peru-red font-bold">•</span> <strong class="text-on-surface">Grupos (+8 personas):</strong> cancelación gratuita hasta 48 horas antes; cancelaciones posteriores podrán conllevar un cargo del 50% del menú acordado.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-headline text-xl font-bold text-on-surface mb-3">3.3 No-Shows (Incomparecencias)</h3>
+              <div class="bg-surface p-6 rounded-lg border border-peru-red/30">
+                <p class="mb-3">
+                  En caso de no presentarse sin previo aviso (<em>no-show</em>), Sabor & Salsa se reserva el derecho de:
+                </p>
+                <ul class="list-none space-y-2">
+                  <li><span class="text-peru-red font-bold">•</span> Cobrar un importe de <strong class="text-on-surface">20€ por persona</strong> de la reserva.</li>
+                  <li><span class="text-peru-red font-bold">•</span> Denegar futuras reservas al cliente.</li>
+                  <li><span class="text-peru-red font-bold">•</span> Para grupos de más de 8 personas, el cargo será del <strong class="text-on-surface">100% del menú acordado</strong>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-headline text-xl font-bold text-on-surface mb-3">3.4 Tiempo de Espera</h3>
+              <p>
+                Se mantendrá la mesa reservada durante un máximo de <strong class="text-on-surface">15 minutos</strong> desde la hora de la reserva. Transcurrido este tiempo sin noticias del cliente, la reserva podrá ser cancelada y la mesa asignada a otros comensales.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Propiedad Intelectual -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">copyright</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">4. Propiedad Intelectual</h2>
+          </div>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <p>
+              Todos los contenidos del sitio web, incluyendo pero no limitado a textos, fotografías, gráficos, imágenes, iconos, logotipos, marcas, nombres comerciales, diseños y software, son propiedad de <strong class="text-on-surface">Sabor & Salsa</strong> o de terceros que han autorizado su uso.
+            </p>
+            <p>
+              Quedan expresamente prohibidos:
+            </p>
+            <ul class="list-none space-y-2 pl-4">
+              <li><span class="text-primary">•</span> La reproducción, distribución o modificación de los contenidos sin autorización expresa.</li>
+              <li><span class="text-primary">•</span> El uso de los contenidos con fines comerciales sin consentimiento previo.</li>
+              <li><span class="text-primary">•</span> La eliminación o alteración de avisos de derechos de autor o marcas registradas.</li>
+              <li><span class="text-primary">•</span> El uso de técnicas de ingeniería inversa sobre cualquier software del sitio.</li>
+            </ul>
+            <p>
+              La infracción de estos derechos de propiedad intelectual será perseguida conforme a la legislación vigente.
+            </p>
+          </div>
+        </article>
+
+        <!-- 5. Limitación de Responsabilidad -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">shield</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">5. Limitación de Responsabilidad</h2>
+          </div>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <p>
+              Sabor & Salsa no será responsable de:
+            </p>
+            <ul class="list-none space-y-2 pl-4">
+              <li><span class="text-primary">•</span> Daños derivados del uso inadecuado del sitio web por parte del usuario.</li>
+              <li><span class="text-primary">•</span> Interrupciones, errores o fallos en el acceso al sitio web por causas ajenas a nuestra voluntad.</li>
+              <li><span class="text-primary">•</span> Daños causados por virus o elementos lesivos introducidos por terceros.</li>
+              <li><span class="text-primary">•</span> Contenidos de sitios web de terceros a los que se pueda acceder mediante enlaces.</li>
+              <li><span class="text-primary">•</span> Alergias o intolerancias alimentarias no comunicadas previamente por el cliente.</li>
+            </ul>
+            <p>
+              <strong class="text-on-surface">Importante:</strong> Es responsabilidad del cliente informar al personal del restaurante sobre cualquier alergia o intolerancia alimentaria antes de realizar su pedido.
+            </p>
+          </div>
+        </article>
+
+        <!-- 6. Ley Aplicable -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">gavel</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">6. Ley Aplicable y Jurisdicción</h2>
+          </div>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <p>
+              Estos términos y condiciones se rigen por la <strong class="text-on-surface">legislación española</strong>.
+            </p>
+            <p>
+              Para la resolución de cualquier controversia que pudiera surgir en relación con el acceso o uso del sitio web, o con la interpretación y cumplimiento de estos términos, las partes se someten a la jurisdicción de los <strong class="text-on-surface">Juzgados y Tribunales de Madrid (España)</strong>, renunciando expresamente a cualquier otro fuero que pudiera corresponderles.
+            </p>
+            <p>
+              No obstante, si el usuario tiene la condición de consumidor, serán competentes los juzgados del domicilio del consumidor, de conformidad con la normativa vigente de protección de consumidores.
+            </p>
+          </div>
+        </article>
+
+        <!-- 7. Contacto -->
+        <article class="bg-surface-container-high p-8 md:p-10 rounded-xl border border-primary/20 glow-card">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="material-symbols-outlined text-primary text-2xl">mail</span>
+            <h2 class="font-headline text-2xl md:text-3xl font-bold">7. Contacto</h2>
+          </div>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <p>
+              Para cualquier consulta relacionada con estos términos y condiciones, puede contactarnos a través de:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <div class="bg-surface p-6 rounded-lg border border-outline-variant/20">
+                <h4 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Email</h4>
+                <a href="mailto:legal@saborysalsa.es" class="text-on-surface hover:text-primary transition-colors">legal@saborysalsa.es</a>
+              </div>
+              <div class="bg-surface p-6 rounded-lg border border-outline-variant/20">
+                <h4 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Teléfono</h4>
+                <a href="tel:+34911234567" class="text-on-surface hover:text-primary transition-colors">+34 91 123 45 67</a>
+              </div>
+              <div class="bg-surface p-6 rounded-lg border border-outline-variant/20 md:col-span-2">
+                <h4 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Dirección Postal</h4>
+                <p class="text-on-surface">Sabor & Salsa Restauración S.L.<br>Calle Principal 123<br>28001 Madrid, España</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Back to Home -->
+      <div class="mt-16 text-center">
+        <a href="index.html" class="inline-flex items-center gap-3 text-primary font-label font-bold uppercase tracking-widest btn-hover-soft px-6 py-3 rounded-lg border border-primary/30">
+          <span class="material-symbols-outlined">arrow_back</span>
+          Volver al inicio
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-low w-full py-16 px-5 md:px-8 border-t border-primary/10">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8 w-full max-w-7xl mx-auto">
+      <div class="flex flex-col items-center md:items-start gap-4">
+        <a class="header-logo" href="index.html" aria-label="Sabor y Salsa inicio">
+          <img alt="Sabor &amp; Salsa Logo" class="h-10 w-auto object-contain" src="logo.jpeg" />
+        </a>
+        <p class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/40 text-center md:text-left">
+          © 2026 msarknet.
+        </p>
+      </div>
+      <div class="flex gap-5 md:gap-8 flex-wrap justify-center">
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover" href="#">Privacy
+          Policy</a>
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-primary border-b border-primary pb-1" href="terminos.html">Terms of
+          Service</a>
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover" href="#">Press
+          Kit</a>
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover"
+          href="index.html#reservas">Contact</a>
+      </div>
+      <div class="flex gap-4">
+        <a class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/20 text-on-surface/60 icon-hover"
+          href="#">
+          <span class="material-symbols-outlined text-lg">share</span>
+        </a>
+        <a class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/20 text-on-surface/60 icon-hover"
+          href="#">
+          <span class="material-symbols-outlined text-lg">map</span>
+        </a>
+      </div>
+    </div>
+    <div class="mt-12 text-center">
+      <p class="text-[10px] font-label text-on-surface/20 uppercase tracking-[0.5em]">El Callao · Lima · Madrid</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
