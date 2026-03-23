@@ -578,17 +578,17 @@
         </button>
       </div>
     </div>
-    <div class="md:hidden hidden px-5 pb-5" id="mobile-menu">
-      <div class="bg-surface-container-high rounded-xl border border-outline-variant/20 p-4 space-y-2">
-        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-primary spark-underline nav-item-active"
+    <div class="md:hidden hidden fixed inset-0 top-[72px] h-[calc(100vh-72px)] z-40 bg-surface" id="mobile-menu">
+      <div class="flex flex-col items-center justify-center h-full w-full p-4 space-y-6">
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-primary text-center spark-underline nav-item-active"
           href="#carta">Carta</a>
-        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover"
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
           href="#manifiesto">Manifiesto</a>
-        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover" href="#barra">Barra
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover" href="#barra">Barra
           Premium</a>
-        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover"
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
           href="#reservas">Reservas</a>
-        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover"
+        <a class="block py-3 text-sm uppercase tracking-[0.2em] text-on-surface/80 text-center nav-link-hover"
           href="#historia">Historia</a>
       </div>
     </div>
@@ -649,107 +649,183 @@
         </div>
       </div>
     </section>
-    <!-- Menu Highlights: Carta optimizada -->
-    <section class="py-24 md:py-32 bg-surface-container-low reveal" id="carta" style="--reveal-delay: 120ms">
+    <!-- Featured Dish: Pollo a la Brasa -->
+    <section class="py-24 md:py-32 bg-surface reveal" id="pollo" style="--reveal-delay: 120ms">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div class="w-full lg:w-1/2 relative group">
+          <div class="absolute -inset-4 bg-primary/10 rounded-xl blur-2xl group-hover:bg-primary/20 transition-all duration-700"></div>
+          <img alt="Pollo a la Brasa" class="relative rounded-xl w-full h-[400px] md:h-[600px] object-cover shadow-2xl" data-alt="Roasted whole chicken with crispy skin on a black plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGOU4nBjnVal6GjGE73eHoGw3A9WvYHYUx2Z_l2pD96HBrlcj602ymQbN8E3kuJl98asiJTsFRrzuKCxd0eWhvrutF_RU7bukM1hmi6jk7U_KmYEK6tTk5UhCPCFu9QJQYZJda42NZ20ukM7Ys415Ar3UWtfavQby0Ibd9t8IoqE_Njf7WXjPjy3-Y95R-s4EWGIgsmVXmQsgVyAHH62vS5fDrEa564vjXePVUE3VfsCGW-JW060RWZTLGaZAbLHAph86KnV6QMBw" />
+          <div class="absolute top-8 left-8 bg-secondary-container text-on-secondary-container px-4 py-2 font-label text-[10px] font-extrabold uppercase tracking-widest rounded-full">
+            Chef's Masterpiece
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2">
+          <h2 class="font-headline text-4xl md:text-5xl font-bold mb-8 leading-tight">El Pollo <br/><span class="text-primary italic font-normal">de la Calle Real</span></h2>
+          <p class="font-body text-on-surface-variant text-lg leading-relaxed mb-10 italic border-l-2 border-primary/30 pl-6">
+            "Asado lento, fuego real, sabor del Callao"
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 menu-option-card">
+              <span class="font-label text-on-surface-variant text-[10px] uppercase tracking-widest mb-2 block">Cuarto</span>
+              <div class="text-2xl font-headline font-bold text-primary">$18</div>
+            </div>
+            <div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant/10 menu-option-card">
+              <span class="font-label text-on-surface-variant text-[10px] uppercase tracking-widest mb-2 block">Medio</span>
+              <div class="text-2xl font-headline font-bold text-primary">$32</div>
+            </div>
+            <div class="bg-surface-container-high p-6 rounded-xl border border-primary/30 ring-1 ring-primary/20 menu-option-card">
+              <span class="font-label text-primary text-[10px] uppercase tracking-widest mb-2 block">Entero</span>
+              <div class="text-2xl font-headline font-bold text-primary">$58</div>
+            </div>
+          </div>
+          <div class="bg-surface-container-low rounded-xl border border-outline-variant/10 p-5 mb-8">
+            <h4 class="font-label text-primary uppercase tracking-[0.18em] text-[10px] mb-3">Salsas caseras</h4>
+            <div class="flex flex-wrap gap-3 text-sm text-on-surface">
+              <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Aji amarillo</span>
+              <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Huancaina</span>
+              <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Rocoto</span>
+            </div>
+          </div>
+          <button class="text-primary font-label font-bold flex items-center gap-3 group btn-hover-soft px-4 py-2 rounded-lg border border-transparent">
+            EXPLORAR EL PROCESO
+            <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Menu Highlights: Bento Grid Style -->
+    <section class="py-24 md:py-32 bg-surface-container-low reveal" id="carta" style="--reveal-delay: 150ms">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="flex justify-between items-end mb-16">
           <div>
-            <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">La Carta</span>
+            <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">La Seleccion</span>
             <h2 class="font-headline text-5xl font-bold mt-4">Nuestra Carta</h2>
           </div>
           <p class="font-body text-on-surface-variant max-w-xs text-right hidden md:block">
-            Recorre el menu por intensidad: brasa protagonista, calle y cocina caliente.
+            Un viaje sensorial por los distritos gastronomicos de Lima.
           </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <article class="lg:col-span-7 bg-surface-container-high rounded-xl overflow-hidden border border-primary/15 glow-card group">
-            <div class="h-64 md:h-96 overflow-hidden">
-              <img alt="🔥 POLLO A LA BRASA (especialidad de la casa)"
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGOU4nBjnVal6GjGE73eHoGw3A9WvYHYUx2Z_l2pD96HBrlcj602ymQbN8E3kuJl98asiJTsFRrzuKCxd0eWhvrutF_RU7bukM1hmi6jk7U_KmYEK6tTk5UhCPCFu9QJQYZJda42NZ20ukM7Ys415Ar3UWtfavQby0Ibd9t8IoqE_Njf7WXjPjy3-Y95R-s4EWGIgsmVXmQsgVyAHH62vS5fDrEa564vjXePVUE3VfsCGW-JW060RWZTLGaZAbLHAph86KnV6QMBw" />
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- Para empezar el ritmo (Large) -->
+          <div class="md:col-span-8 bg-surface-container-high p-8 rounded-xl flex flex-col justify-between min-h-[400px] glow-card">
+            <div class="h-48 mb-6 overflow-hidden rounded-lg">
+              <img alt="Para empezar el ritmo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVS8zeLT1MR4EVxr8lGcd1PTnx9WCAvF2YG-Izgb-y30hO2LFRt7t08qThzB0imKEeXHvN1O4NryQu5KVn3C4r3FsV4xznmrcTD9ilKbCtkGCCnsuDNvWbkBL63IfSK3VAp1qV6EHCBbD6OtCmrANXNluFNfaXRbafGZPeDkdeQqt_3uz8sVnRKQtff8fP6C5rs4c-SutrcU_kdSxT_LlLH4PjJTj6k478XUX4poWw2yGHFbIU7U8HUP9Gl5Ff9QGEPwTHA_vj5Yo"/>
             </div>
-            <div class="p-8 md:p-10">
-              <span class="inline-flex bg-secondary-container/20 text-secondary px-3 py-1 rounded-full font-label text-[9px] uppercase tracking-widest mb-5">Especialidad de la casa</span>
-              <h3 class="font-headline text-3xl md:text-4xl font-bold leading-tight mb-4">🔥 POLLO A LA BRASA <span class="italic font-normal text-primary">(especialidad de la casa)</span></h3>
-              <p class="font-body text-on-surface-variant text-base md:text-lg italic border-l-2 border-primary/30 pl-5 mb-8">Asado lento, fuego real, sabor del Callao</p>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10 menu-option-card">
-                  <p class="font-body text-sm text-on-surface mb-2">1/4 pollo + patatas + ensalada</p>
-                  <p class="font-headline text-2xl font-bold text-primary">XX€</p>
+            <div>
+              <span class="bg-secondary-container/20 text-secondary px-3 py-1 rounded-full font-label text-[9px] uppercase tracking-widest mb-6 inline-block">Para empezar el ritmo</span>
+              <div class="space-y-8">
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-2">Tequenos</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Crujientes palitos rellenos de queso fundido.</p>
+                  </div>
+                  <span class="font-headline text-primary font-bold">$12</span>
                 </div>
-                <div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10 menu-option-card">
-                  <p class="font-body text-sm text-on-surface mb-2">1/2 pollo + patatas + ensalada</p>
-                  <p class="font-headline text-2xl font-bold text-primary">XX€</p>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-2">Yuca frita</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Yuca dorada con salsa huancaina.</p>
+                  </div>
+                  <span class="font-headline text-primary font-bold">$10</span>
                 </div>
-                <div class="bg-surface-container-highest p-5 rounded-xl border border-outline-variant/10 menu-option-card">
-                  <p class="font-body text-sm text-on-surface mb-2">Pollo entero</p>
-                  <p class="font-headline text-2xl font-bold text-primary">XX€</p>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-2">Alitas criollas</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Alitas marinadas al estilo criollo peruano.</p>
+                  </div>
+                  <span class="font-headline text-primary font-bold">$14</span>
                 </div>
-              </div>
-              <div class="bg-surface-container-low rounded-xl border border-outline-variant/10 p-5">
-                <h4 class="font-label text-primary uppercase tracking-[0.18em] text-[10px] mb-3">Salsas caseras</h4>
-                <div class="flex flex-wrap gap-3 text-sm text-on-surface">
-                  <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Ají amarillo 🌶️</span>
-                  <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Huancaína 🧀</span>
-                  <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Rocoto 🔥</span>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-2">Causa limena</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Papa amarilla con aji amarillo y relleno de pollo.</p>
+                  </div>
+                  <span class="font-headline text-primary font-bold">$16</span>
                 </div>
               </div>
             </div>
-          </article>
-          <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-            <article class="bg-surface-container-high p-7 rounded-xl border border-outline-variant/10 glow-card">
-              <h3 class="font-headline text-2xl font-bold mb-5">Para empezar el ritmo</h3>
-              <ul class="space-y-3 text-on-surface-variant">
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tequeños</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Yuca frita</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Alitas criollas</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Causa limeña</li>
-              </ul>
-            </article>
-            <article class="bg-surface p-7 rounded-xl border border-outline-variant/10 glow-card">
-              <h3 class="font-headline text-2xl font-bold mb-5">Calle &amp; sabor</h3>
-              <ul class="space-y-3 text-on-surface-variant">
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Pan con pollo</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Anticuchos</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tacos peruanos</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Chicharrón bites</li>
-              </ul>
-            </article>
-            <article class="bg-surface-container-highest p-7 rounded-xl border border-outline-variant/10 glow-card">
-              <h3 class="font-headline text-2xl font-bold mb-5">Fuego en cocina</h3>
-              <ul class="space-y-3 text-on-surface-variant">
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Lomo saltado</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Arroz chaufa</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tallarines</li>
-              </ul>
-            </article>
-            <article class="bg-surface p-7 rounded-xl border border-outline-variant/10 glow-card">
-              <h3 class="font-headline text-2xl font-bold mb-5">Postres</h3>
-              <ul class="space-y-3 text-on-surface-variant">
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tres leches</li>
-                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tarta de maracuyá</li>
-              </ul>
-            </article>
-            <article class="bg-surface-container-high p-7 rounded-xl border border-outline-variant/10 glow-card">
-              <h3 class="font-headline text-2xl font-bold mb-5">El ritmo líquido</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-on-surface-variant">
-                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Pisco sour 🍸</div>
-                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Cócteles latinos</div>
-                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Cervezas</div>
-                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Refrescos</div>
+            <button class="w-fit text-on-surface/50 hover:text-primary font-label text-[10px] font-bold uppercase tracking-widest transition-colors mt-8 spark-underline">Ver todos los entrantes</button>
+          </div>
+          <!-- Calle & sabor (Tall) -->
+          <div class="md:col-span-4 bg-surface rounded-xl overflow-hidden border border-outline-variant/10 group glow-card">
+            <div class="h-48 overflow-hidden">
+              <img alt="Calle y sabor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Close up of street tacos with fresh salsa" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcZkwn4_aVtJm8uxMNd3KFPROAPeLoh5bonwUu7DaLC9PSbWHSz9z4XorxJI41RZmAcjf24DyK4mcEKhkvmh5d_GMAvcPRlIGHbPgkXkj0ERaCp1YfTDAfu5YNHE6b7vyciseHlKcKyC5B2OZLTzyaO6Fc05oCk0Q32niZrm75D9vstBE_2Wk6fvVdw4o-Fm2QARq8KYqshMp69ytq8pwod5tCKCO5TOuenEM2tGJbmf4fgLIEmgjDkbpdVNqPCrbOus994wgNt58"/>
+            </div>
+            <div class="p-8">
+              <span class="text-primary font-label text-[9px] uppercase tracking-widest mb-4 block">Calle &amp; sabor</span>
+              <div class="space-y-4">
+                <div class="menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <h3 class="font-headline text-lg font-bold mb-1">Pan con pollo</h3>
+                  <span class="font-headline text-primary font-bold">$10</span>
+                </div>
+                <div class="menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <h3 class="font-headline text-lg font-bold mb-1">Anticuchos</h3>
+                  <span class="font-headline text-primary font-bold">$16</span>
+                </div>
+                <div class="menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <h3 class="font-headline text-lg font-bold mb-1">Tacos peruanos</h3>
+                  <span class="font-headline text-primary font-bold">$14</span>
+                </div>
+                <div class="menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <h3 class="font-headline text-lg font-bold mb-1">Chicharron bites</h3>
+                  <span class="font-headline text-primary font-bold">$12</span>
+                </div>
               </div>
-            </article>
+            </div>
+          </div>
+          <!-- Fuego en cocina -->
+          <div class="md:col-span-6 bg-surface-container-highest p-8 rounded-xl glow-card">
+            <span class="text-primary font-label text-[9px] uppercase tracking-widest mb-6 block">Fuego en cocina</span>
+            <div class="flex justify-between items-center group cursor-pointer py-4 border-b border-outline-variant/10 menu-option-card rounded-lg px-3 border-transparent">
+              <div>
+                <h4 class="font-headline text-lg font-bold group-hover:text-primary transition-colors">Lomo Saltado</h4>
+                <p class="font-body text-xs text-on-surface-variant mt-1">Wok de alto fuego con reduccion de pisco.</p>
+              </div>
+              <span class="font-headline font-bold">$28</span>
+            </div>
+            <div class="flex justify-between items-center group cursor-pointer py-4 border-b border-outline-variant/10 menu-option-card rounded-lg px-3 border-transparent">
+              <div>
+                <h4 class="font-headline text-lg font-bold group-hover:text-primary transition-colors">Arroz chaufa</h4>
+                <p class="font-body text-xs text-on-surface-variant mt-1">Arroz salteado al wok con pollo y verduras.</p>
+              </div>
+              <span class="font-headline font-bold">$22</span>
+            </div>
+            <div class="flex justify-between items-center group cursor-pointer py-4 menu-option-card rounded-lg px-3 border border-transparent">
+              <div>
+                <h4 class="font-headline text-lg font-bold group-hover:text-primary transition-colors">Tallarines</h4>
+                <p class="font-body text-xs text-on-surface-variant mt-1">Pasta salteada estilo peruano con carne.</p>
+              </div>
+              <span class="font-headline font-bold">$20</span>
+            </div>
+          </div>
+          <!-- Postres -->
+          <div class="md:col-span-6 relative overflow-hidden rounded-xl bg-surface glow-card">
+            <img alt="Postres" class="absolute inset-0 w-full h-full object-cover opacity-40" data-alt="Beautifully plated dessert with cream and fruit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOqhGJnSUU8kAi100hgeP7V_qJ-TtlpQe6arLedIiAcJxGSV1y_j9IrdZbPSipLzpOl3o2YM7WJlsKRy3rdrXxzsDk9uUAgJIgudYaS77C8x-WtERacDjSi7wflrzYfcQM4P27R05kbvyh3URycShgF-u-UTlqcg8rnLellEqbFxQm1OacK_YcAx5UUBtR7Q8Sajru2tUJzzmUAdZlULBycJy6KMmM16qHBTyVV-uU2ILV7PmcUDqliDGRGKd_3tlwFhcsGBnNoLA"/>
+            <div class="relative z-10 p-8 flex flex-col justify-end h-full min-h-[300px] bg-gradient-to-t from-surface to-transparent">
+              <span class="text-primary font-label text-[9px] uppercase tracking-widest mb-2 block">Postres</span>
+              <h3 class="font-headline text-3xl font-bold mb-4">Dulce Final</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent bg-surface/60 backdrop-blur-sm">
+                  <span class="font-headline text-lg font-bold">Tres leches</span>
+                  <span class="font-headline text-primary font-bold">$10</span>
+                </div>
+                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent bg-surface/60 backdrop-blur-sm">
+                  <span class="font-headline text-lg font-bold">Tarta de maracuya</span>
+                  <span class="font-headline text-primary font-bold">$12</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <!-- Liquid Rhythm: Cócteles & Barra -->
-    <section class="py-24 md:py-32 bg-surface text-center reveal" id="barra" style="--reveal-delay: 150ms">
+    <section class="py-24 md:py-32 bg-surface text-center reveal" id="barra" style="--reveal-delay: 180ms">
       <div class="max-w-5xl mx-auto px-5 md:px-8">
         <span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="local_bar">local_bar</span>
-        <h2 class="font-headline text-5xl font-bold mb-16 italic">Ritmo Líquido</h2>
+        <h2 class="font-headline text-5xl font-bold mb-16 italic">El Ritmo Liquido</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div class="space-y-4">
+          <div class="space-y-4 glow-card p-4 rounded-xl">
             <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-2xl">
               <img alt="Pisco Sour" class="w-full h-full object-cover"
                 data-alt="Classic Pisco Sour with foam and bitters"
@@ -759,25 +835,59 @@
             <p class="font-body text-sm text-on-surface-variant">Quebranta, clara de huevo y gotas de amargo.</p>
             <span class="text-primary font-headline font-bold text-lg">$14</span>
           </div>
-          <div class="space-y-4 pt-12 md:pt-0">
+          <div class="space-y-4 pt-12 md:pt-0 glow-card p-4 rounded-xl">
             <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-2xl scale-110 border-2 border-primary/20">
               <img alt="Chilcano" class="w-full h-full object-cover" data-alt="Fresh cocktail with lime and ginger ale"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkEjhqPTy7vRsx5dd1UEbEttFL5on8lku7GTfvzPiITPTAMyWfjdV8oXiEdIlf6jYkAeuSlrNJkB0pdsAmdblm17o9dBHGH3VTXAsjXwCphDVrCZp8svYvtax79D8WGCpQF38F7HX5iWySdc5L71FNZl4vpCtj2EvCcIUJ76xYEXZ2luCROObJi7VKKaSPOnQ4t4jqRlS22OvzYYJ6S3bxP1s7B0Mvr-w78K0MoUy_nP7ymFbUG1-u4gJSID23AUb0Br2pgfuJong" />
             </div>
-            <h4 class="font-headline text-xl font-bold text-primary">Chilcano Clásico</h4>
+            <h4 class="font-headline text-xl font-bold text-primary">Chilcano Clasico</h4>
             <p class="font-body text-sm text-on-surface-variant">Pisco Acholado, ginger ale y zumo de lima.</p>
             <span class="text-primary font-headline font-bold text-lg">$12</span>
           </div>
-          <div class="space-y-4">
+          <div class="space-y-4 glow-card p-4 rounded-xl">
             <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-2xl">
               <img alt="Mojito de Maracuya" class="w-full h-full object-cover"
                 data-alt="Tropical passion fruit cocktail with mint"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqwCAj2gfmF5DJ7qjUw-xLQA4RN2TiVk4MEYeLmypjquvfDVZNdg1rEjJYOfqcFO7bl_E6D-gpGzPjb9V__7MBNF0CYNt8QrFKAu1nXNA5GubUbpnBTP7vjvAZmI0s0yY8dBgvRsiAhMOSwjd7MqoAd3MOMOTPqW4k_cGumH9HoC-maYVp-ZZajft-6tOlvPlLvAK9G8Qu9CyoOKQ2IIow128RzdaFDB6ZIUfPnl0ncW8jCM7T09hehIa4ZBMKJ82mAUVu5n-_hgg" />
             </div>
-            <h4 class="font-headline text-xl font-bold">Mojito de Maracuyá</h4>
-            <p class="font-body text-sm text-on-surface-variant">Fruta de la pasión, ron blanco y hierbabuena fresca.
-            </p>
+            <h4 class="font-headline text-xl font-bold">Mojito de Maracuya</h4>
+            <p class="font-body text-sm text-on-surface-variant">Fruta de la pasion, ron blanco y hierbabuena fresca.</p>
             <span class="text-primary font-headline font-bold text-lg">$15</span>
+          </div>
+        </div>
+        <!-- Subsecciones de bebidas -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+          <div class="bg-surface-container-high p-6 rounded-xl glow-card">
+            <h5 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Cocteles latinos</h5>
+            <ul class="space-y-2 text-sm text-on-surface-variant">
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Caipirinha</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Margarita</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Cuba Libre</li>
+            </ul>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-xl glow-card">
+            <h5 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Cervezas</h5>
+            <ul class="space-y-2 text-sm text-on-surface-variant">
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Cusquena</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Pilsen</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Artesanales</li>
+            </ul>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-xl glow-card">
+            <h5 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Refrescos</h5>
+            <ul class="space-y-2 text-sm text-on-surface-variant">
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Chicha morada</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Maracuya</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Limonada</li>
+            </ul>
+          </div>
+          <div class="bg-surface-container-high p-6 rounded-xl glow-card">
+            <h5 class="font-label text-primary text-[10px] uppercase tracking-widest mb-3">Vinos</h5>
+            <ul class="space-y-2 text-sm text-on-surface-variant">
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Tintos</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Blancos</li>
+              <li class="menu-option-card rounded px-2 py-1 border border-transparent">Espumantes</li>
+            </ul>
           </div>
         </div>
       </div>
