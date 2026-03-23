@@ -1,0 +1,97 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Nav from "@/shared/components/Nav.astro";
+import Footer from "@/shared/components/Footer.astro";
+---
+
+<BaseLayout title="Politica de Privacidad | Sabor &amp; Salsa">
+  <Nav />
+  <main class="pt-32 pb-24">
+    <section class="max-w-4xl mx-auto px-5 md:px-8 mb-16">
+      <span class="font-label text-primary uppercase tracking-[0.4em] text-xs mb-6 block">Legal</span>
+      <h1 class="font-headline text-4xl md:text-6xl font-bold text-on-surface leading-tight mb-6">
+        Politica de <span class="italic text-primary font-normal">Privacidad</span>
+      </h1>
+      <p class="text-on-surface-variant text-lg leading-relaxed">En Sabor &amp; Salsa nos tomamos muy en serio la proteccion de tus datos personales. Esta politica explica como recopilamos, usamos y protegemos tu informacion.</p>
+      <p class="text-on-surface-variant/60 text-sm mt-4">Ultima actualizacion: Marzo <span data-current-year></span></p>
+    </section>
+    <section class="max-w-4xl mx-auto px-5 md:px-8 space-y-12">
+      <article class="bg-surface-container-high p-8 rounded-xl border border-outline-variant/10">
+        <h2 class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">business</span> Responsable del Tratamiento
+        </h2>
+        <div class="text-on-surface-variant leading-relaxed space-y-3">
+          <p><strong class="text-on-surface">Identidad:</strong> Sabor &amp; Salsa S.L.</p>
+          <p><strong class="text-on-surface">Direccion:</strong> Jr. Bolognesi 414, Barranco, Lima</p>
+          <p><strong class="text-on-surface">Email de contacto:</strong> privacidad@saborysalsa.com</p>
+          <p><strong class="text-on-surface">Telefono:</strong> +51 XXX XXX XXX</p>
+        </div>
+      </article>
+      <article class="bg-surface-container-high p-8 rounded-xl border border-outline-variant/10">
+        <h2 class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">database</span> Datos que Recopilamos
+        </h2>
+        <div class="text-on-surface-variant leading-relaxed space-y-4">
+          <p>Recopilamos los siguientes tipos de datos personales:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-surface p-5 rounded-lg border border-outline-variant/20">
+              <h3 class="font-label text-primary text-sm uppercase tracking-wider mb-2">Datos de Reservas</h3>
+              <ul class="text-sm space-y-1"><li>- Nombre completo</li><li>- Numero de telefono</li><li>- Fecha y hora de reserva</li><li>- Numero de comensales</li><li>- Preferencias o solicitudes especiales</li></ul>
+            </div>
+            <div class="bg-surface p-5 rounded-lg border border-outline-variant/20">
+              <h3 class="font-label text-primary text-sm uppercase tracking-wider mb-2">Datos de Contacto</h3>
+              <ul class="text-sm space-y-1"><li>- Direccion de email</li><li>- Mensajes enviados</li><li>- Historial de comunicaciones</li></ul>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="bg-surface-container-high p-8 rounded-xl border border-outline-variant/10">
+        <h2 class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">target</span> Finalidad del Tratamiento
+        </h2>
+        <div class="text-on-surface-variant leading-relaxed space-y-3">
+          <p>Utilizamos tus datos personales para las siguientes finalidades:</p>
+          <ul class="list-disc list-inside space-y-2 mt-4 ml-4">
+            <li>Gestionar y confirmar tus reservas en nuestro restaurante</li>
+            <li>Comunicarnos contigo sobre el estado de tu reserva</li>
+            <li>Responder a tus consultas y solicitudes de informacion</li>
+            <li>Enviarte informacion sobre eventos especiales y promociones (solo si has dado tu consentimiento)</li>
+            <li>Mejorar nuestros servicios y la experiencia del cliente</li>
+            <li>Cumplir con obligaciones legales y fiscales</li>
+          </ul>
+        </div>
+      </article>
+      <article class="bg-surface-container-high p-8 rounded-xl border border-outline-variant/10">
+        <h2 class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">shield_person</span> Tus Derechos (ARCO)
+        </h2>
+        <div class="text-on-surface-variant leading-relaxed space-y-4">
+          <p>Como titular de tus datos, tienes derecho a:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-surface p-5 rounded-lg border border-outline-variant/20"><h3 class="font-label text-peru-red text-sm uppercase tracking-wider mb-2">Acceso</h3><p class="text-sm">Conocer que datos personales tenemos sobre ti.</p></div>
+            <div class="bg-surface p-5 rounded-lg border border-outline-variant/20"><h3 class="font-label text-peru-red text-sm uppercase tracking-wider mb-2">Rectificacion</h3><p class="text-sm">Solicitar la correccion de datos inexactos.</p></div>
+            <div class="bg-surface p-5 rounded-lg border border-outline-variant/20"><h3 class="font-label text-peru-red text-sm uppercase tracking-wider mb-2">Cancelacion</h3><p class="text-sm">Solicitar la eliminacion de tus datos.</p></div>
+            <div class="bg-surface p-5 rounded-lg border border-outline-variant/20"><h3 class="font-label text-peru-red text-sm uppercase tracking-wider mb-2">Oposicion</h3><p class="text-sm">Oponerte al tratamiento de tus datos.</p></div>
+          </div>
+        </div>
+      </article>
+      <article class="bg-surface-container-high p-8 rounded-xl border border-primary/30">
+        <h2 class="font-headline text-2xl font-bold mb-4 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">mail</span> Contacto para Ejercer tus Derechos
+        </h2>
+        <div class="text-on-surface-variant leading-relaxed space-y-4">
+          <p>Para ejercer cualquiera de tus derechos contactanos:</p>
+          <div class="bg-surface p-6 rounded-lg border border-outline-variant/20 mt-4">
+            <p class="mb-2"><strong class="text-on-surface">Email:</strong> privacidad@saborysalsa.com</p>
+            <p class="mb-2"><strong class="text-on-surface">Direccion postal:</strong> Jr. Bolognesi 414, Barranco, Lima</p>
+            <p><strong class="text-on-surface">Asunto sugerido:</strong> "Ejercicio de derechos ARCO"</p>
+          </div>
+        </div>
+      </article>
+      <div class="text-center pt-8">
+        <a class="metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong inline-block" href="/">Volver al Inicio</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

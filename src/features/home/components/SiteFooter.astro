@@ -1,0 +1,71 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="mt-24 px-6 py-12 md:px-12"
+  style="background: var(--surface-container-low); border-top: 1px solid var(--outline-variant);"
+>
+  <div class="mx-auto max-w-6xl">
+    <div class="grid gap-10 md:grid-cols-3">
+      <!-- Brand -->
+      <div class="space-y-3">
+        <p class="headline-md gold-text" style="font-size: 1.5rem;">
+          Sabor y Salsa
+        </p>
+        <p class="label-category" style="color: var(--on-surface-variant);">
+          Street Food Latino · Lima, Perú
+        </p>
+        <p class="text-sm leading-relaxed" style="color: var(--on-surface-variant);">
+          Una experiencia culinaria que captura el alma de la calle limeña con técnica de autor.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="space-y-3">
+        <p class="label-category" style="color: var(--primary);">Navegación</p>
+        <nav class="flex flex-col gap-2">
+          {[
+            { label: "Inicio", href: "/" },
+            { label: "Agenda", href: "/agenda" },
+            { label: "Proceso", href: "/proceso" },
+            { label: "Contacto", href: "/contacto" },
+            { label: "Términos", href: "/terminos" },
+            { label: "Privacidad", href: "/privacidad" },
+          ].map((link) => (
+            <a
+              href={link.href}
+              class="text-sm transition-colors hover:text-[var(--primary)]"
+              style="color: var(--on-surface-variant);"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Contact -->
+      <div class="space-y-3">
+        <p class="label-category" style="color: var(--primary);">Contacto</p>
+        <address class="not-italic space-y-2 text-sm" style="color: var(--on-surface-variant);">
+          <p>Av. La Mar 770, Miraflores</p>
+          <p>Lima, Perú</p>
+          <a href="tel:+5112345678" class="block hover:text-[var(--primary)] transition-colors">
+            +51 1 234 5678
+          </a>
+          <a href="mailto:hola@saborysal.sa" class="block hover:text-[var(--primary)] transition-colors">
+            hola@saborysal.sa
+          </a>
+        </address>
+      </div>
+    </div>
+
+    <div
+      class="mt-10 flex flex-col items-center justify-between gap-4 pt-8 text-xs md:flex-row"
+      style="border-top: 1px solid var(--outline-variant); color: var(--on-surface-variant);"
+    >
+      <p>© {year} Sabor y Salsa. Todos los derechos reservados.</p>
+      <p>Hecho con sabor en Lima, Perú.</p>
+    </div>
+  </div>
+</footer>

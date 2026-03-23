@@ -1,0 +1,222 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Nav from "@/shared/components/Nav.astro";
+import Footer from "@/shared/components/Footer.astro";
+---
+
+<BaseLayout title="El Proceso | Sabor &amp; Salsa">
+  <Nav />
+  <main>
+    <!-- Hero -->
+    <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-24" id="hero">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-surface/40 via-surface/60 to-surface"></div>
+        <div class="hero-burst-orb o1" aria-hidden="true"></div>
+        <div class="hero-burst-orb o2" aria-hidden="true"></div>
+      </div>
+      <div class="relative z-10 text-center max-w-4xl px-6 reveal in">
+        <span class="font-label text-primary uppercase tracking-[0.4em] text-xs mb-6 block">Tradicion &amp; Fuego</span>
+        <h1 class="hero-title font-headline text-5xl md:text-7xl lg:text-8xl font-bold text-on-surface leading-none tracking-tighter mb-8">
+          EL <span class="italic font-normal text-primary">PROCESO</span>
+        </h1>
+        <p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-8 leading-relaxed">
+          Cada pollo a la brasa cuenta una historia. Desde la seleccion del ave hasta el momento perfecto sobre las brasas, descubre el ritual que nos define.
+        </p>
+        <div class="flex items-center justify-center gap-2 text-primary">
+          <span class="material-symbols-outlined">local_fire_department</span>
+          <span class="font-label text-sm uppercase tracking-widest">El arte del asado peruano</span>
+          <span class="material-symbols-outlined">local_fire_department</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso Steps -->
+    <section class="py-24 md:py-32 bg-surface-container-low reveal" style="--reveal-delay: 70ms">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center mb-20">
+          <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">Los Cuatro Pilares</span>
+          <h2 class="font-headline text-4xl md:text-5xl font-bold mt-4">Nuestro Ritual</h2>
+        </div>
+
+        <!-- Step 1: La Seleccion -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-32">
+          <div class="order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6">
+              <span class="font-headline text-6xl md:text-8xl font-bold text-primary/20">01</span>
+              <div>
+                <span class="font-label text-peru-red uppercase tracking-[0.2em] text-[10px] font-bold">Primer Paso</span>
+                <h3 class="font-headline text-3xl md:text-4xl font-bold">La Seleccion</h3>
+              </div>
+            </div>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+              Todo comienza con la eleccion perfecta. Trabajamos exclusivamente con <span class="text-primary font-semibold">pollos de corral</span>,
+              criados en libertad y alimentados de forma natural. Cada ave es seleccionada a mano por su tamano, textura y frescura.
+            </p>
+            <div class="bg-surface-container-high p-6 rounded-xl border border-primary/20">
+              <h4 class="font-label text-primary text-[10px] uppercase tracking-widest mb-4">Lo que buscamos</h4>
+              <ul class="space-y-3 text-on-surface-variant">
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Pollos de corral de 1.2-1.5 kg</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Piel firme y color uniforme</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Proveedores locales certificados</li>
+              </ul>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative group">
+            <div class="absolute -inset-4 bg-primary/10 rounded-xl blur-2xl group-hover:bg-primary/20 transition-all duration-700"></div>
+            <div class="relative h-[350px] md:h-[450px] rounded-xl overflow-hidden border border-outline-variant/20 glow-card">
+              <div class="absolute inset-0 bg-gradient-to-br from-peru-red/30 via-transparent to-primary/20"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary/40 text-[150px]">egg_alt</span>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent p-6">
+                <span class="font-label text-primary text-xs uppercase tracking-widest">Ingredientes Frescos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: El Marinado -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-32">
+          <div class="relative group">
+            <div class="absolute -inset-4 bg-peru-red/10 rounded-xl blur-2xl group-hover:bg-peru-red/20 transition-all duration-700"></div>
+            <div class="relative h-[350px] md:h-[450px] rounded-xl overflow-hidden border border-outline-variant/20 glow-card">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-peru-red/20"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-peru-red/40 text-[150px]">schedule</span>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent p-6">
+                <span class="font-label text-peru-red text-xs uppercase tracking-widest">24 Horas de Paciencia</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-4 mb-6">
+              <span class="font-headline text-6xl md:text-8xl font-bold text-peru-red/20">02</span>
+              <div>
+                <span class="font-label text-peru-red uppercase tracking-[0.2em] text-[10px] font-bold">Segundo Paso</span>
+                <h3 class="font-headline text-3xl md:text-4xl font-bold">El Marinado</h3>
+              </div>
+            </div>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+              El secreto esta en el tiempo y las especias. Nuestro marinado reposa durante <span class="text-peru-red font-semibold">24 horas completas</span>,
+              permitiendo que cada fibra absorba la mezcla ancestral de especias peruanas que hemos perfeccionado durante generaciones.
+            </p>
+            <div class="bg-surface-container-high p-6 rounded-xl border border-peru-red/20">
+              <h4 class="font-label text-peru-red text-[10px] uppercase tracking-widest mb-4">Nuestra mezcla secreta</h4>
+              <div class="flex flex-wrap gap-3">
+                {["Aji panca", "Comino", "Ajo negro", "Romero", "Huacatay", "Cerveza negra"].map((s) => (
+                  <span class="px-4 py-2 rounded-lg bg-surface border border-outline-variant/20 text-sm">{s}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: El Fuego -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-32">
+          <div class="order-2 lg:order-1">
+            <div class="flex items-center gap-4 mb-6">
+              <span class="font-headline text-6xl md:text-8xl font-bold text-primary/20">03</span>
+              <div>
+                <span class="font-label text-primary uppercase tracking-[0.2em] text-[10px] font-bold">Tercer Paso</span>
+                <h3 class="font-headline text-3xl md:text-4xl font-bold">El Fuego</h3>
+              </div>
+            </div>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+              No usamos gas ni electricidad. Solo <span class="text-primary font-semibold">brasas de carbon natural</span>
+              que arden a la temperatura perfecta. El fuego vivo es el alma de nuestro pollo, otorgandole ese sabor ahumado inconfundible que nos distingue.
+            </p>
+            <div class="bg-surface-container-high p-6 rounded-xl border border-primary/20">
+              <h4 class="font-label text-primary text-[10px] uppercase tracking-widest mb-4">Datos del fuego</h4>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="text-center p-4 bg-surface rounded-lg">
+                  <span class="font-headline text-3xl font-bold text-primary">280°</span>
+                  <p class="text-on-surface-variant text-xs mt-1">Temperatura inicial</p>
+                </div>
+                <div class="text-center p-4 bg-surface rounded-lg">
+                  <span class="font-headline text-3xl font-bold text-primary">100%</span>
+                  <p class="text-on-surface-variant text-xs mt-1">Carbon natural</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 lg:order-2 relative group">
+            <div class="absolute -inset-4 bg-peru-red/10 rounded-xl blur-2xl group-hover:bg-peru-red/20 transition-all duration-700"></div>
+            <div class="relative h-[350px] md:h-[450px] rounded-xl overflow-hidden border border-outline-variant/20 glow-card">
+              <div class="absolute inset-0 bg-gradient-to-br from-peru-red/40 via-transparent to-primary/30"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-peru-red/50 text-[150px]">local_fire_department</span>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent p-6">
+                <span class="font-label text-peru-red text-xs uppercase tracking-widest">Brasas de Carbon Natural</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: El Arte -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="relative group">
+            <div class="absolute -inset-4 bg-primary/10 rounded-xl blur-2xl group-hover:bg-primary/20 transition-all duration-700"></div>
+            <div class="relative h-[350px] md:h-[450px] rounded-xl overflow-hidden border border-outline-variant/20 glow-card">
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-transparent to-peru-red/30"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary/50 text-[150px]">restaurant</span>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-surface to-transparent p-6">
+                <span class="font-label text-primary text-xs uppercase tracking-widest">Perfeccion en Cada Pieza</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-4 mb-6">
+              <span class="font-headline text-6xl md:text-8xl font-bold text-primary/20">04</span>
+              <div>
+                <span class="font-label text-primary uppercase tracking-[0.2em] text-[10px] font-bold">Cuarto Paso</span>
+                <h3 class="font-headline text-3xl md:text-4xl font-bold">El Arte</h3>
+              </div>
+            </div>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+              El momento exacto lo es todo. Despues de <span class="text-primary font-semibold">90 minutos de rotacion constante</span>,
+              el pollo alcanza su punto perfecto: piel crujiente y dorada por fuera, carne jugosa y tierna por dentro. Es el resultado de anos de experiencia y pasion.
+            </p>
+            <div class="bg-surface-container-high p-6 rounded-xl border border-primary/20">
+              <h4 class="font-label text-primary text-[10px] uppercase tracking-widest mb-4">El resultado final</h4>
+              <ul class="space-y-3 text-on-surface-variant">
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">star</span> Piel dorada y crujiente</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">star</span> Interior jugoso y tierno</li>
+                <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-lg">star</span> Aroma ahumado inconfundible</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 md:py-32 bg-surface-container-high reveal" style="--reveal-delay: 120ms">
+      <div class="max-w-4xl mx-auto px-5 md:px-8 text-center">
+        <span class="material-symbols-outlined text-primary text-5xl mb-6">restaurant_menu</span>
+        <h2 class="font-headline text-4xl md:text-5xl font-bold mb-6">Listo para <span class="italic text-primary font-normal">probarlo?</span></h2>
+        <p class="text-on-surface-variant text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+          Ahora que conoces nuestro proceso, es momento de experimentarlo. Cada bocado cuenta la historia del fuego, la tradicion y el amor por lo autentico.
+        </p>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+          <a class="metallic-gradient text-on-primary font-label font-bold px-10 py-4 rounded-lg uppercase tracking-widest btn-hover-strong" href="/#reservas">Reservar Mesa</a>
+          <a class="bg-transparent border border-outline-variant/30 text-primary font-label font-bold px-10 py-4 rounded-lg uppercase tracking-widest btn-hover-soft" href="/#carta">Ver la Carta</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const revealNodes = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.2 });
+  revealNodes.forEach((node) => observer.observe(node));
+</script>

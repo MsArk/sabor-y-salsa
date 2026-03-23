@@ -1,0 +1,87 @@
+---
+const navLinks = [
+  { label: "Inicio", href: "/" },
+  { label: "Agenda", href: "/agenda" },
+  { label: "Proceso", href: "/proceso" },
+  { label: "Contacto", href: "/contacto" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav
+  class="glass fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12"
+  style="border-bottom: 1px solid var(--outline-variant);"
+>
+  <a href="/" class="flex items-center gap-3">
+    <span
+      class="headline-md gold-text"
+      style="font-size: 1.25rem; letter-spacing: -0.01em;"
+    >
+      Sabor y Salsa
+    </span>
+  </a>
+
+  <div class="hidden items-center gap-8 md:flex">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="label-category transition-colors duration-200"
+        style={`color: ${currentPath === link.href ? "var(--primary)" : "var(--on-surface-variant)"}`}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+
+  <a
+    href="/contacto"
+    class="btn-primary-glow hidden rounded-md px-5 py-2.5 text-sm font-semibold transition-all duration-300 md:block gold-gradient"
+    style="color: var(--on-primary);"
+  >
+    Reservar
+  </a>
+
+  <!-- Mobile hamburger -->
+  <button
+    id="mobile-menu-btn"
+    class="flex flex-col gap-1.5 md:hidden"
+    aria-label="Abrir menú"
+  >
+    <span class="block h-0.5 w-6 rounded" style="background: var(--on-surface);"></span>
+    <span class="block h-0.5 w-6 rounded" style="background: var(--on-surface);"></span>
+    <span class="block h-0.5 w-4 rounded" style="background: var(--on-surface);"></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div
+  id="mobile-menu"
+  class="glass fixed inset-x-0 top-[64px] z-40 hidden flex-col gap-2 px-6 py-6"
+>
+  {navLinks.map((link) => (
+    <a
+      href={link.href}
+      class="label-category py-3 transition-colors"
+      style={`color: ${currentPath === link.href ? "var(--primary)" : "var(--on-surface)"}`}
+    >
+      {link.label}
+    </a>
+  ))}
+  <a
+    href="/contacto"
+    class="mt-2 rounded-md px-5 py-3 text-center text-sm font-semibold gold-gradient"
+    style="color: var(--on-primary);"
+  >
+    Reservar
+  </a>
+</div>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+    menu?.classList.toggle("flex");
+  });
+</script>

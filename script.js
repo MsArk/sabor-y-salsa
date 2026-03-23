@@ -1,3 +1,7 @@
+document.querySelectorAll('[data-current-year]').forEach((el) => {
+  el.textContent = String(new Date().getFullYear());
+});
+
 const revealNodes = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {

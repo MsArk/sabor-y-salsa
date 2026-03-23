@@ -1,0 +1,32 @@
+---
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Sabor & Salsa | Premium Peruvian Street Food",
+} = Astro.props;
+---
+
+<!doctype html>
+<html class="dark" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary bg-flares noisy-night burst-grid">
+    <slot />
+    <script is:inline>
+      document.querySelectorAll("[data-current-year]").forEach(function (el) {
+        el.textContent = String(new Date().getFullYear());
+      });
+    </script>
+  </body>
+</html>
