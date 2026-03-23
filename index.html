@@ -342,36 +342,52 @@
               </div>
             </div>
           </div>
-          <!-- Fuego en cocina -->
-          <div class="md:col-span-6 bg-surface-container-highest p-8 rounded-xl glow-card">
-            <h3 class="font-headline text-2xl font-bold mb-2">PLATOS CALIENTES</h3>
-            <span
-              class="inline-block bg-peru-red text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5">Fuego
-              en cocina</span>
-            <div
-              class="flex justify-between items-center group cursor-pointer py-4 border-b border-outline-variant/10 menu-option-card rounded-lg px-3 border-transparent">
-              <div>
-                <h4 class="font-headline text-lg font-bold group-hover:text-primary transition-colors">Lomo Saltado</h4>
-                <p class="font-body text-xs text-on-surface-variant mt-1">Wok de alto fuego con reduccion de pisco.</p>
+          <!-- Fuego en cocina - Street Food Latino -->
+          <div class="md:col-span-6 relative overflow-hidden rounded-xl glow-card group/card">
+            <!-- Imagen de fondo con efecto street food -->
+            <img alt="Platos Calientes - Street Food Latino"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105"
+              src="img/platos-calientes.jpg" />
+            <!-- Overlay con gradiente dramático estilo street food -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+            <!-- Efecto de humo/calor -->
+            <div class="absolute inset-0 bg-gradient-to-br from-peru-red/20 via-transparent to-amber-500/10"></div>
+            <!-- Contenido -->
+            <div class="relative z-10 p-8 flex flex-col justify-end min-h-[420px]">
+              <h3 class="font-headline text-3xl font-black mb-2 text-white drop-shadow-lg tracking-wide"
+                style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">PLATOS CALIENTES</h3>
+              <span
+                class="inline-block bg-peru-red text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5 w-fit shadow-lg">Fuego
+                en cocina</span>
+              <div class="space-y-2">
+                <div
+                  class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
+                  <div>
+                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                      Lomo Saltado</h4>
+                    <p class="font-body text-xs text-gray-300 mt-1">Wok de alto fuego con reduccion de pisco.</p>
+                  </div>
+                  <span class="font-headline font-bold text-amber-400">28 €</span>
+                </div>
+                <div
+                  class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
+                  <div>
+                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                      Arroz chaufa</h4>
+                    <p class="font-body text-xs text-gray-300 mt-1">Arroz salteado al wok con pollo y verduras.</p>
+                  </div>
+                  <span class="font-headline font-bold text-amber-400">22 €</span>
+                </div>
+                <div
+                  class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
+                  <div>
+                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
+                      Tallarines</h4>
+                    <p class="font-body text-xs text-gray-300 mt-1">Pasta salteada estilo peruano con carne.</p>
+                  </div>
+                  <span class="font-headline font-bold text-amber-400">20 €</span>
+                </div>
               </div>
-              <span class="font-headline font-bold">28 €</span>
-            </div>
-            <div
-              class="flex justify-between items-center group cursor-pointer py-4 border-b border-outline-variant/10 menu-option-card rounded-lg px-3 border-transparent">
-              <div>
-                <h4 class="font-headline text-lg font-bold group-hover:text-primary transition-colors">Arroz chaufa</h4>
-                <p class="font-body text-xs text-on-surface-variant mt-1">Arroz salteado al wok con pollo y verduras.
-                </p>
-              </div>
-              <span class="font-headline font-bold">22 €</span>
-            </div>
-            <div
-              class="flex justify-between items-center group cursor-pointer py-4 menu-option-card rounded-lg px-3 border border-transparent">
-              <div>
-                <h4 class="font-headline text-lg font-bold group-hover:text-primary transition-colors">Tallarines</h4>
-                <p class="font-body text-xs text-on-surface-variant mt-1">Pasta salteada estilo peruano con carne.</p>
-              </div>
-              <span class="font-headline font-bold">20 €</span>
             </div>
           </div>
           <!-- Postres -->
