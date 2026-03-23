@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Sabor &amp; Salsa | Premium Peruvian Street Food</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Manrope:wght@300;400;600;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-low": "#1c1b1b",
+            "on-tertiary": "#562000",
+            "outline-variant": "#4d4635",
+            "on-secondary-fixed-variant": "#753401",
+            "on-primary": "#3c2f00",
+            "on-error": "#690005",
+            "on-tertiary-container": "#772f00",
+            "inverse-surface": "#e5e2e1",
+            "primary-fixed-dim": "#e9c349",
+            "secondary": "#ffb68c",
+            "on-tertiary-fixed": "#351000",
+            "surface-bright": "#3a3939",
+            "on-error-container": "#ffdad6",
+            "surface-container-high": "#2a2a2a",
+            "outline": "#99907c",
+            "error-container": "#93000a",
+            "secondary-fixed-dim": "#ffb68c",
+            "surface-container-lowest": "#0e0e0e",
+            "primary-fixed": "#ffe088",
+            "primary": "#f2ca50",
+            "on-primary-fixed": "#241a00",
+            "tertiary": "#ffc1a4",
+            "secondary-fixed": "#ffdbc9",
+            "on-secondary-container": "#fb9f66",
+            "inverse-primary": "#735c00",
+            "on-primary-fixed-variant": "#574500",
+            "surface-dim": "#131313",
+            "background": "#131313",
+            "on-background": "#e5e2e1",
+            "surface-container-highest": "#353534",
+            "on-surface-variant": "#d0c5af",
+            "on-tertiary-fixed-variant": "#7a3000",
+            "primary-container": "#d4af37",
+            "inverse-on-surface": "#313030",
+            "error": "#ffb4ab",
+            "surface-tint": "#e9c349",
+            "surface": "#131313",
+            "on-secondary": "#532200",
+            "on-secondary-fixed": "#321200",
+            "tertiary-fixed-dim": "#ffb693",
+            "surface-variant": "#353534",
+            "on-surface": "#e5e2e1",
+            "secondary-container": "#753401",
+            "tertiary-fixed": "#ffdbcc",
+            "surface-container": "#201f1f",
+            "on-primary-container": "#554300",
+            "tertiary-container": "#ff9965"
+          },
+          fontFamily: {
+            "headline": ["Noto Serif"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+        },
+      },
+    }
+  </script>
+  <style>
+    :root {
+      --spark-gold: #f2ca50;
+      --spark-orange: #ff8f3d;
+      --spark-crimson: #ff5f3d;
+      --spark-electric: #ffdf70;
+      --ink-void: #0f0d0d;
+      --motion-snap: cubic-bezier(0.2, 0.9, 0.16, 1);
+      --flare-1: radial-gradient(circle at 20% 30%, rgba(242, 202, 80, 0.4), transparent 42%);
+      --flare-2: radial-gradient(circle at 80% 60%, rgba(255, 95, 61, 0.28), transparent 44%);
+      --hover-card-lift: -6px;
+      --hover-card-border: rgba(242, 202, 80, 0.34);
+      --hover-card-shadow: 0 22px 36px rgba(0, 0, 0, 0.42), 0 0 28px rgba(242, 202, 80, 0.14);
+      --hover-card-bg: rgba(242, 202, 80, 0.06);
+      --hover-cta-lift: -3px;
+      --hover-cta-scale: 1.03;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .metallic-gradient {
+      background: linear-gradient(135deg, #f2ca50 0%, #d4af37 40%, #ff8f3d 100%);
+    }
+
+    .glass-nav {
+      background: rgba(19, 19, 19, 0.78);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(242, 202, 80, 0.12);
+    }
+
+    .asymmetric-clip {
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+    }
+
+    .bg-flares {
+      background-image: var(--flare-1), var(--flare-2);
+    }
+
+    .noisy-night {
+      background-color: var(--ink-void);
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(255, 143, 61, 0.16), transparent 38%),
+        radial-gradient(circle at 82% 0%, rgba(242, 202, 80, 0.14), transparent 36%),
+        linear-gradient(140deg, rgba(255, 95, 61, 0.08), rgba(0, 0, 0, 0));
+    }
+
+    .burst-grid::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      z-index: -1;
+      background-image: linear-gradient(rgba(242, 202, 80, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(242, 202, 80, 0.07) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(circle at 50% -20%, black, transparent 75%);
+    }
+
+    .logo-burst {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      isolation: isolate;
+      overflow: visible;
+    }
+
+    .logo-burst::before,
+    .logo-burst::after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .logo-burst::before {
+      background: conic-gradient(from 0deg, rgba(242, 202, 80, 0.45), rgba(255, 143, 61, 0.08), rgba(242, 202, 80, 0.45));
+      filter: blur(6px);
+      animation: burst-spin 5.6s linear infinite;
+    }
+
+    .logo-burst::after {
+      border: 1px solid rgba(242, 202, 80, 0.28);
+      box-shadow: 0 0 28px rgba(242, 202, 80, 0.2);
+    }
+
+    .logo-mark {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-mark::before {
+      content: "";
+      position: absolute;
+      inset: -12px -18px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 143, 61, 0.24), rgba(242, 202, 80, 0.07) 62%, transparent 68%);
+      animation: logo-shockwave 2.8s var(--motion-snap) infinite;
+    }
+
+    .logo-spark {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #fff4c0, var(--spark-gold));
+      box-shadow: 0 0 16px rgba(242, 202, 80, 0.7);
+      animation: spark-pop 2.6s ease-in-out infinite;
+    }
+
+    .logo-spark.s2 {
+      background: radial-gradient(circle at 30% 30%, #ffd6bb, var(--spark-orange));
+      animation-delay: -1s;
+    }
+
+    .logo-spark.s3 {
+      background: radial-gradient(circle at 30% 30%, #ffb29b, var(--spark-crimson));
+      animation-delay: -1.8s;
+    }
+
+    .hero-burst-orb {
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-burst-orb.o1 {
+      width: 380px;
+      height: 380px;
+      top: 9%;
+      left: 7%;
+      background: radial-gradient(circle, rgba(255, 143, 61, 0.25), transparent 62%);
+      animation: pulse-drift 8s ease-in-out infinite;
+    }
+
+    .hero-burst-orb.o2 {
+      width: 420px;
+      height: 420px;
+      right: -7%;
+      bottom: 8%;
+      background: radial-gradient(circle, rgba(242, 202, 80, 0.24), transparent 62%);
+      animation: pulse-drift 9s ease-in-out infinite reverse;
+    }
+
+    .hero-title {
+      animation: headline-pop 820ms var(--motion-snap) both;
+    }
+
+    .hero-cta {
+      animation: cta-beat 2.8s ease-in-out infinite;
+    }
+
+    .meteor {
+      position: absolute;
+      width: 140px;
+      height: 2px;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 223, 112, 1), rgba(255, 143, 61, 0));
+      filter: blur(0.2px);
+      opacity: 0.65;
+      animation: meteor-fall 5.5s linear infinite;
+    }
+
+    .meteor.m2 {
+      top: 24%;
+      left: 14%;
+      animation-delay: -2.4s;
+    }
+
+    .meteor.m3 {
+      top: 38%;
+      right: 15%;
+      animation-delay: -4.1s;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .glow-card {
+      transition: box-shadow 420ms ease, border-color 420ms ease, background-color 420ms ease;
+    }
+
+    .glow-card:hover {
+      box-shadow: var(--hover-card-shadow);
+      border-color: var(--hover-card-border);
+      background-color: var(--hover-card-bg);
+    }
+
+    .menu-option-card {
+      transition: border-color 320ms ease, box-shadow 320ms ease, background-color 320ms ease;
+    }
+
+    .menu-option-card:hover {
+      border-color: var(--hover-card-border);
+      box-shadow: 0 14px 22px rgba(0, 0, 0, 0.32), 0 0 18px rgba(242, 202, 80, 0.16);
+      background-color: rgba(242, 202, 80, 0.08);
+    }
+
+    .nav-link-hover {
+      transition: color 220ms ease;
+    }
+
+    .nav-link-hover:hover {
+      color: var(--spark-gold);
+    }
+
+    .btn-hover-strong {
+      transition: transform 300ms ease, filter 300ms ease, box-shadow 300ms ease;
+    }
+
+    .btn-hover-strong:hover {
+      transform: translateY(var(--hover-cta-lift)) scale(var(--hover-cta-scale));
+      filter: brightness(1.08);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35), 0 0 24px rgba(242, 202, 80, 0.2);
+    }
+
+    .btn-hover-soft {
+      transition: transform 300ms ease, background-color 300ms ease, border-color 300ms ease;
+    }
+
+    .btn-hover-soft:hover {
+      transform: translateY(-2px);
+      background-color: rgba(242, 202, 80, 0.08);
+      border-color: rgba(242, 202, 80, 0.32);
+    }
+
+    .icon-hover {
+      transition: color 240ms ease, border-color 240ms ease, transform 240ms ease;
+    }
+
+    .icon-hover:hover {
+      color: var(--spark-gold);
+      border-color: rgba(242, 202, 80, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .spark-underline {
+      position: relative;
+    }
+
+    .spark-underline::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--spark-gold), var(--spark-orange), transparent);
+      transform: scaleX(0.2);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 300ms ease, opacity 300ms ease;
+    }
+
+    .spark-underline:hover::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    @keyframes burst-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spark-pop {
+
+      0%,
+      100% {
+        transform: scale(0.45) translateY(0);
+        opacity: 0.45;
+      }
+
+      50% {
+        transform: scale(1) translateY(-3px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse-drift {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0.7;
+      }
+
+      50% {
+        transform: translate3d(0, -20px, 0) scale(1.06);
+        opacity: 1;
+      }
+    }
+
+    @keyframes logo-shockwave {
+      0% {
+        transform: scale(0.88);
+        opacity: 0;
+      }
+
+      28% {
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(1.16);
+        opacity: 0;
+      }
+    }
+
+    @keyframes meteor-fall {
+      0% {
+        transform: translate3d(110px, -80px, 0) rotate(-28deg);
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 0.72;
+      }
+
+      100% {
+        transform: translate3d(-620px, 420px, 0) rotate(-28deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes headline-pop {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+        letter-spacing: 0.14em;
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        letter-spacing: -0.03em;
+      }
+    }
+
+    @keyframes cta-beat {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 rgba(242, 202, 80, 0);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(242, 202, 80, 0.35);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .logo-burst::before,
+      .logo-mark::before,
+      .logo-spark,
+      .hero-burst-orb,
+      .hero-title,
+      .hero-cta,
+      .meteor,
+      .reveal,
+      .glow-card,
+      .menu-option-card,
+      .btn-hover-strong,
+      .btn-hover-soft,
+      .icon-hover,
+      .spark-underline::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Header logo: static, no animations */
+    .header-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-logo img {
+      animation: none !important;
+      transform: none !important;
+      filter: none !important;
+      box-shadow: none !important;
+    }
+
+    .nav-item-active::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+    /* Logo Variants for branding preview */
+    .logo-variant-a,
+    .logo-variant-b,
+    .logo-variant-c {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .logo-variant-a img,
+    .logo-variant-b img,
+    .logo-variant-c img {
+      height: 3.5rem;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Variant A: Clean minimal - subtle border */
+    .logo-variant-a {
+      background: transparent;
+      border: 1px solid rgba(242, 202, 80, 0.25);
+    }
+
+    /* Variant B: Dark container with gold accent */
+    .logo-variant-b {
+      background: linear-gradient(145deg, rgba(28, 27, 27, 0.95), rgba(19, 19, 19, 0.98));
+      border: 1px solid rgba(242, 202, 80, 0.35);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(242, 202, 80, 0.08);
+    }
+
+    /* Variant C: Metallic glow container */
+    .logo-variant-c {
+      background: radial-gradient(ellipse at 50% 0%, rgba(242, 202, 80, 0.12), transparent 70%),
+        linear-gradient(180deg, rgba(42, 42, 42, 0.9), rgba(19, 19, 19, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 0 24px rgba(242, 202, 80, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Variant preview cards */
+    .variant-preview-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      background: rgba(32, 31, 31, 0.6);
+      border: 1px solid rgba(77, 70, 53, 0.3);
+      transition: border-color 300ms ease, box-shadow 300ms ease;
+    }
+
+    .variant-preview-card:hover {
+      border-color: rgba(242, 202, 80, 0.4);
+      box-shadow: 0 0 20px rgba(242, 202, 80, 0.1);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary bg-flares noisy-night burst-grid">
+  <!-- Top Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-nav">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-5 md:px-8 py-4 md:py-6">
+      <a class="header-logo" href="#inicio" aria-label="Sabor y Salsa inicio">
+        <img alt="Sabor &amp; Salsa Logo" class="h-10 md:h-12 w-auto object-contain" src="/logo.jpeg" />
+      </a>
+      <div class="hidden md:flex items-center gap-10">
+        <a class="font-label text-primary border-primary pb-1 uppercase tracking-wider text-xs font-bold spark-underline nav-item-active"
+          href="#carta">Carta</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="#manifiesto">Manifiesto</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="#barra">Barra Premium</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="#reservas">Reservas</a>
+        <a class="font-label text-on-surface/80 nav-link-hover uppercase tracking-wider text-xs font-bold spark-underline"
+          href="#historia">Historia</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a class="hidden md:inline-flex metallic-gradient text-on-primary font-label font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest btn-hover-strong shadow-[0_0_20px_rgba(242,202,80,0.2)]"
+          href="#reservas">
+          Reservar mesa
+        </a>
+        <button aria-controls="mobile-menu" aria-expanded="false"
+          class="md:hidden w-11 h-11 rounded-lg border border-primary/20 text-primary flex items-center justify-center"
+          id="mobile-menu-toggle" type="button">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+    <div class="md:hidden hidden px-5 pb-5" id="mobile-menu">
+      <div class="bg-surface-container-high rounded-xl border border-outline-variant/20 p-4 space-y-2">
+        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-primary spark-underline nav-item-active"
+          href="#carta">Carta</a>
+        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover"
+          href="#manifiesto">Manifiesto</a>
+        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover" href="#barra">Barra
+          Premium</a>
+        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover"
+          href="#reservas">Reservas</a>
+        <a class="block py-2 text-xs uppercase tracking-[0.2em] text-on-surface/80 nav-link-hover"
+          href="#historia">Historia</a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden" id="inicio">
+      <div class="absolute inset-0 z-0">
+        <img alt="Sabor &amp; Salsa Interior" class="w-full h-full object-cover opacity-60 scale-105"
+          data-alt="Moody upscale restaurant interior with warm lighting"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzsR4ZUh6Tmu-8roBFodEP6tX6v78_emZ79Go-LuaRURFNarSbk4POYpKKof4Z2zRJlKKZNOQ510dtuYhritbV0GN_yqQ-VMLV83WnS2oYd69XMCK0UbgULwujbgaZvxKfUUf1Ke7kHuUlmgrvs3KGjAF1pVn3XlcL2OoJkLaH_XSrCbR6IdnUYxgzT41wWHYKj2YBvc_n5oyWZIXQifcQ2o2fHWtqHGBlcwpmkr25jz_ArOy37QIJ4k6OxvKS8EzCMYL-WGxxjeY" />
+        <div class="absolute inset-0 bg-gradient-to-b from-surface/40 via-surface/60 to-surface"></div>
+        <div class="hero-burst-orb o1" aria-hidden="true"></div>
+        <div class="hero-burst-orb o2" aria-hidden="true"></div>
+        <div class="meteor m1" style="top: 18%; right: 12%" aria-hidden="true"></div>
+        <div class="meteor m2" aria-hidden="true"></div>
+        <div class="meteor m3" aria-hidden="true"></div>
+      </div>
+      <div class="relative z-10 text-center max-w-4xl px-6 reveal in">
+        <span class="font-label text-primary uppercase tracking-[0.4em] text-xs mb-6 block">Est. Lima 2024</span>
+        <h1
+          class="hero-title font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-on-surface leading-none tracking-tighter mb-8">
+          SABOR <span class="italic font-normal text-primary">&amp;</span> SALSA
+        </h1>
+        <p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed">
+          The raw kinetic energy of Callao meets urban sophistication. Reimagining the soul of <span
+            class="text-on-surface font-semibold italic">pollo a la brasa</span> in the heart of the city.
+        </p>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+          <a class="hero-cta metallic-gradient text-on-primary font-label font-bold px-10 py-4 rounded-lg uppercase tracking-widest btn-hover-strong"
+            href="#reservas">
+            Reservar Mesa
+          </a>
+          <a class="bg-transparent border border-outline-variant/30 text-primary font-label font-bold px-10 py-4 rounded-lg uppercase tracking-widest btn-hover-soft"
+            href="#carta">
+            Nuestra Carta
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="py-20 md:py-24 bg-surface-container-high reveal" id="manifiesto" style="--reveal-delay: 70ms">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">Manifiesto</span>
+          <h2 class="font-headline text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">Una web que vibra como la
+            barra: <span class="italic text-primary font-normal">calor, ritmo y fuego</span>.</h2>
+          <p class="text-on-surface-variant text-lg leading-relaxed max-w-3xl">Desde el primer scroll la experiencia
+            empuja la energia de Sabor &amp; Salsa: transiciones cinematograficas, contrastes metalicos y contenido
+            pensado para convertir visitas en reservas.</p>
+        </div>
+        <div class="lg:col-span-4 bg-surface-container-low rounded-xl p-7 border border-primary/20 glow-card">
+          <span class="font-label text-[10px] uppercase tracking-[0.22em] text-primary">Impacto</span>
+          <div class="mt-5 space-y-4">
+            <p class="text-sm text-on-surface-variant">+ Hero con enfoque de conversion</p>
+            <p class="text-sm text-on-surface-variant">+ Carta y barra con narrativa visual</p>
+            <p class="text-sm text-on-surface-variant">+ CTA de reserva visible en desktop y mobile</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Menu Highlights: Carta optimizada -->
+    <section class="py-24 md:py-32 bg-surface-container-low reveal" id="carta" style="--reveal-delay: 120ms">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="flex justify-between items-end mb-16">
+          <div>
+            <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">La Carta</span>
+            <h2 class="font-headline text-5xl font-bold mt-4">Nuestra Carta</h2>
+          </div>
+          <p class="font-body text-on-surface-variant max-w-xs text-right hidden md:block">
+            Recorre el menu por intensidad: brasa protagonista, calle y cocina caliente.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <article class="lg:col-span-7 bg-surface-container-high rounded-xl overflow-hidden border border-primary/15 glow-card group">
+            <div class="h-64 md:h-96 overflow-hidden">
+              <img alt="🔥 POLLO A LA BRASA (especialidad de la casa)"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGOU4nBjnVal6GjGE73eHoGw3A9WvYHYUx2Z_l2pD96HBrlcj602ymQbN8E3kuJl98asiJTsFRrzuKCxd0eWhvrutF_RU7bukM1hmi6jk7U_KmYEK6tTk5UhCPCFu9QJQYZJda42NZ20ukM7Ys415Ar3UWtfavQby0Ibd9t8IoqE_Njf7WXjPjy3-Y95R-s4EWGIgsmVXmQsgVyAHH62vS5fDrEa564vjXePVUE3VfsCGW-JW060RWZTLGaZAbLHAph86KnV6QMBw" />
+            </div>
+            <div class="p-8 md:p-10">
+              <span class="inline-flex bg-secondary-container/20 text-secondary px-3 py-1 rounded-full font-label text-[9px] uppercase tracking-widest mb-5">Especialidad de la casa</span>
+              <h3 class="font-headline text-3xl md:text-4xl font-bold leading-tight mb-4">🔥 POLLO A LA BRASA <span class="italic font-normal text-primary">(especialidad de la casa)</span></h3>
+              <p class="font-body text-on-surface-variant text-base md:text-lg italic border-l-2 border-primary/30 pl-5 mb-8">Asado lento, fuego real, sabor del Callao</p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10 menu-option-card">
+                  <p class="font-body text-sm text-on-surface mb-2">1/4 pollo + patatas + ensalada</p>
+                  <p class="font-headline text-2xl font-bold text-primary">XX€</p>
+                </div>
+                <div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10 menu-option-card">
+                  <p class="font-body text-sm text-on-surface mb-2">1/2 pollo + patatas + ensalada</p>
+                  <p class="font-headline text-2xl font-bold text-primary">XX€</p>
+                </div>
+                <div class="bg-surface-container-highest p-5 rounded-xl border border-outline-variant/10 menu-option-card">
+                  <p class="font-body text-sm text-on-surface mb-2">Pollo entero</p>
+                  <p class="font-headline text-2xl font-bold text-primary">XX€</p>
+                </div>
+              </div>
+              <div class="bg-surface-container-low rounded-xl border border-outline-variant/10 p-5">
+                <h4 class="font-label text-primary uppercase tracking-[0.18em] text-[10px] mb-3">Salsas caseras</h4>
+                <div class="flex flex-wrap gap-3 text-sm text-on-surface">
+                  <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Ají amarillo 🌶️</span>
+                  <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Huancaína 🧀</span>
+                  <span class="px-3 py-2 rounded-lg border border-outline-variant/20 menu-option-card">Rocoto 🔥</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            <article class="bg-surface-container-high p-7 rounded-xl border border-outline-variant/10 glow-card">
+              <h3 class="font-headline text-2xl font-bold mb-5">Para empezar el ritmo</h3>
+              <ul class="space-y-3 text-on-surface-variant">
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tequeños</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Yuca frita</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Alitas criollas</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Causa limeña</li>
+              </ul>
+            </article>
+            <article class="bg-surface p-7 rounded-xl border border-outline-variant/10 glow-card">
+              <h3 class="font-headline text-2xl font-bold mb-5">Calle &amp; sabor</h3>
+              <ul class="space-y-3 text-on-surface-variant">
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Pan con pollo</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Anticuchos</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tacos peruanos</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Chicharrón bites</li>
+              </ul>
+            </article>
+            <article class="bg-surface-container-highest p-7 rounded-xl border border-outline-variant/10 glow-card">
+              <h3 class="font-headline text-2xl font-bold mb-5">Fuego en cocina</h3>
+              <ul class="space-y-3 text-on-surface-variant">
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Lomo saltado</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Arroz chaufa</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tallarines</li>
+              </ul>
+            </article>
+            <article class="bg-surface p-7 rounded-xl border border-outline-variant/10 glow-card">
+              <h3 class="font-headline text-2xl font-bold mb-5">Postres</h3>
+              <ul class="space-y-3 text-on-surface-variant">
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tres leches</li>
+                <li class="menu-option-card rounded-lg border border-transparent px-3 py-2">Tarta de maracuyá</li>
+              </ul>
+            </article>
+            <article class="bg-surface-container-high p-7 rounded-xl border border-outline-variant/10 glow-card">
+              <h3 class="font-headline text-2xl font-bold mb-5">El ritmo líquido</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-on-surface-variant">
+                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Pisco sour 🍸</div>
+                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Cócteles latinos</div>
+                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Cervezas</div>
+                <div class="menu-option-card rounded-lg border border-outline-variant/20 px-3 py-2">Refrescos</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Liquid Rhythm: Cócteles & Barra -->
+    <section class="py-24 md:py-32 bg-surface text-center reveal" id="barra" style="--reveal-delay: 150ms">
+      <div class="max-w-5xl mx-auto px-5 md:px-8">
+        <span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="local_bar">local_bar</span>
+        <h2 class="font-headline text-5xl font-bold mb-16 italic">Ritmo Líquido</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div class="space-y-4">
+            <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-2xl">
+              <img alt="Pisco Sour" class="w-full h-full object-cover"
+                data-alt="Classic Pisco Sour with foam and bitters"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmgQLBy4sZTf-4-w8Bj_YKTS2kMsMzJwDOPEqyunAlVMjpryqchp7Q6cCJxq0fbjh3nKFBi0ZWs52Yhd0QZoQAcBNeuF3W9qAIO8oaQBQeVj_OmKQ2nowEgEyin1GzYSZAH6BKxxCyJcXqyHci9na0wa5-QblxDOo-5TZhRvFPpEgYk34HY75mI_0mrgtvcyZ4gbS3UzQn49dsPVFk55u7S1R5TCuWP6MoBWVZ2XlUg9bYp0mmMn-3uiO7moiNRRr4M8XRTqqWsoA" />
+            </div>
+            <h4 class="font-headline text-xl font-bold">Pisco Sour Catedral</h4>
+            <p class="font-body text-sm text-on-surface-variant">Quebranta, clara de huevo y gotas de amargo.</p>
+            <span class="text-primary font-headline font-bold text-lg">$14</span>
+          </div>
+          <div class="space-y-4 pt-12 md:pt-0">
+            <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-2xl scale-110 border-2 border-primary/20">
+              <img alt="Chilcano" class="w-full h-full object-cover" data-alt="Fresh cocktail with lime and ginger ale"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkEjhqPTy7vRsx5dd1UEbEttFL5on8lku7GTfvzPiITPTAMyWfjdV8oXiEdIlf6jYkAeuSlrNJkB0pdsAmdblm17o9dBHGH3VTXAsjXwCphDVrCZp8svYvtax79D8WGCpQF38F7HX5iWySdc5L71FNZl4vpCtj2EvCcIUJ76xYEXZ2luCROObJi7VKKaSPOnQ4t4jqRlS22OvzYYJ6S3bxP1s7B0Mvr-w78K0MoUy_nP7ymFbUG1-u4gJSID23AUb0Br2pgfuJong" />
+            </div>
+            <h4 class="font-headline text-xl font-bold text-primary">Chilcano Clásico</h4>
+            <p class="font-body text-sm text-on-surface-variant">Pisco Acholado, ginger ale y zumo de lima.</p>
+            <span class="text-primary font-headline font-bold text-lg">$12</span>
+          </div>
+          <div class="space-y-4">
+            <div class="relative h-64 mb-6 rounded-xl overflow-hidden shadow-2xl">
+              <img alt="Mojito de Maracuya" class="w-full h-full object-cover"
+                data-alt="Tropical passion fruit cocktail with mint"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqwCAj2gfmF5DJ7qjUw-xLQA4RN2TiVk4MEYeLmypjquvfDVZNdg1rEjJYOfqcFO7bl_E6D-gpGzPjb9V__7MBNF0CYNt8QrFKAu1nXNA5GubUbpnBTP7vjvAZmI0s0yY8dBgvRsiAhMOSwjd7MqoAd3MOMOTPqW4k_cGumH9HoC-maYVp-ZZajft-6tOlvPlLvAK9G8Qu9CyoOKQ2IIow128RzdaFDB6ZIUfPnl0ncW8jCM7T09hehIa4ZBMKJ82mAUVu5n-_hgg" />
+            </div>
+            <h4 class="font-headline text-xl font-bold">Mojito de Maracuyá</h4>
+            <p class="font-body text-sm text-on-surface-variant">Fruta de la pasión, ron blanco y hierbabuena fresca.
+            </p>
+            <span class="text-primary font-headline font-bold text-lg">$15</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Lifestyle Block: Barra Premium -->
+    <section class="relative min-h-[580px] md:h-[600px] flex items-center overflow-hidden reveal" id="historia"
+      style="--reveal-delay: 180ms">
+      <div class="absolute inset-0">
+        <img alt="Bar Ambiance" class="w-full h-full object-cover grayscale brightness-50"
+          data-alt="Close up of bar accessories and gold lighting"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG9E03owG2h-Xax2Oz3uQWJx1nHN0P9IhuNLrkdLb0G5HMZzBHE9kCpOBjYoT2k7Rodoc2GuJ3eZS8rFI_82s05Uemhyd-mX_oMGGC4qMSrG9WyJvBlk1IMEuKhSqmUT0uQU7HWSBEvzA8D1oQPwVXHPUmei3jhbTfUqYsNd9z7sQz3JsQMm0jB7BTYeCTUc07K3pvnadL86MRq6gIGrS5r6W7RKhe_PY7D3xB-86xGq3Rp21Zk-6O2o3nsahA01FgEQhKzgGCDaM" />
+        <div class="absolute inset-0 bg-primary/5 mix-blend-overlay"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-5 md:px-8 w-full">
+        <div class="max-w-2xl bg-surface-container-low/90 backdrop-blur-md p-12 rounded-xl border-l-4 border-primary">
+          <span class="font-label text-primary uppercase tracking-widest text-xs mb-4 block">Experiencia Premium</span>
+          <h2 class="font-headline text-5xl font-bold text-on-surface mb-6 leading-none">Donde el Sabor <br /><span
+              class="italic font-normal">se Baila</span></h2>
+          <p class="font-body text-on-surface-variant mb-10 leading-relaxed">
+            Nuestra barra es el latido del local. Una curaduría de destilados peruanos y coctelería de autor diseñada
+            para elevar cada bocado.
+          </p>
+          <a class="metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong inline-block"
+            href="#reservas">
+            Nuestra Experiencia
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="py-24 md:py-32 bg-surface-container-low reveal" id="reservas" style="--reveal-delay: 220ms">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10">
+        <div class="lg:col-span-7 bg-surface-container-high p-8 md:p-12 rounded-xl glow-card">
+          <span class="font-label text-primary uppercase tracking-[0.28em] text-[11px] mb-4 block">Reserva
+            Explosiva</span>
+          <h2 class="font-headline text-4xl md:text-6xl font-bold leading-tight mb-6">Tu noche empieza <span
+              class="italic text-primary font-normal">con fuego</span></h2>
+          <p class="text-on-surface-variant leading-relaxed max-w-2xl mb-10">Reservas de jueves a domingo. Set de
+            bienvenida con mini chilcano ahumado y degustacion de salsas de la casa para mesas de 4+ personas.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <label class="block">
+              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Nombre</span>
+              <input
+                class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35"
+                placeholder="Tu nombre" type="text" />
+            </label>
+            <label class="block">
+              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Telefono</span>
+              <input
+                class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35"
+                placeholder="+51 ..." type="tel" />
+            </label>
+            <label class="block">
+              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Fecha</span>
+              <input
+                class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
+                type="date" />
+            </label>
+            <label class="block">
+              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Personas</span>
+              <input
+                class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
+                max="12" min="1" type="number" value="2" />
+            </label>
+          </div>
+          <button
+            class="mt-10 metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong">Confirmar
+            Reserva</button>
+        </div>
+        <aside class="lg:col-span-5 flex flex-col gap-6 lg:h-full">
+          <div class="bg-surface p-8 rounded-xl border border-outline-variant/20 glow-card lg:flex-1">
+            <h3 class="font-headline text-3xl font-bold mb-4">Ubicacion</h3>
+            <p class="text-on-surface-variant mb-4">Jr. Bolognesi 414, Barranco, Lima</p>
+            <p class="font-label text-[10px] uppercase tracking-[0.18em] text-primary">Jue-Dom · 6PM - 2AM</p>
+          </div>
+          <div class="bg-surface-container-highest p-8 rounded-xl glow-card lg:flex-1">
+            <h3 class="font-headline text-2xl font-bold mb-4">Explosive Nights</h3>
+            <p class="text-on-surface-variant mb-6">DJ set en vivo viernes y sabado. Maridaje guiado con barra premium a
+              las 10:30PM.</p>
+            <a class="font-label text-xs uppercase tracking-[0.18em] text-primary spark-underline" href="#">Ver agenda
+              completa</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-surface-container-low w-full py-16 px-5 md:px-8 border-t border-primary/10">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8 w-full max-w-7xl mx-auto">
+      <div class="flex flex-col items-center md:items-start gap-4">
+        <a class="header-logo" href="#inicio" aria-label="Sabor y Salsa inicio">
+          <img alt="Sabor &amp; Salsa Logo" class="h-10 w-auto object-contain" src="/logo.jpeg" />
+        </a>
+        <p class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/40 text-center md:text-left">
+          © 2024 Sabor &amp; Salsa. Lima's Heart, Urban Soul.
+        </p>
+      </div>
+      <div class="flex gap-5 md:gap-8 flex-wrap justify-center">
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover" href="#">Privacy
+          Policy</a>
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover" href="#">Terms of
+          Service</a>
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover" href="#">Press
+          Kit</a>
+        <a class="font-label uppercase tracking-[0.05em] text-xs text-on-surface/60 nav-link-hover"
+          href="#reservas">Contact</a>
+      </div>
+      <div class="flex gap-4">
+        <a class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/20 text-on-surface/60 icon-hover"
+          href="#">
+          <span class="material-symbols-outlined text-lg">share</span>
+        </a>
+        <a class="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/20 text-on-surface/60 icon-hover"
+          href="#">
+          <span class="material-symbols-outlined text-lg">map</span>
+        </a>
+      </div>
+    </div>
+    <div class="mt-12 text-center">
+      <p class="text-[10px] font-label text-on-surface/20 uppercase tracking-[0.5em]">El Callao · Lima · Madrid</p>
+    </div>
+  </footer>
+
+  <script>
+    const revealNodes = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    revealNodes.forEach((node) => observer.observe(node));
+
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+        mobileToggle.setAttribute('aria-expanded', String(!expanded));
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    const hero = document.getElementById('inicio');
+    const orbs = hero ? hero.querySelectorAll('.hero-burst-orb') : [];
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (hero && orbs.length && !reducedMotion) {
+      window.addEventListener('mousemove', (event) => {
+        const x = event.clientX / window.innerWidth - 0.5;
+        const y = event.clientY / window.innerHeight - 0.5;
+        orbs.forEach((orb, index) => {
+          const factor = index === 0 ? 18 : -20;
+          orb.style.transform = `translate3d(${x * factor}px, ${y * factor}px, 0)`;
+        });
+      });
+    }
+  </script>
+</body>
+
+</html>
