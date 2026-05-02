@@ -3,6 +3,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Nav from "@/shared/components/Nav.astro";
 import Footer from "@/shared/components/Footer.astro";
 import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
+
+/** Producción Webhook URL del flujo n8n (nodo Webhook). */
+const reservationN8nWebhookUrl =
+  typeof import.meta.env.PUBLIC_N8N_RESERVA_WEBHOOK_URL === "string"
+    ? import.meta.env.PUBLIC_N8N_RESERVA_WEBHOOK_URL.trim()
+    : "";
 ---
 
 <BaseLayout title="Sabor &amp; Salsa | Premium Peruvian Street Food">
@@ -623,7 +629,7 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
   <Footer />
 </BaseLayout>
 
-<script>
+<script define:vars={{ reservationN8nWebhookUrl }}>
   const revealNodes = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -689,17 +695,17 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
     }
     syncReservationHoraMinFromFecha();
 
-    reservationForm.addEventListener('submit', (submitEv) => {
+    reservationForm.addEventListener('submit', async (submitEv) => {
       submitEv.preventDefault();
       syncReservationHoraMinFromFecha();
 
-      const nombreEl = reservationForm.querySelector<HTMLInputElement>('input[name="nombre"]');
-      const telEl = reservationForm.querySelector<HTMLInputElement>('input[name="telefono"]');
-      const fechaEl = reservationForm.querySelector<HTMLInputElement>('input[name="fecha"]');
-      const horaEl = reservationForm.querySelector<HTMLInputElement>('input[name="hora"]');
-      const personasEl = reservationForm.querySelector<HTMLInputElement>('input[name="personas"]');
-      /** Errores en español para consola — saber exactamente qué falta por completar */
-      const issues: { campo: string; mensaje: string; input?: HTMLElement }[] = [];
+      const nombreEl = reservationForm.querySelector('input[name="nombre"]');
+      const telEl = reservationForm.querySelector('input[name="telefono"]');
+      const fechaEl = reservationForm.querySelector('input[name="fecha"]');
+      const horaEl = reservationForm.querySelector('input[name="hora"]');
+      const personasEl = reservationForm.querySelector('input[name="personas"]');
+      /** @type {{ campo: string; mensaje: string; input?: HTMLElement }[]} */
+      const issues = [];
 
       if (!(nombreEl instanceof HTMLInputElement))
         issues.push({ campo: 'nombre', mensaje: 'Campo nombre no existe en el formulario.' });
@@ -773,20 +779,48 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
         return;
       }
 
-      const nombreOk = nombreEl!.value.trim();
-      const telOk = telEl!.value.trim();
-      const fechaOk = fechaEl!.value;
-      const horaOk = horaEl!.value;
+      const nombreOk = nombreEl.value.trim();
+      const telOk = telEl.value.trim();
+      const fechaOk = fechaEl.value;
+      const horaOk = horaEl.value;
 
-      console.info('[Reserva] Información válida. Enviando solicitud:', {
+      const payloadN8n = {
+        tipo: 'reserva_mesa',
+        origen: 'sabor-y-salsa-web',
+        enviado_en: new Date().toISOString(),
         nombre: nombreOk,
         telefono: telOk,
         fecha: fechaOk,
         hora: horaOk,
         personas: personasNum,
         alguien_alergico: alergico,
-        detalle_alergias: alergico ? (detalleAlergias || '(sin texto adicional)') : null,
-      });
+        detalle_alergias: alergico ? (detalleAlergias || null) : null,
+      };
+
+      console.info('[Reserva] Información válida. Enviando solicitud:', payloadN8n);
+
+      if (reservationN8nWebhookUrl) {
+        try {
+          const resN8n = await fetch(reservationN8nWebhookUrl, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payloadN8n),
+          });
+          if (!resN8n.ok) {
+            const bodyText = await resN8n.text().catch(() => '');
+            console.error('[Reserva] n8n webhook error HTTP', resN8n.status, bodyText.slice(0, 800));
+          } else {
+            console.info('[Reserva] Payload recibido por n8n (HTTP', resN8n.status + ').');
+          }
+        } catch (err) {
+          console.error('[Reserva] Fallo de red o CORS al llamar al webhook n8n:', err);
+        }
+      } else {
+        console.warn(
+          '[Reserva] Sin PUBLIC_N8N_RESERVA_WEBHOOK_URL — configura la URL del Webhook en .env para enviar datos a n8n.',
+        );
+      }
 
       const bodyLines = [
         'Hola, quiero reservar mesa en Sabor & Salsa.',
@@ -1049,8 +1083,9 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
       const x = event.clientX / window.innerWidth - 0.5;
       const y = event.clientY / window.innerHeight - 0.5;
       orbs.forEach((orb, index) => {
+        if (!(orb instanceof HTMLElement)) return;
         const factor = index === 0 ? 18 : -20;
-        (orb as HTMLElement).style.transform = `translate3d(${x * factor}px, ${y * factor}px, 0)`;
+        orb.style.transform = `translate3d(${x * factor}px, ${y * factor}px, 0)`;
       });
     });
   }
