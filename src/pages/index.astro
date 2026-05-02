@@ -538,29 +538,64 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
           <span class="font-label text-primary uppercase tracking-[0.28em] text-[11px] mb-4 block">Reservas</span>
           <h2 class="font-headline text-4xl md:text-6xl font-bold leading-tight mb-6">Tus días de <span class="italic text-primary font-normal">alegría</span></h2>
           <p class="text-on-surface-variant leading-relaxed max-w-2xl mb-10">Reservas de lunes a domingo.</p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <label class="block">
-              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Nombre</span>
-              <input class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35"
-                placeholder="Tu nombre" type="text" />
+          <form class="space-y-6" id="reserva-form" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <label class="block">
+                <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Nombre</span>
+                <input id="reserva-nombre"
+                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35"
+                  name="nombre"
+                  autocomplete="name"
+                  placeholder="Tu nombre" required type="text" />
+              </label>
+              <label class="block">
+                <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Telefono</span>
+                <input id="reserva-telefono"
+                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35"
+                  name="telefono"
+                  autocomplete="tel"
+                  placeholder="+34 ..." required type="tel" />
+              </label>
+              <label class="block">
+                <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Fecha</span>
+                <input id="reserva-fecha"
+                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
+                  name="fecha" required type="date" />
+              </label>
+              <label class="block">
+                <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Hora</span>
+                <input id="reserva-hora"
+                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface max-w-[12rem] sm:max-w-none"
+                  name="hora" max="23:00" min="09:00" required step="900" type="time" />
+              </label>
+              <label class="block sm:col-span-2">
+                <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Personas</span>
+                <input id="reserva-personas"
+                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
+                  name="personas"
+                  max="12" min="1" required type="number" value="2" />
+              </label>
+            </div>
+            <label class="flex gap-3 items-start cursor-pointer select-none pt-2">
+              <input id="reserva-alergico"
+                class="mt-1 h-4 w-4 shrink-0 rounded border border-outline-variant/50 bg-transparent text-primary focus:ring-primary"
+                name="alergico" type="checkbox" value="1" />
+              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70 leading-snug pt-px">
+                Hay alguien con <span class="text-on-surface normal-case tracking-normal font-body text-sm">alergias o intolerancias alimentarias</span>
+              </span>
             </label>
-            <label class="block">
-              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Telefono</span>
-              <input class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35"
-                placeholder="+34 ..." type="tel" />
+            <label class="block hidden pt-2" id="reserva-alergias-wrap">
+              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Detalle de alergias (opcional)</span>
+              <textarea id="reserva-alergias-detalle"
+                class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface placeholder:text-on-surface/35 resize-none min-h-[3rem]"
+                name="detalle_alergias" rows="2" placeholder="Indica las alergias o advertencias relevantes para cocina"></textarea>
             </label>
-            <label class="block">
-              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Fecha</span>
-              <input class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
-                type="date" />
-            </label>
-            <label class="block">
-              <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Personas</span>
-              <input class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
-                max="12" min="1" type="number" value="2" />
-            </label>
-          </div>
-          <button class="mt-10 metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong">Confirmar Reserva</button>
+            <div class="pt-4">
+              <button type="submit" class="metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong">
+                Confirmar Reserva
+              </button>
+            </div>
+          </form>
         </div>
         <aside class="lg:col-span-5 flex flex-col gap-6 lg:h-full">
           <div class="bg-surface p-8 rounded-xl border border-outline-variant/20 glow-card lg:flex-1">
@@ -599,6 +634,179 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
     });
   }, { threshold: 0.2 });
   revealNodes.forEach((node) => observer.observe(node));
+
+  /** Reserva: validación, logs en consola y envío por WhatsApp */
+  const reservationForm = document.getElementById('reserva-form');
+  const allergyCheckbox = document.getElementById('reserva-alergico');
+  const allergyWrap = document.getElementById('reserva-alergias-wrap');
+  const allergyDetail = document.getElementById('reserva-alergias-detalle');
+  const RESERVATION_WA = '34639810204';
+
+  const syncReservationAllergyField = () => {
+    const show = allergyCheckbox instanceof HTMLInputElement && allergyCheckbox.checked;
+    if (allergyWrap instanceof HTMLElement) allergyWrap.classList.toggle('hidden', !show);
+    if (!(allergyCheckbox instanceof HTMLInputElement) || !allergyCheckbox.checked) {
+      if (allergyDetail instanceof HTMLTextAreaElement) allergyDetail.value = '';
+    }
+  };
+
+  if (allergyCheckbox instanceof HTMLInputElement)
+    allergyCheckbox.addEventListener('change', syncReservationAllergyField);
+  syncReservationAllergyField();
+
+  if (reservationForm instanceof HTMLFormElement) {
+    const fechaReservation = reservationForm.querySelector('#reserva-fecha');
+    const horaReservation = reservationForm.querySelector('#reserva-hora');
+    /** Horario permitido para reservas (local, HH:MM 24h) */
+    const RESERVA_HORA_DESDE = '09:00';
+    const RESERVA_HORA_HASTA = '23:00';
+
+    /** Mantiene min/max del input acorde a la fecha: hoy no antes de ahora ni antes de apertura; siempre tope 23:00 */
+    const syncReservationHoraMinFromFecha = () => {
+      if (!(fechaReservation instanceof HTMLInputElement) || !(horaReservation instanceof HTMLInputElement)) return;
+      const todayStr = new Date().toISOString().slice(0, 10);
+      horaReservation.max = RESERVA_HORA_HASTA;
+
+      if (fechaReservation.value === todayStr) {
+        const d = new Date();
+        const nowHM = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        let efectivo = nowHM > RESERVA_HORA_DESDE ? nowHM : RESERVA_HORA_DESDE;
+        if (efectivo > RESERVA_HORA_HASTA) horaReservation.removeAttribute('min');
+        else horaReservation.min = efectivo;
+      } else if (fechaReservation.value) {
+        horaReservation.min = RESERVA_HORA_DESDE;
+      } else {
+        horaReservation.min = RESERVA_HORA_DESDE;
+      }
+    };
+
+    if (fechaReservation instanceof HTMLInputElement && fechaReservation.type === 'date')
+      fechaReservation.min = new Date().toISOString().slice(0, 10);
+
+    if (fechaReservation instanceof HTMLInputElement) {
+      fechaReservation.addEventListener('input', syncReservationHoraMinFromFecha);
+      fechaReservation.addEventListener('change', syncReservationHoraMinFromFecha);
+    }
+    syncReservationHoraMinFromFecha();
+
+    reservationForm.addEventListener('submit', (submitEv) => {
+      submitEv.preventDefault();
+      syncReservationHoraMinFromFecha();
+
+      const nombreEl = reservationForm.querySelector<HTMLInputElement>('input[name="nombre"]');
+      const telEl = reservationForm.querySelector<HTMLInputElement>('input[name="telefono"]');
+      const fechaEl = reservationForm.querySelector<HTMLInputElement>('input[name="fecha"]');
+      const horaEl = reservationForm.querySelector<HTMLInputElement>('input[name="hora"]');
+      const personasEl = reservationForm.querySelector<HTMLInputElement>('input[name="personas"]');
+      /** Errores en español para consola — saber exactamente qué falta por completar */
+      const issues: { campo: string; mensaje: string; input?: HTMLElement }[] = [];
+
+      if (!(nombreEl instanceof HTMLInputElement))
+        issues.push({ campo: 'nombre', mensaje: 'Campo nombre no existe en el formulario.' });
+      else if (!nombreEl.value.trim())
+        issues.push({ campo: 'nombre', mensaje: 'Vacío — indica tu nombre.', input: nombreEl });
+
+      if (!(telEl instanceof HTMLInputElement))
+        issues.push({ campo: 'telefono', mensaje: 'Campo teléfono no existe en el formulario.' });
+      else if (!telEl.value.trim())
+        issues.push({ campo: 'telefono', mensaje: 'Vacío — indica un teléfono de contacto.', input: telEl });
+
+      if (!(fechaEl instanceof HTMLInputElement))
+        issues.push({ campo: 'fecha', mensaje: 'Campo fecha no existe en el formulario.' });
+      else if (!fechaEl.value)
+        issues.push({ campo: 'fecha', mensaje: 'Sin fecha — elige el día de la reserva.', input: fechaEl });
+      else if (fechaEl.value < fechaEl.min)
+        issues.push({ campo: 'fecha', mensaje: 'La fecha no puede ser anterior a hoy.', input: fechaEl });
+      else {
+        const todayStrCheck = new Date().toISOString().slice(0, 10);
+        if (fechaEl.value === todayStrCheck) {
+          const dh = new Date();
+          const nowHMSubmit = `${String(dh.getHours()).padStart(2, '0')}:${String(dh.getMinutes()).padStart(2, '0')}`;
+          if (nowHMSubmit > RESERVA_HORA_HASTA)
+            issues.push({
+              campo: 'fecha',
+              mensaje:
+                'Para hoy ya no hay reservas (el horario permitido llega hasta las 23:00). Elige otra fecha.',
+              input: fechaEl,
+            });
+        }
+      }
+
+      if (!(horaEl instanceof HTMLInputElement))
+        issues.push({ campo: 'hora', mensaje: 'Campo hora no existe en el formulario.' });
+      else if (!horaEl.value)
+        issues.push({ campo: 'hora', mensaje: 'Sin hora — elige la hora prevista para la mesa.', input: horaEl });
+      else {
+        if (horaEl.value < RESERVA_HORA_DESDE || horaEl.value > RESERVA_HORA_HASTA)
+          issues.push({ campo: 'hora', mensaje: 'La hora debe estar entre las 9:00 y las 23:00.', input: horaEl });
+        const horaMin = horaEl.getAttribute('min');
+        if (horaEl.value >= RESERVA_HORA_DESDE && horaEl.value <= RESERVA_HORA_HASTA && horaMin && horaEl.value < horaMin)
+          issues.push({ campo: 'hora', mensaje: 'Para hoy, la hora no puede ser anterior a la hora actual.', input: horaEl });
+      }
+
+      let personasNum = NaN;
+      if (!(personasEl instanceof HTMLInputElement))
+        issues.push({ campo: 'personas', mensaje: 'Campo personas no existe en el formulario.' });
+      else {
+        personasNum = Number.parseInt(personasEl.value, 10);
+        if (!personasEl.value.trim() || Number.isNaN(personasNum))
+          issues.push({ campo: 'personas', mensaje: 'Número de personas inválido o vacío.', input: personasEl });
+        else if (personasNum < 1)
+          issues.push({ campo: 'personas', mensaje: 'Mínimo 1 persona.', input: personasEl });
+        else if (personasNum > 12)
+          issues.push({ campo: 'personas', mensaje: 'Máximo 12 personas (ajusta si el grupo es mayor por teléfono).', input: personasEl });
+      }
+
+      const alergico = allergyCheckbox instanceof HTMLInputElement && allergyCheckbox.checked;
+      const detalleAlergias = allergyDetail instanceof HTMLTextAreaElement ? allergyDetail.value.trim() : '';
+
+      if (issues.length > 0) {
+        console.error('[Reserva] No se envía — faltan datos o hay valores no válidos:');
+        for (const { campo, mensaje } of issues)
+          console.error(`  • ${campo}: ${mensaje}`);
+        console.error('[Reserva] Resumen pendiente:', issues.map((x) => x.campo).join(', '));
+        const focusEl = issues.find((x) => x.input)?.input;
+        if (focusEl) {
+          focusEl.focus({ preventScroll: false });
+          focusEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+        return;
+      }
+
+      const nombreOk = nombreEl!.value.trim();
+      const telOk = telEl!.value.trim();
+      const fechaOk = fechaEl!.value;
+      const horaOk = horaEl!.value;
+
+      console.info('[Reserva] Información válida. Enviando solicitud:', {
+        nombre: nombreOk,
+        telefono: telOk,
+        fecha: fechaOk,
+        hora: horaOk,
+        personas: personasNum,
+        alguien_alergico: alergico,
+        detalle_alergias: alergico ? (detalleAlergias || '(sin texto adicional)') : null,
+      });
+
+      const bodyLines = [
+        'Hola, quiero reservar mesa en Sabor & Salsa.',
+        '',
+        `Nombre: ${nombreOk}`,
+        `Teléfono: ${telOk}`,
+        `Fecha: ${fechaOk}`,
+        `Hora: ${horaOk}`,
+        `Personas: ${personasNum}`,
+        ...(alergico
+          ? [
+              '',
+              `Alergias / intolerancias: sí${detalleAlergias ? `. ${detalleAlergias}` : ''}`,
+            ]
+          : []),
+      ];
+
+      window.open(`https://wa.me/${RESERVATION_WA}?text=${encodeURIComponent(bodyLines.join('\n'))}`, '_blank', 'noopener,noreferrer');
+    });
+  }
 
   const reduceMotionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
 
