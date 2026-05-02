@@ -342,3 +342,68 @@
     transition: none !important;
   }
 }
+
+@layer components {
+  /** Chapa de categoría en la carta (color por tipo de propuesta) */
+  .carta-chip {
+    @apply inline-block text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5 w-fit;
+  }
+
+  .carta-chip--entrantes {
+    @apply bg-amber-900;
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2);
+  }
+
+  .carta-chip--calientes {
+    @apply bg-orange-700;
+    box-shadow: 0 0 0 1px rgba(234, 88, 12, 0.25);
+  }
+
+  .carta-chip--frios {
+    @apply bg-teal-700;
+    box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.2);
+  }
+
+  .carta-chip--postres {
+    @apply bg-fuchsia-950;
+    box-shadow: 0 0 0 1px rgba(217, 70, 239, 0.18);
+  }
+
+  .menu-carta-carousel:focus-visible {
+    outline: 2px solid var(--spark-gold, #f2ca50);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+
+  .menu-carta-carousel__dot {
+    @apply h-1.5 min-w-4 max-w-8 shrink-0 cursor-pointer rounded-full border-0 p-0 transition-colors bg-outline-variant/45;
+  }
+
+  .menu-carta-carousel__dot[aria-current="true"] {
+    @apply bg-primary;
+  }
+
+  .menu-carta-carousel__viewport {
+    transition: height 0.38s var(--motion-snap, cubic-bezier(0.2, 0.9, 0.16, 1));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-carta-carousel__viewport {
+      transition: none !important;
+    }
+  }
+
+  /** Carta (#carta): grid 50/50 — texto puede encoger, precio siempre completo a la derecha */
+  #carta .menu-option-card.flex.justify-between {
+    @apply gap-3;
+  }
+  #carta .menu-option-card.flex.justify-between > div:first-child {
+    @apply min-w-0 flex-1 pr-2;
+  }
+  #carta .menu-option-card.flex.justify-between > span:first-child.font-headline:not(:only-child) {
+    @apply min-w-0 flex-1 pr-2;
+  }
+  #carta .menu-option-card.flex.justify-between > span:last-child.font-headline {
+    @apply shrink-0 tabular-nums text-right;
+  }
+}
