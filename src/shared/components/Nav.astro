@@ -12,41 +12,76 @@ const links = [
 ];
 ---
 
-<nav class="fixed top-0 w-full z-50 glass-nav">
-  <div class="flex justify-between items-center max-w-7xl mx-auto px-5 md:px-8 py-4 md:py-6">
-    <a class="header-logo" href="/" aria-label="Sabor y Salsa inicio">
-      <img alt="Sabor &amp; Salsa Logo" class="h-10 md:h-12 w-auto object-contain" src="/logo.jpeg" />
-    </a>
-    <div class="hidden md:flex items-center gap-10">
-      {links.map((link) => (
+<nav class="fixed top-0 left-0 right-0 z-50 flex w-full flex-col">
+  <div
+    id="site-nav-stack"
+    class="flex w-full flex-col border-b border-primary/10 bg-[rgba(19,19,19,0.94)] backdrop-blur-md"
+  >
+    <!-- Sub-header: teléfonos + reserva -->
+    <div class="max-w-7xl mx-auto w-full px-5 md:px-8 py-2 md:py-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 md:gap-x-6">
+          <a
+            class="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-on-surface/85 transition-colors hover:text-primary md:text-xs"
+            href="tel:+34639810204"
+          >
+            +34 639 81 02 04
+          </a>
+          <span class="hidden text-on-surface/25 sm:inline" aria-hidden="true">·</span>
+          <a
+            class="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-on-surface/85 transition-colors hover:text-primary md:text-xs"
+            href="tel:+34623997930"
+          >
+            +34 623 99 79 30
+          </a>
+        </div>
         <a
-          class={`font-label uppercase tracking-wider text-xs font-bold spark-underline ${activeLink === link.label ? "text-primary border-primary pb-1 nav-item-active" : "text-on-surface/80 nav-link-hover"}`}
-          href={link.href}
+          class="metallic-gradient text-on-primary font-label font-bold rounded-lg px-4 py-2 text-[10px] uppercase tracking-widest shadow-[0_0_18px_rgba(242,202,80,0.18)] transition-[filter,transform] btn-hover-strong hover:brightness-105 md:px-6 md:py-2.5 md:text-xs whitespace-nowrap"
+          href="/#reservas"
         >
-          {link.label}
+          Reservar mesa
         </a>
-      ))}
+      </div>
     </div>
-    <div class="flex items-center gap-3">
-      <a
-        class="hidden md:inline-flex metallic-gradient text-on-primary font-label font-bold px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest btn-hover-strong shadow-[0_0_20px_rgba(242,202,80,0.2)]"
-        href="/#reservas"
-      >
-        Reservar mesa
-      </a>
-      <button
-        aria-controls="mobile-menu"
-        aria-expanded="false"
-        class="md:hidden w-11 h-11 rounded-lg border border-primary/20 text-primary flex items-center justify-center"
-        id="mobile-menu-toggle"
-        type="button"
-      >
-        <span class="material-symbols-outlined">menu</span>
-      </button>
+
+    <!-- Fila principal -->
+    <div class="glass-nav">
+      <div class="flex w-full max-w-7xl mx-auto items-center px-5 md:px-8 py-4 md:py-6">
+        <div class="flex flex-1 justify-start min-w-0">
+          <a class="header-logo shrink-0" href="/" aria-label="Sabor y Salsa inicio">
+            <img alt="Sabor &amp; Salsa Logo" class="h-10 md:h-12 w-auto object-contain" src="/logo.jpeg" />
+          </a>
+        </div>
+        <div class="hidden min-w-0 md:flex items-center justify-center gap-10">
+          {links.map((link) => (
+            <a
+              class={`font-label uppercase tracking-wider text-xs font-bold spark-underline ${activeLink === link.label ? "text-primary border-primary pb-1 nav-item-active" : "text-on-surface/80 nav-link-hover"}`}
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <div class="flex flex-1 justify-end min-w-0">
+          <button
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            class="md:hidden w-11 h-11 shrink-0 rounded-lg border border-primary/20 text-primary flex items-center justify-center"
+            id="mobile-menu-toggle"
+            type="button"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="md:hidden hidden fixed inset-0 top-[72px] h-[calc(100vh-72px)] z-40 bg-surface" id="mobile-menu">
-    <div class="flex flex-col items-center justify-center h-full w-full p-4 space-y-6">
+
+  <div
+    class="md:hidden fixed left-0 right-0 z-40 hidden overflow-y-auto bg-surface"
+    id="mobile-menu"
+  >
+    <div class="flex min-h-full flex-col items-center justify-center w-full p-4 space-y-6">
       {links.map((link) => (
         <a
           class={`block py-3 text-sm uppercase tracking-[0.2em] text-center ${activeLink === link.label ? "text-primary spark-underline nav-item-active" : "text-on-surface/80 nav-link-hover"}`}
@@ -60,21 +95,33 @@ const links = [
 </nav>
 
 <script>
-  const mobileToggle = document.getElementById('mobile-menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileToggle = document.getElementById("mobile-menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navStack = document.getElementById("site-nav-stack");
+
+  function layoutMobileMenu() {
+    if (!mobileMenu || !navStack) return;
+    const h = navStack.getBoundingClientRect().height;
+    mobileMenu.style.top = `${h}px`;
+    mobileMenu.style.height = `calc(100dvh - ${h}px)`;
+  }
 
   if (mobileToggle && mobileMenu) {
-    mobileToggle.addEventListener('click', () => {
-      const expanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-      mobileToggle.setAttribute('aria-expanded', String(!expanded));
-      mobileMenu.classList.toggle('hidden');
+    mobileToggle.addEventListener("click", () => {
+      const expanded = mobileToggle.getAttribute("aria-expanded") === "true";
+      mobileToggle.setAttribute("aria-expanded", String(!expanded));
+      mobileMenu.classList.toggle("hidden");
+      if (!mobileMenu.classList.contains("hidden")) layoutMobileMenu();
     });
 
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileToggle.setAttribute("aria-expanded", "false");
       });
     });
   }
+
+  window.addEventListener("resize", layoutMobileMenu);
+  layoutMobileMenu();
 </script>
