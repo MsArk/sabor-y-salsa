@@ -545,6 +545,13 @@ const reservationN8nWebhookUrl =
           <h2 class="font-headline text-4xl md:text-6xl font-bold leading-tight mb-6">Tus días de <span class="italic text-primary font-normal">alegría</span></h2>
           <p class="text-on-surface-variant leading-relaxed max-w-2xl mb-10">Reservas de lunes a domingo.</p>
           <form class="space-y-6" id="reserva-form" novalidate>
+            <div
+              id="reserva-form-alert"
+              class="hidden rounded-xl border border-error/35 bg-error-container/25 px-4 py-3 text-sm text-on-error-container [&_strong]:font-semibold [&_strong]:text-on-error-container"
+              role="alert"
+              aria-live="assertive"
+              aria-hidden="true"
+            ></div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <label class="block">
                 <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Nombre</span>
@@ -641,8 +648,56 @@ const reservationN8nWebhookUrl =
   }, { threshold: 0.2 });
   revealNodes.forEach((node) => observer.observe(node));
 
-  /** Reserva: validación, logs en consola y envío por WhatsApp */
+  /** Reserva: validación, mensajes en el formulario y envío por WhatsApp */
   const reservationForm = document.getElementById('reserva-form');
+  const reservationFormAlert = document.getElementById('reserva-form-alert');
+
+  const hideReservationFormAlert = () => {
+    if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.classList.add('hidden');
+    reservationFormAlert.textContent = '';
+    reservationFormAlert.setAttribute('aria-hidden', 'true');
+  };
+
+  /**
+   * @param {{ campo: string; mensaje: string; input?: HTMLElement }[]} issues
+   */
+  const showReservationFormIssues = (issues) => {
+    if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.classList.remove('hidden');
+    reservationFormAlert.removeAttribute('aria-hidden');
+
+    const headline = document.createElement('p');
+    headline.className = 'font-label text-[10px] uppercase tracking-widest text-error mb-2';
+    headline.textContent = 'No se puede enviar — faltan datos o hay valores no válidos';
+
+    const list = document.createElement('ul');
+    list.className = 'list-disc list-inside space-y-1.5 mb-2 pl-0.5';
+
+    const labelForCampo = (c) =>
+      ({
+        nombre: 'Nombre',
+        telefono: 'Teléfono',
+        fecha: 'Fecha',
+        hora: 'Hora',
+        personas: 'Personas',
+      })[c] ?? c;
+
+    for (const { campo, mensaje } of issues) {
+      const li = document.createElement('li');
+      const strong = document.createElement('strong');
+      strong.textContent = `${labelForCampo(campo)}: `;
+      li.append(strong);
+      li.append(document.createTextNode(mensaje));
+      list.append(li);
+    }
+
+    const footer = document.createElement('p');
+    footer.className = 'text-xs opacity-90 border-t border-on-error-container/25 pt-2 mt-2';
+    footer.textContent = `Por completar: ${issues.map((x) => labelForCampo(x.campo)).join(', ')}`;
+
+    reservationFormAlert.replaceChildren(headline, list, footer);
+  };
   const allergyCheckbox = document.getElementById('reserva-alergico');
   const allergyWrap = document.getElementById('reserva-alergias-wrap');
   const allergyDetail = document.getElementById('reserva-alergias-detalle');
@@ -697,6 +752,7 @@ const reservationN8nWebhookUrl =
 
     reservationForm.addEventListener('submit', async (submitEv) => {
       submitEv.preventDefault();
+      hideReservationFormAlert();
       syncReservationHoraMinFromFecha();
 
       const nombreEl = reservationForm.querySelector('input[name="nombre"]');
@@ -767,15 +823,11 @@ const reservationN8nWebhookUrl =
       const detalleAlergias = allergyDetail instanceof HTMLTextAreaElement ? allergyDetail.value.trim() : '';
 
       if (issues.length > 0) {
-        console.error('[Reserva] No se envía — faltan datos o hay valores no válidos:');
-        for (const { campo, mensaje } of issues)
-          console.error(`  • ${campo}: ${mensaje}`);
-        console.error('[Reserva] Resumen pendiente:', issues.map((x) => x.campo).join(', '));
+        showReservationFormIssues(issues);
+        if (reservationFormAlert instanceof HTMLElement)
+          reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         const focusEl = issues.find((x) => x.input)?.input;
-        if (focusEl) {
-          focusEl.focus({ preventScroll: false });
-          focusEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        }
+        if (focusEl) focusEl.focus({ preventScroll: true });
         return;
       }
 
