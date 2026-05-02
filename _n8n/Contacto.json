@@ -1,0 +1,165 @@
+{
+  "name": "Contacto",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ac8c4090-ca61-4a8b-8f87-76219b05e034",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "784a1bf9-59ff-4d0e-9c39-71ceb5fde418",
+      "name": "Webhook",
+      "webhookId": "ac8c4090-ca61-4a8b-8f87-76219b05e034"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"ok\": true,\n  \"message\": \"Mensaje recibido correctamente\",\n  \"email_sent\": true,\n  \"customer_confirmation_sent\": true\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        880,
+        0
+      ],
+      "id": "257c9753-409e-4c99-b86e-8047d5802e97",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json;\n\nif (body.tipo !== 'contacto_web') {\n  throw new Error(`Tipo de solicitud no soportado: ${body.tipo}`);\n}\n\nconst requiredFields = ['nombre', 'email', 'asunto', 'mensaje'];\n\nfor (const field of requiredFields) {\n  if (body[field] === undefined || body[field] === null || String(body[field]).trim() === '') {\n    throw new Error(`Campo obligatorio vacío: ${field}`);\n  }\n}\n\nconst escapeHtml = (value) => {\n  return String(value ?? '')\n    .replaceAll('&', '&amp;')\n    .replaceAll('<', '&lt;')\n    .replaceAll('>', '&gt;')\n    .replaceAll('\"', '&quot;')\n    .replaceAll(\"'\", '&#039;');\n};\n\nconst nombre = String(body.nombre).trim();\nconst email = String(body.email).trim();\nconst asunto = String(body.asunto).trim();\nconst mensaje = String(body.mensaje).trim();\n\nconst emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n\nif (!emailRegex.test(email)) {\n  throw new Error('Email no válido');\n}\n\nconst origen = body.origen || 'sabor-y-salsa-web';\nconst enviadoEn = body.enviado_en || new Date().toISOString();\n\nconst asuntoEmailRestaurante = `Nuevo mensaje de contacto - ${asunto}`;\n\nconst cuerpoEmailRestauranteHtml = `\n<div style=\"font-family: Arial, sans-serif; font-size: 15px; color: #222; line-height: 1.5;\">\n  <h2 style=\"margin: 0 0 16px 0; color: #111;\">\n    Nuevo mensaje de contacto\n  </h2>\n\n  <p style=\"margin: 0 0 16px 0;\">\n    Se ha recibido un nuevo mensaje desde la web de <strong>Sabor y Salsa</strong>.\n  </p>\n\n  <table style=\"border-collapse: collapse; width: 100%; max-width: 650px; margin-bottom: 20px;\">\n    <tr>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd; background: #f7f7f7; width: 160px;\">\n        <strong>Nombre</strong>\n      </td>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd;\">\n        ${escapeHtml(nombre)}\n      </td>\n    </tr>\n\n    <tr>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd; background: #f7f7f7;\">\n        <strong>Email</strong>\n      </td>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd;\">\n        <a href=\"mailto:${escapeHtml(email)}\">${escapeHtml(email)}</a>\n      </td>\n    </tr>\n\n    <tr>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd; background: #f7f7f7;\">\n        <strong>Asunto</strong>\n      </td>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd;\">\n        ${escapeHtml(asunto)}\n      </td>\n    </tr>\n\n    <tr>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd; background: #f7f7f7; vertical-align: top;\">\n        <strong>Mensaje</strong>\n      </td>\n      <td style=\"padding: 8px 12px; border: 1px solid #ddd; white-space: pre-line;\">\n        ${escapeHtml(mensaje)}\n      </td>\n    </tr>\n  </table>\n\n  <p style=\"margin: 0 0 8px 0;\">\n    <strong>Origen:</strong> ${escapeHtml(origen)}\n  </p>\n\n  <p style=\"margin: 0 0 20px 0;\">\n    <strong>Enviado en:</strong> ${escapeHtml(enviadoEn)}\n  </p>\n\n  <div style=\"padding: 12px 16px; background: #fff7e6; border: 1px solid #ffd591; border-radius: 6px;\">\n    <strong>Siguiente paso:</strong><br>\n    Responder al cliente desde el correo del restaurante.\n  </div>\n</div>\n`.trim();\n\nconst asuntoConfirmacionCliente = `Hemos recibido tu mensaje - Sabor y Salsa`;\n\nconst cuerpoConfirmacionClienteHtml = `\n<div style=\"font-family: Arial, sans-serif; font-size: 15px; color: #222; line-height: 1.5;\">\n  <h2 style=\"margin: 0 0 16px 0; color: #111;\">\n    Hemos recibido tu mensaje\n  </h2>\n\n  <p>Hola ${escapeHtml(nombre)},</p>\n\n  <p>\n    Gracias por contactar con <strong>Sabor y Salsa</strong>.\n    Hemos recibido tu mensaje correctamente y te responderemos lo antes posible.\n  </p>\n\n  <div style=\"padding: 12px 16px; background: #f7f7f7; border: 1px solid #ddd; border-radius: 6px; margin: 18px 0;\">\n    <strong>Asunto:</strong> ${escapeHtml(asunto)}<br><br>\n    <strong>Mensaje enviado:</strong><br>\n    <span style=\"white-space: pre-line;\">${escapeHtml(mensaje)}</span>\n  </div>\n\n  <p style=\"margin-top: 20px;\">\n    Un saludo,<br>\n    <strong>Sabor y Salsa</strong>\n  </p>\n</div>\n`.trim();\n\nreturn [\n  {\n    json: {\n      tipo: 'contacto_web',\n      nombre,\n      email,\n      asunto,\n      mensaje,\n      origen,\n      enviado_en: enviadoEn,\n\n      email_restaurante: 'barsaborysalsa@gmail.com',\n\n      asunto_email_restaurante: asuntoEmailRestaurante,\n      cuerpo_email_restaurante_html: cuerpoEmailRestauranteHtml,\n\n      asunto_confirmacion_cliente: asuntoConfirmacionCliente,\n      cuerpo_confirmacion_cliente_html: cuerpoConfirmacionClienteHtml\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "0f8a6145-3153-4f22-b3ad-82438c5fe65c",
+      "name": "Preparar contacto"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email_restaurante }}",
+        "subject": "={{ $json.asunto_email_restaurante }}",
+        "message": "={{ $json.cuerpo_email_restaurante_html }}",
+        "options": {
+          "appendAttribution": false,
+          "ccList": "",
+          "replyTo": "={{ $json.email }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "1f287cdf-5cc9-4359-abf1-6dcd54b3b346",
+      "name": "Email contacto",
+      "webhookId": "a258d6ad-77f5-4b24-b431-cae02aadc9c9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wj1AddJcEmLfPsyX",
+          "name": "Sabor y Salsa - Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Preparar contacto').first().json.email }}",
+        "subject": "={{ $('Preparar contacto').first().json.asunto_confirmacion_cliente }}",
+        "message": "={{ $('Preparar contacto').first().json.cuerpo_confirmacion_cliente_html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        656,
+        0
+      ],
+      "id": "112ffab2-5193-471a-b21a-6cf2f281185b",
+      "name": "Email confirmación cliente",
+      "webhookId": "8c2569b3-2a20-497c-887b-bd6bacbf55cf",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wj1AddJcEmLfPsyX",
+          "name": "Sabor y Salsa - Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Preparar contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar contacto": {
+      "main": [
+        [
+          {
+            "node": "Email contacto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email contacto": {
+      "main": [
+        [
+          {
+            "node": "Email confirmación cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email confirmación cliente": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "4292fdd5-f4d9-4ed0-931d-e56708be08f8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "589954e5374140162883a2faead209414bfe6ad0a43162602c9c783730e2e058"
+  },
+  "id": "NYdSI7StaSQDj7mH",
+  "tags": []
+}
