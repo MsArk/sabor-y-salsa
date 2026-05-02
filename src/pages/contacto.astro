@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Nav from "@/shared/components/Nav.astro";
 import Footer from "@/shared/components/Footer.astro";
-import { ContactMaps } from "@/features/map/components/ContactMaps";
+import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
 ---
 
 <BaseLayout title="Contacto | Sabor &amp; Salsa">
@@ -147,14 +147,14 @@ import { ContactMaps } from "@/features/map/components/ContactMaps";
       </div>
     </section>
 
-    <!-- Mapa con mapcn (reemplaza Google Maps iframes) -->
+    <!-- Mapa (Google Maps) -->
     <section class="py-16 md:py-24 bg-surface reveal" style="--reveal-delay: 120ms">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="text-center mb-12">
           <span class="font-label text-primary uppercase tracking-[0.3em] text-[10px] font-bold">Visitanos</span>
           <h2 class="font-headline text-3xl md:text-4xl font-bold mt-4">Nuestra <span class="italic text-primary font-normal">ubicacion</span></h2>
         </div>
-        <ContactMaps client:load />
+        <LocationMapEmbed />
       </div>
     </section>
 

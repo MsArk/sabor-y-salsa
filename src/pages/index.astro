@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Nav from "@/shared/components/Nav.astro";
 import Footer from "@/shared/components/Footer.astro";
+import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
 ---
 
 <BaseLayout title="Sabor &amp; Salsa | Premium Peruvian Street Food">
@@ -518,6 +519,9 @@ import Footer from "@/shared/components/Footer.astro";
             <h3 class="font-headline text-3xl font-bold mb-4">Ubicacion</h3>
             <p class="text-on-surface-variant mb-4">Calle Guadaira 14, Local nº 3 Madrid, España</p>
             <p class="font-label text-[10px] uppercase tracking-[0.18em] text-primary">Lun-Dom · 12PM - 12AM</p>
+            <div class="mt-6">
+              <LocationMapEmbed />
+            </div>
           </div>
         </aside>
       </div>
