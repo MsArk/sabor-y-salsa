@@ -114,7 +114,7 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
           <!-- Entrantes (Large) -->
-          <div class="md:col-span-7 bg-surface-container-high p-8 rounded-xl flex flex-col justify-between min-h-[400px] glow-card">
+          <div class="md:col-span-7 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
             <div class="h-48 mb-6 overflow-hidden rounded-lg">
               <img alt="Entrantes" class="w-full h-full object-cover" src="/img/entrantes.jpg" />
             </div>
@@ -158,242 +158,258 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
                   </div>
                   <span class="font-headline text-primary font-bold">10 €</span>
                 </div>
-
-                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                  <div class="max-w-md">
-                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de patatas</h3>
-                    <p class="font-body text-sm text-on-surface-variant">Patatas fritas.</p>
+              </div>
+              <details class="menu-carta-expand group mt-2">
+                <summary
+                  class="cursor-pointer list-none w-fit [&::-webkit-details-marker]:hidden text-on-surface/50 hover:text-primary font-label text-[10px] font-bold uppercase tracking-widest transition-colors mt-6 spark-underline flex items-center gap-2"
+                >
+                  <span class="group-open:hidden">Mostrar más entrantes (5)</span>
+                  <span class="hidden group-open:inline">Ocultar entrantes extra</span>
+                </summary>
+                <div class="space-y-3 mt-6 pt-6 border-t border-outline-variant/15">
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de patatas</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Patatas fritas.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold">7 €</span>
                   </div>
-                  <span class="font-headline text-primary font-bold">7 €</span>
+
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de arroz</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Arroz blanco.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold">5 €</span>
+                  </div>
+
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Torreznos</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Desde Soria a tu estómago.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold">12,5 €</span>
+                  </div>
+
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Croquetas</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Con toque ibérico.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold">13 €</span>
+                  </div>
+
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Anticuchos</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Anticuchos de ternera, acompañados con crema a la Huancaina.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold">15 €</span>
+                  </div>
                 </div>
-
+              </details>
+            </div>
+          </div>
+          <!-- Platos Calientes -->
+          <div class="md:col-span-5 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+            <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
+              <img alt="Platos Calientes - Street Food Latino" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                src="/img/platos-calientes.jpg" />
+            </div>
+            <div>
+              <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">PLATOS CALIENTES</h3>
+              <span class="inline-block bg-peru-red text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5">Fuego en cocina</span>
+              <div class="space-y-3">
                 <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
                   <div class="max-w-md">
-                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de arroz</h3>
-                    <p class="font-body text-sm text-on-surface-variant">Arroz blanco.</p>
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Lomo Saltado</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Wok a fuego extremadamente alto (punto de humo).</p>
                   </div>
-                  <span class="font-headline text-primary font-bold">5 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">22 €</span>
                 </div>
-
                 <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
                   <div class="max-w-md">
-                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Torreznos</h3>
-                    <p class="font-body text-sm text-on-surface-variant">Desde Soria a tu estómago.</p>
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Chaufa de Pollo</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Delicioso arroz fusión peruana-oriental.</p>
                   </div>
-                  <span class="font-headline text-primary font-bold">12,5 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">18 €</span>
                 </div>
-
                 <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
                   <div class="max-w-md">
-                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Croquetas</h3>
-                    <p class="font-body text-sm text-on-surface-variant">Con toque ibérico.</p>
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Chaufa de Carne</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Delicioso arroz fusión peruana-oriental.</p>
                   </div>
-                  <span class="font-headline text-primary font-bold">13 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">20 €</span>
                 </div>
-
                 <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
                   <div class="max-w-md">
-                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Anticuchos</h3>
-                    <p class="font-body text-sm text-on-surface-variant">Anticuchos de ternera, acompañados con crema a la Huancaina.</p>
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Chaufa de Marisco</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Fusión peruana-oriental. Con sabor peruano.</p>
                   </div>
-                  <span class="font-headline text-primary font-bold">15 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">25 €</span>
+                </div>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Arroz con Marisco</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Tipico arroz peruano con mixtura de marisco.</p>
+                  </div>
+                  <span class="font-headline text-primary font-bold shrink-0">25 €</span>
+                </div>
+              </div>
+              <details class="menu-carta-expand group mt-2">
+                <summary
+                  class="cursor-pointer list-none w-fit [&::-webkit-details-marker]:hidden text-on-surface/50 hover:text-primary font-label text-[10px] font-bold uppercase tracking-widest transition-colors mt-6 spark-underline flex items-center gap-2"
+                >
+                  <span class="group-open:hidden">Mostrar más platos calientes (11)</span>
+                  <span class="hidden group-open:inline">Ocultar platos extra</span>
+                </summary>
+                <div class="space-y-3 mt-6 pt-6 border-t border-outline-variant/15">
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Duo Marino</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Cheviche de pescado y con chicharron de pescado.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">25 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Trio Marino</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Tres deliciosas versiones de nuestro mar.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">35 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Parrilla</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Nuestra típica parrilla con mixturas pollo, chuletas de cerdo, filetes de ternera, anticuchos y patatas a la parrilla.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">40 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea personal</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado con yuquitas fritas y nuestra deciciosa salsa criolla de cebolla.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">25 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea mixta personal</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado, aros de calamar y camarones empanizados con yuquitas fritas y su nuestra deciciosa salsa criolla de cebolla.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">28 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea mixta familiar</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado, aros de calamar y camarones empanizados con yuquitas fritas y su nuestra deciciosa salsa criolla de cebolla.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">80 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea familiar</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado con yuquitas fritas y nuestra deciciosa salsa criolla de cebolla.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">77,5 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Mostrito</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Cuarto de pollo a la brasa, patatas fritas y su rico chaufa.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">20 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Pollada peruana</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Deliciosa pollada acompañada de sus patatas a la parrilla, ensalda y cremas.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">20 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Pollo broster</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Crujiente pollo broster, acompañada de patatas fritas, ensalda y cremas.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">20 €</span>
+                  </div>
+                  <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                    <div class="max-w-md">
+                      <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Entrecot</h3>
+                      <p class="font-body text-sm text-on-surface-variant">Delicioso entrocot acompañado de patatas a la parilla y cremas.</p>
+                    </div>
+                    <span class="font-headline text-primary font-bold shrink-0">20 €</span>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+          <!-- Platos Fríos -->
+          <div class="md:col-span-6 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+            <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
+              <img alt="Platos Fríos - Ceviches y Tiraditos" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                src="/img/platos-frios.png" />
+            </div>
+            <div>
+              <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">PLATOS FRÍOS</h3>
+              <span class="inline-block bg-cyan-700 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5">Del mar a la mesa</span>
+              <div class="space-y-3">
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche clásico personal</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Pescado marinado en jugo de limón, cebolla y especias.</p>
+                  </div>
+                  <span class="font-headline text-cyan-400 font-bold shrink-0">22,5 €</span>
+                </div>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche clásico familiar</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Pescado marinado en jugo de limón, cebolla y especias.</p>
+                  </div>
+                  <span class="font-headline text-cyan-400 font-bold shrink-0">70 €</span>
+                </div>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche mixto personal</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Pescado, calamar y camarón marinado en jugo de limón, cebolla y especias.</p>
+                  </div>
+                  <span class="font-headline text-cyan-400 font-bold shrink-0">25 €</span>
+                </div>
+                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <div class="max-w-md">
+                    <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche mixto familiar</h3>
+                    <p class="font-body text-sm text-on-surface-variant">Pescado, calamar y camarón marinado en jugo de limón, cebolla y especias.</p>
+                  </div>
+                  <span class="font-headline text-cyan-400 font-bold shrink-0">75 €</span>
                 </div>
               </div>
             </div>
-            <button class="w-fit text-on-surface/50 hover:text-primary font-label text-[10px] font-bold uppercase tracking-widest transition-colors mt-8 spark-underline">Ver todos los entrantes</button>
           </div>
-          <!-- Platos Calientes (col-span-4) -->
-          <div class="md:col-span-5 relative overflow-hidden rounded-xl glow-card group/card">
-            <img alt="Platos Calientes - Street Food Latino"
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105"
-              src="/img/platos-calientes.jpg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-br from-peru-red/20 via-transparent to-amber-500/10"></div>
-            <div class="relative z-10 p-8 flex flex-col justify-end min-h-[420px]">
-              <h3 class="font-headline text-2xl font-black mb-2 text-white drop-shadow-lg tracking-wide"
-                style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">PLATOS CALIENTES</h3>
-              <span class="inline-block bg-peru-red text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5 w-fit shadow-lg">Fuego en cocina</span>
-              <div class="space-y-2">
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Lomo Saltado</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Wok a fuego extremadamente alto (punto de humo).</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">22 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Chaufa de Pollo</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Delicioso arroz fusión peruana-oriental.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">18 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Chaufa de Carne</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Delicioso arroz fusión peruana-oriental.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">20 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Chaufa de Marisco</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Fusión peruana-oriental. Con sabor peruano.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">25 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Arroz con Marisco</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Tipico arroz peruano con mixtura de marisco.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">25 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Duo Marino</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Cheviche de pescado y con chicharron de pescado.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">25 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Trio Marino</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Tres deliciosas versiones de nuestro mar.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">35 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Parrilla</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Nuestra típica parrilla con mixturas pollo, chuletas de cerdo, filetes de ternera, anticuchos y patatas a la parrilla.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">40 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Jalea personal</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Crocantes trozos de pescado con yuquitas fritas y nuestra deciciosa salsa criolla de cebolla.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">25 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Jalea mixta personal</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Crocantes trozos de pescado, aros de calamar y camarones empanizados con  yuquitas fritas y su nuestra deciciosa salsa criolla de cebolla.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">28 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Jalea mixta familiar</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Crocantes trozos de pescado, aros de calamar y camarones empanizados con  yuquitas fritas y su nuestra deciciosa salsa criolla de cebolla.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">80 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Jalea familiar</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Crocantes trozos de pescado con yuquitas fritas y nuestra deciciosa salsa criolla de cebolla.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">77,5 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Mostrito</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Cuarto de pollo a la brasa, patatas fritas y su rico chaufa.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">20 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Pollada peruana</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Deliciosa pollada acompañada de sus patatas a la parrilla, ensalda y cremas.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">20 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Pollo broster</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Crujiente pollo broster, acompañada de patatas fritas, ensalda y cremas.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">20 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-3 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-peru-red/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-base font-bold text-white group-hover:text-amber-400 transition-colors">Entrecot</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Delicioso entrocot acompañado de patatas a la parilla y cremas.</p>
-                  </div>
-                  <span class="font-headline font-bold text-amber-400 ml-3 shrink-0">20 €</span>
-                </div>
-              </div>
+          <!-- Postres -->
+          <div class="md:col-span-6 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+            <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
+              <img alt="Postres" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                src="/img/postres.jpg" />
             </div>
-          </div>
-          <!-- Platos Fríos (col-span-6) -->
-          <div class="md:col-span-6 relative overflow-hidden rounded-xl glow-card group/card">
-            <img alt="Platos Fríos - Ceviches y Tiraditos"
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105"
-              src="/img/platos-frios.png" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-transparent to-teal-500/10"></div>
-            <div class="relative z-10 p-8 flex flex-col justify-end min-h-[360px]">
-              <h3 class="font-headline text-3xl font-black mb-2 text-white drop-shadow-lg tracking-wide"
-                style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">PLATOS FRÍOS</h3>
-              <span class="inline-block bg-cyan-700 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5 w-fit shadow-lg">Del mar a la mesa</span>
-              <div class="space-y-2">
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-cyan-700/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Ceviche clásico personal</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Pescado marinado en jugo de limón, cebolla y especias.</p>
-                  </div>
-                  <span class="font-headline font-bold text-cyan-300 ml-3 shrink-0">22,5 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-cyan-700/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Ceviche clásico familiar</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Pescado marinado en jugo de limón, cebolla y especias.</p>
-                  </div>
-                  <span class="font-headline font-bold text-cyan-300 ml-3 shrink-0">70 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-cyan-700/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Ceviche mixto personal</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Pescado, calamar y camarón marinado en jugo de limón, cebolla y especias.</p>
-                  </div>
-                  <span class="font-headline font-bold text-cyan-300 ml-3 shrink-0">25 €</span>
-                </div>
-                <div class="flex justify-between items-center group cursor-pointer menu-option-card rounded-lg px-4 py-3 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-cyan-700/30 transition-all duration-300">
-                  <div>
-                    <h4 class="font-headline text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Ceviche mixto familiar</h4>
-                    <p class="font-body text-xs text-gray-300 mt-1">Pescado, calamar y camarón marinado en jugo de limón, cebolla y especias.</p>
-                  </div>
-                  <span class="font-headline font-bold text-cyan-300 ml-3 shrink-0">75 €</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Postres (col-span-6) -->
-          <div class="md:col-span-6 relative overflow-hidden rounded-xl bg-surface glow-card">
-            <img alt="Postres" class="absolute inset-0 w-full h-full object-cover opacity-40"
-              src="/img/postres.jpg" />
-            <div class="relative z-10 p-8 flex flex-col justify-end h-full min-h-[360px] bg-gradient-to-t from-surface to-transparent">
-              <h3 class="font-headline text-2xl font-bold mb-2">POSTRES</h3>
+            <div>
+              <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">POSTRES</h3>
               <span class="inline-block bg-peru-red text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5 w-fit">El gustito</span>
               <div class="space-y-3">
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent bg-surface/60 backdrop-blur-sm">
-                  <span class="font-headline text-lg font-bold">Tres leches</span>
+                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <span class="font-headline text-lg font-bold text-on-surface">Tres leches</span>
                   <span class="font-headline text-primary font-bold">6 €</span>
                 </div>
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent bg-surface/60 backdrop-blur-sm">
-                  <span class="font-headline text-lg font-bold">Tarta de chocolate</span>
+                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <span class="font-headline text-lg font-bold text-on-surface">Tarta de chocolate</span>
                   <span class="font-headline text-primary font-bold">6 €</span>
                 </div>
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent bg-surface/60 backdrop-blur-sm">
-                  <span class="font-headline text-lg font-bold">Tarta helada</span>
+                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <span class="font-headline text-lg font-bold text-on-surface">Tarta helada</span>
                   <span class="font-headline text-primary font-bold">6 €</span>
                 </div>
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent bg-surface/60 backdrop-blur-sm">
-                  <span class="font-headline text-lg font-bold">Copa de helado</span>
+                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                  <span class="font-headline text-lg font-bold text-on-surface">Copa de helado</span>
                   <span class="font-headline text-primary font-bold">7,5 €</span>
                 </div>
               </div>
