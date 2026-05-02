@@ -46,23 +46,25 @@ const links = [
 
     <!-- Fila principal -->
     <div class="glass-nav">
-      <div class="flex w-full max-w-7xl mx-auto items-center px-5 md:px-8 py-4 md:py-6">
-        <div class="flex flex-1 justify-start min-w-0">
+      <div class="relative flex w-full max-w-7xl mx-auto items-center px-5 md:px-8 py-4 md:py-6">
+        <div class="flex min-w-0 flex-1 justify-start">
           <a class="header-logo shrink-0" href="/" aria-label="Sabor y Salsa inicio">
             <img alt="Sabor &amp; Salsa Logo" class="h-10 md:h-12 w-auto object-contain" src="/logo.jpeg" />
           </a>
         </div>
-        <div class="hidden min-w-0 md:flex items-center justify-center gap-10">
+        <div
+          class="pointer-events-none absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 md:flex min-w-0 items-center justify-center gap-10"
+        >
           {links.map((link) => (
             <a
-              class={`font-label uppercase tracking-wider text-xs font-bold spark-underline ${activeLink === link.label ? "text-primary border-primary pb-1 nav-item-active" : "text-on-surface/80 nav-link-hover"}`}
+              class={`pointer-events-auto font-label uppercase tracking-wider text-xs font-bold spark-underline ${activeLink === link.label ? "text-primary border-primary pb-1 nav-item-active" : "text-on-surface/80 nav-link-hover"}`}
               href={link.href}
             >
               {link.label}
             </a>
           ))}
         </div>
-        <div class="flex flex-1 justify-end min-w-0">
+        <div class="flex h-11 w-11 shrink-0 items-center justify-end">
           <button
             aria-controls="mobile-menu"
             aria-expanded="false"
