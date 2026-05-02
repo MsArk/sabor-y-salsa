@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.css";
 import ScrollToTop from "@/shared/components/ScrollToTop.astro";
+import WhatsAppFloat from "@/shared/components/WhatsAppFloat.astro";
 
 interface Props {
   title: string;
@@ -28,6 +29,7 @@ const {
   </head>
   <body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary bg-flares noisy-night burst-grid">
     <slot />
+    <WhatsAppFloat />
     <ScrollToTop />
     <script is:inline>
       document.querySelectorAll("[data-current-year]").forEach(function (el) {
