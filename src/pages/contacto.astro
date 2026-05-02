@@ -4,6 +4,11 @@ import Nav from "@/shared/components/Nav.astro";
 import Footer from "@/shared/components/Footer.astro";
 import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
 import SocialLinksRound from "@/shared/components/SocialLinksRound.astro";
+
+const contactN8nWebhookUrl =
+  typeof import.meta.env.PUBLIC_CONTACT_WEBHOOK_URL === "string"
+    ? import.meta.env.PUBLIC_CONTACT_WEBHOOK_URL.trim()
+    : "";
 ---
 
 <BaseLayout title="Contacto | Sabor &amp; Salsa">
@@ -84,7 +89,14 @@ import SocialLinksRound from "@/shared/components/SocialLinksRound.astro";
           <div class="bg-surface-container-high p-8 md:p-12 rounded-xl glow-card">
             <span class="font-label text-primary uppercase tracking-[0.28em] text-[11px] mb-4 block">Escribenos</span>
             <h2 class="font-headline text-3xl md:text-4xl font-bold leading-tight mb-8">Enviar <span class="italic text-primary font-normal">mensaje</span></h2>
-            <form class="space-y-6" id="contact-form">
+            <form class="space-y-6" id="contact-form" novalidate>
+              <div
+                id="contact-form-alert"
+                class="hidden rounded-xl border border-error/35 bg-error-container/25 px-4 py-3 text-sm text-on-error-container [&_strong]:font-semibold [&_strong]:text-on-error-container"
+                role="alert"
+                aria-live="assertive"
+                aria-hidden="true"
+              ></div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <label class="block">
                   <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Nombre *</span>
@@ -115,7 +127,11 @@ import SocialLinksRound from "@/shared/components/SocialLinksRound.astro";
                   placeholder="Cuentanos como podemos ayudarte..." name="mensaje" rows="5" required></textarea>
               </label>
               <div class="pt-4">
-                <button type="submit" class="metallic-gradient text-on-primary font-label font-bold px-10 py-4 rounded-lg uppercase tracking-widest btn-hover-strong w-full sm:w-auto">
+                <button
+                  id="contact-submit-btn"
+                  type="submit"
+                  class="metallic-gradient text-on-primary font-label font-bold px-10 py-4 rounded-lg uppercase tracking-widest btn-hover-strong w-full sm:w-auto disabled:opacity-60 disabled:pointer-events-none"
+                >
                   Enviar Mensaje
                 </button>
               </div>
@@ -149,12 +165,280 @@ import SocialLinksRound from "@/shared/components/SocialLinksRound.astro";
   <Footer />
 </BaseLayout>
 
-<script>
+<script define:vars={{ contactN8nWebhookUrl }}>
   const revealNodes = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
     });
   }, { threshold: 0.2 });
   revealNodes.forEach((node) => observer.observe(node));
+
+  const contactForm = document.getElementById('contact-form');
+  const contactFormAlert = document.getElementById('contact-form-alert');
+  const contactAlertClassesError =
+    'hidden rounded-xl border border-error/35 bg-error-container/25 px-4 py-3 text-sm text-on-error-container [&_strong]:font-semibold [&_strong]:text-on-error-container';
+  const contactAlertClassesSuccess =
+    'rounded-xl border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-on-surface [&_strong]:font-semibold';
+  const contactAlertClassesPending =
+    'rounded-xl border border-outline/45 bg-surface-container-highest/50 px-4 py-3 text-sm text-on-surface-variant';
+
+  const hideContactFormAlert = () => {
+    if (!(contactFormAlert instanceof HTMLElement)) return;
+    contactFormAlert.className = contactAlertClassesError;
+    contactFormAlert.textContent = '';
+    contactFormAlert.setAttribute('aria-hidden', 'true');
+  };
+
+  /**
+   * @param {{ campo: string; mensaje: string; input?: HTMLElement }[]} issues
+   */
+  const showContactFormIssues = (issues) => {
+    if (!(contactFormAlert instanceof HTMLElement)) return;
+    contactFormAlert.className = contactAlertClassesError.replace(/^hidden /, '');
+    contactFormAlert.classList.remove('hidden');
+    contactFormAlert.removeAttribute('aria-hidden');
+
+    const headline = document.createElement('p');
+    headline.className = 'font-label text-[10px] uppercase tracking-widest text-error mb-2';
+    headline.textContent = 'No se puede enviar — faltan datos o hay valores no válidos';
+
+    const list = document.createElement('ul');
+    list.className = 'list-disc list-inside space-y-1.5 mb-2 pl-0.5';
+
+    const labelForCampo = (c) =>
+      ({ nombre: 'Nombre', email: 'Email', asunto: 'Asunto', mensaje: 'Mensaje' })[c] ?? c;
+
+    for (const { campo, mensaje } of issues) {
+      const li = document.createElement('li');
+      const strong = document.createElement('strong');
+      strong.textContent = `${labelForCampo(campo)}: `;
+      li.append(strong);
+      li.append(document.createTextNode(mensaje));
+      list.append(li);
+    }
+
+    const footer = document.createElement('p');
+    footer.className = 'text-xs opacity-90 border-t border-on-error-container/25 pt-2 mt-2';
+    footer.textContent = `Por completar: ${issues.map((x) => labelForCampo(x.campo)).join(', ')}`;
+
+    contactFormAlert.replaceChildren(headline, list, footer);
+  };
+
+  const showContactSendError = (title, paragraphs) => {
+    if (!(contactFormAlert instanceof HTMLElement)) return;
+    contactFormAlert.className = contactAlertClassesError.replace(/^hidden /, '');
+    contactFormAlert.classList.remove('hidden');
+    contactFormAlert.removeAttribute('aria-hidden');
+
+    const h = document.createElement('p');
+    h.className = 'font-label text-[10px] uppercase tracking-widest text-error mb-2';
+    h.textContent = title;
+
+    const box = document.createElement('div');
+    box.className = 'space-y-2';
+    for (const line of paragraphs) {
+      if (!line) continue;
+      const p = document.createElement('p');
+      p.className = 'text-sm leading-relaxed';
+      p.textContent = line;
+      box.append(p);
+    }
+
+    contactFormAlert.replaceChildren(h, box);
+    contactFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+
+  /** @param {null | { ok?: boolean; message?: string }} api */
+  const showContactSubmitSuccess = (api) => {
+    if (!(contactFormAlert instanceof HTMLElement)) return;
+    contactFormAlert.className = contactAlertClassesSuccess;
+    contactFormAlert.removeAttribute('aria-hidden');
+    contactFormAlert.classList.remove('hidden');
+
+    const h = document.createElement('p');
+    h.className = 'font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-2';
+    h.textContent = 'Mensaje enviado';
+
+    const defaultMsg =
+      'Gracias por escribirnos. Te responderemos lo antes posible.';
+    const mainText =
+      api && typeof api.message === 'string' && api.message.trim() ? api.message.trim() : defaultMsg;
+
+    const p = document.createElement('p');
+    p.className = 'text-sm leading-relaxed text-on-surface/90';
+    p.textContent = mainText;
+
+    contactFormAlert.replaceChildren(h, p);
+    contactFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+
+  const showContactSendingStatus = () => {
+    if (!(contactFormAlert instanceof HTMLElement)) return;
+    contactFormAlert.className = contactAlertClassesPending;
+    contactFormAlert.removeAttribute('aria-hidden');
+    contactFormAlert.classList.remove('hidden');
+
+    const h = document.createElement('p');
+    h.className = 'font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-2';
+    h.textContent = 'Enviando…';
+
+    const p = document.createElement('p');
+    p.className = 'text-sm leading-relaxed text-on-surface/85';
+    p.textContent = 'Estamos enviando tu mensaje; no cierres la página.';
+
+    contactFormAlert.replaceChildren(h, p);
+    contactFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+
+  /** @param {string} bodyText */
+  const n8nHintFromBody = (bodyText) => {
+    const u = bodyText.toLowerCase();
+    if (u.includes('respond to webhook'))
+      return 'En n8n el flujo necesita un nodo Respond to Webhook enlazado al Webhook (o activa la respuesta automática en el nodo Webhook). Revisa también que la URL sea la de Producción y que el flujo esté activo.';
+    return 'Revisa en n8n que el flujo esté activo, que la URL del Webhook sea la correcta y que no falle ningún nodo previo.';
+  };
+
+  const emailOk = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+
+  if (contactForm instanceof HTMLFormElement) {
+    const contactSubmitBtn = contactForm.querySelector('#contact-submit-btn');
+
+    const setContactSubmitBusy = (busy) => {
+      if (!(contactSubmitBtn instanceof HTMLButtonElement)) return;
+      if (busy) {
+        if (!(contactSubmitBtn.dataset.labelDefault || '').trim())
+          contactSubmitBtn.dataset.labelDefault =
+            contactSubmitBtn.textContent.trim() || 'Enviar Mensaje';
+        contactSubmitBtn.disabled = true;
+        contactSubmitBtn.setAttribute('aria-busy', 'true');
+        contactSubmitBtn.textContent = 'Enviando…';
+        return;
+      }
+      contactSubmitBtn.disabled = false;
+      contactSubmitBtn.removeAttribute('aria-busy');
+      contactSubmitBtn.textContent =
+        contactSubmitBtn.dataset.labelDefault?.trim() || 'Enviar Mensaje';
+    };
+
+    contactForm.addEventListener('submit', async (submitEv) => {
+      submitEv.preventDefault();
+      hideContactFormAlert();
+
+      const nombreEl = contactForm.querySelector('input[name="nombre"]');
+      const emailEl = contactForm.querySelector('input[name="email"]');
+      const asuntoEl = contactForm.querySelector('select[name="asunto"]');
+      const mensajeEl = contactForm.querySelector('textarea[name="mensaje"]');
+      /** @type {{ campo: string; mensaje: string; input?: HTMLElement }[]} */
+      const issues = [];
+
+      if (!(nombreEl instanceof HTMLInputElement))
+        issues.push({ campo: 'nombre', mensaje: 'Campo nombre no existe en el formulario.' });
+      else if (!nombreEl.value.trim())
+        issues.push({ campo: 'nombre', mensaje: 'Vacío — indica tu nombre.', input: nombreEl });
+
+      if (!(emailEl instanceof HTMLInputElement))
+        issues.push({ campo: 'email', mensaje: 'Campo email no existe en el formulario.' });
+      else if (!emailEl.value.trim())
+        issues.push({ campo: 'email', mensaje: 'Vacío — indica un correo válido.', input: emailEl });
+      else if (!emailOk(emailEl.value.trim()))
+        issues.push({ campo: 'email', mensaje: 'El correo no parece válido.', input: emailEl });
+
+      if (!(asuntoEl instanceof HTMLSelectElement))
+        issues.push({ campo: 'asunto', mensaje: 'Campo asunto no existe en el formulario.' });
+      else if (!asuntoEl.value.trim())
+        issues.push({ campo: 'asunto', mensaje: 'Elige un asunto en la lista.', input: asuntoEl });
+
+      if (!(mensajeEl instanceof HTMLTextAreaElement))
+        issues.push({ campo: 'mensaje', mensaje: 'Campo mensaje no existe en el formulario.' });
+      else if (!mensajeEl.value.trim())
+        issues.push({ campo: 'mensaje', mensaje: 'Vacío — escribe tu mensaje.', input: mensajeEl });
+
+      if (issues.length > 0) {
+        showContactFormIssues(issues);
+        if (contactFormAlert instanceof HTMLElement)
+          contactFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        const focusEl = issues.find((x) => x.input)?.input;
+        if (focusEl) focusEl.focus({ preventScroll: true });
+        return;
+      }
+
+      let asuntoEtiqueta = asuntoEl.value;
+      const opt = asuntoEl.selectedOptions[0];
+      if (opt) asuntoEtiqueta = opt.text.trim();
+
+      const payloadN8n = {
+        tipo: 'contacto_web',
+        origen: 'sabor-y-salsa-web',
+        enviado_en: new Date().toISOString(),
+        nombre: nombreEl.value.trim(),
+        email: emailEl.value.trim(),
+        asunto: asuntoEl.value,
+        asunto_etiqueta: asuntoEtiqueta,
+        mensaje: mensajeEl.value.trim(),
+      };
+
+      if (!contactN8nWebhookUrl) {
+        showContactSendError('No está configurado el envío automático.', [
+          'Falta la variable PUBLIC_CONTACT_WEBHOOK_URL en el entorno donde se construye el sitio (por ejemplo «.env»).',
+          'Define la URL de producción del Webhook y vuelve a generar la web.',
+        ]);
+        return;
+      }
+
+      showContactSendingStatus();
+      setContactSubmitBusy(true);
+
+      try {
+        const resN8n = await fetch(contactN8nWebhookUrl, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payloadN8n),
+        });
+        const bodyText = await resN8n.text().catch(() => '');
+        /** @type {null | { ok?: boolean; message?: string }} */
+        let json = null;
+        if (bodyText.trim()) {
+          try {
+            const j = JSON.parse(bodyText);
+            if (j && typeof j === 'object' && !Array.isArray(j)) json = j;
+          } catch {
+            /* no JSON */
+          }
+        }
+        if (!resN8n.ok) {
+          let serverMsg = '';
+          if (json && typeof json.message === 'string') serverMsg = json.message;
+          else serverMsg = bodyText.trim().slice(0, 400);
+          const hint = n8nHintFromBody(serverMsg || bodyText);
+          showContactSendError(`No se pudo enviar el mensaje (error ${resN8n.status}).`, [
+            serverMsg || 'Respuesta sin detalle del servidor.',
+            hint,
+          ]);
+          return;
+        }
+        if (json && json.ok === false) {
+          const serverMsg =
+            typeof json.message === 'string' && json.message.trim()
+              ? json.message.trim()
+              : 'El envío no se completó.';
+          showContactSendError('No se pudo completar el envío.', [serverMsg]);
+          return;
+        }
+        showContactSubmitSuccess(json);
+        contactForm.reset();
+      } catch {
+        showContactSendError('No se pudo conectar con el servidor.', [
+          'Comprueba tu conexión o un bloqueador del navegador.',
+          'Si sigue igual, revisa la URL del Webhook, CORS y que el workflow en n8n esté activo.',
+        ]);
+      } finally {
+        setContactSubmitBusy(false);
+      }
+    });
+  }
 </script>
