@@ -9,6 +9,31 @@ const reservationN8nWebhookUrl =
   typeof import.meta.env.PUBLIC_N8N_RESERVA_WEBHOOK_URL === "string"
     ? import.meta.env.PUBLIC_N8N_RESERVA_WEBHOOK_URL.trim()
     : "";
+
+/** Franjas HH:MM (24h) mostradas en el formulario de reserva — alineadas con Lun–Dom · 12:00–00:00. */
+const reservationSlotsComida = [
+  "12:00",
+  "12:30",
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+  "16:00",
+  "16:30",
+  "17:00",
+] as const;
+const reservationSlotsCena = [
+  "19:30",
+  "20:00",
+  "20:30",
+  "21:00",
+  "21:30",
+  "22:00",
+  "22:30",
+  "23:00",
+] as const;
 ---
 
 <BaseLayout title="Sabor &amp; Salsa | Premium Peruvian Street Food">
@@ -569,18 +594,57 @@ const reservationN8nWebhookUrl =
                   autocomplete="tel"
                   placeholder="+34 ..." required type="tel" />
               </label>
-              <label class="block">
+              <label class="block sm:col-span-2">
                 <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Fecha</span>
                 <input id="reserva-fecha"
-                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface"
+                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface sm:max-w-xs"
                   name="fecha" required type="date" />
               </label>
-              <label class="block">
-                <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Hora</span>
-                <input id="reserva-hora"
-                  class="mt-2 w-full bg-transparent border-0 border-b border-outline/40 focus:border-primary focus:ring-0 px-1 py-2 text-on-surface max-w-[12rem] sm:max-w-none"
-                  name="hora" max="23:00" min="09:00" required step="900" type="time" />
-              </label>
+              <div class="sm:col-span-2 space-y-5">
+                <div>
+                  <span id="reserva-horario-label"
+                    class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70 block mb-3">Turno preferido</span>
+                  <input id="reserva-hora" name="hora" type="hidden" value="" />
+                  <fieldset class="border-0 p-0 m-0 mb-6" aria-describedby="reserva-horario-label">
+                    <legend class="font-label text-primary text-[11px] uppercase tracking-[0.2em] mb-3">Comida</legend>
+                    <div class="flex flex-wrap gap-2">
+                      {reservationSlotsComida.map((h) => (
+                        <label class="cursor-pointer outline-none shrink-0">
+                          <input
+                            type="radio"
+                            name="reserva_horario_radio"
+                            value={h}
+                            class="peer sr-only"
+                            data-reserva-slot=""
+                          />
+                          <span class="block rounded-lg border border-outline/40 px-3 py-2 text-sm font-body text-on-surface transition-colors hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary/15 peer-checked:text-on-surface peer-focus-visible:ring-2 peer-focus-visible:ring-primary/50 peer-disabled:opacity-35 peer-disabled:cursor-not-allowed">
+                            {h}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                  <fieldset class="border-0 p-0 m-0" aria-describedby="reserva-horario-label">
+                    <legend class="font-label text-primary text-[11px] uppercase tracking-[0.2em] mb-3">Cena</legend>
+                    <div class="flex flex-wrap gap-2">
+                      {reservationSlotsCena.map((h) => (
+                        <label class="cursor-pointer outline-none shrink-0">
+                          <input
+                            type="radio"
+                            name="reserva_horario_radio"
+                            value={h}
+                            class="peer sr-only"
+                            data-reserva-slot=""
+                          />
+                          <span class="block rounded-lg border border-outline/40 px-3 py-2 text-sm font-body text-on-surface transition-colors hover:border-primary/50 peer-checked:border-primary peer-checked:bg-primary/15 peer-checked:text-on-surface peer-focus-visible:ring-2 peer-focus-visible:ring-primary/50 peer-disabled:opacity-35 peer-disabled:cursor-not-allowed">
+                            {h}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
               <label class="block sm:col-span-2">
                 <span class="font-label text-[10px] uppercase tracking-[0.18em] text-on-surface/70">Personas</span>
                 <input id="reserva-personas"
@@ -636,7 +700,7 @@ const reservationN8nWebhookUrl =
   <Footer />
 </BaseLayout>
 
-<script define:vars={{ reservationN8nWebhookUrl }}>
+<script define:vars={{ reservationN8nWebhookUrl, reservationSlotsComida, reservationSlotsCena }}>
   const revealNodes = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -698,6 +762,30 @@ const reservationN8nWebhookUrl =
 
     reservationFormAlert.replaceChildren(headline, list, footer);
   };
+
+  /** Fallo después de pasar validación (webhook / red). No usa la lista tipo “Por completar”. */
+  const showReservationSendError = (title, paragraphs) => {
+    if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.classList.remove('hidden');
+    reservationFormAlert.removeAttribute('aria-hidden');
+
+    const h = document.createElement('p');
+    h.className = 'font-label text-[10px] uppercase tracking-widest text-error mb-2';
+    h.textContent = title;
+
+    const box = document.createElement('div');
+    box.className = 'space-y-2';
+    for (const line of paragraphs) {
+      if (!line) continue;
+      const p = document.createElement('p');
+      p.className = 'text-sm leading-relaxed';
+      p.textContent = line;
+      box.append(p);
+    }
+
+    reservationFormAlert.replaceChildren(h, box);
+    reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
   const allergyCheckbox = document.getElementById('reserva-alergico');
   const allergyWrap = document.getElementById('reserva-alergias-wrap');
   const allergyDetail = document.getElementById('reserva-alergias-detalle');
@@ -717,27 +805,41 @@ const reservationN8nWebhookUrl =
 
   if (reservationForm instanceof HTMLFormElement) {
     const fechaReservation = reservationForm.querySelector('#reserva-fecha');
-    const horaReservation = reservationForm.querySelector('#reserva-hora');
-    /** Horario permitido para reservas (local, HH:MM 24h) */
-    const RESERVA_HORA_DESDE = '09:00';
-    const RESERVA_HORA_HASTA = '23:00';
+    const horaHidden = reservationForm.querySelector('#reserva-hora');
+    /** Todos los slots en orden HH:MM (24h); coincide con maquetación */
+    const RESERVA_SLOTS_TODOS = [...reservationSlotsComida, ...reservationSlotsCena];
+    const RESERVA_HORA_DESDE = reservationSlotsComida[0];
+    const RESERVA_HORA_HASTA = reservationSlotsCena[reservationSlotsCena.length - 1];
+    const RESERVA_SLOTS_SET = new Set(RESERVA_SLOTS_TODOS);
 
-    /** Mantiene min/max del input acorde a la fecha: hoy no antes de ahora ni antes de apertura; siempre tope 23:00 */
-    const syncReservationHoraMinFromFecha = () => {
-      if (!(fechaReservation instanceof HTMLInputElement) || !(horaReservation instanceof HTMLInputElement)) return;
+    const getNowHM = () => {
+      const d = new Date();
+      return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    };
+
+    /** Desactiva horarios ya pasados si la fecha es hoy; limpia selección inválida y el hidden `hora`. */
+    const syncReservationSlotsFromFecha = () => {
+      if (!(fechaReservation instanceof HTMLInputElement) || !(horaHidden instanceof HTMLInputElement)) return;
       const todayStr = new Date().toISOString().slice(0, 10);
-      horaReservation.max = RESERVA_HORA_HASTA;
+      const nowHM = getNowHM();
+      const slotRadios = reservationForm.querySelectorAll('input[data-reserva-slot][type="radio"]');
 
-      if (fechaReservation.value === todayStr) {
-        const d = new Date();
-        const nowHM = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-        let efectivo = nowHM > RESERVA_HORA_DESDE ? nowHM : RESERVA_HORA_DESDE;
-        if (efectivo > RESERVA_HORA_HASTA) horaReservation.removeAttribute('min');
-        else horaReservation.min = efectivo;
-      } else if (fechaReservation.value) {
-        horaReservation.min = RESERVA_HORA_DESDE;
-      } else {
-        horaReservation.min = RESERVA_HORA_DESDE;
+      const isToday = fechaReservation.value === todayStr;
+      for (const r of slotRadios) {
+        if (!(r instanceof HTMLInputElement)) continue;
+        const pastToday = isToday && r.value < nowHM;
+        r.disabled = pastToday;
+        if (pastToday && r.checked) {
+          r.checked = false;
+          horaHidden.value = '';
+        }
+      }
+
+      if (isToday && horaHidden.value && horaHidden.value < nowHM) {
+        horaHidden.value = '';
+        for (const r of slotRadios) {
+          if (r instanceof HTMLInputElement) r.checked = false;
+        }
       }
     };
 
@@ -745,21 +847,30 @@ const reservationN8nWebhookUrl =
       fechaReservation.min = new Date().toISOString().slice(0, 10);
 
     if (fechaReservation instanceof HTMLInputElement) {
-      fechaReservation.addEventListener('input', syncReservationHoraMinFromFecha);
-      fechaReservation.addEventListener('change', syncReservationHoraMinFromFecha);
+      fechaReservation.addEventListener('input', syncReservationSlotsFromFecha);
+      fechaReservation.addEventListener('change', syncReservationSlotsFromFecha);
     }
-    syncReservationHoraMinFromFecha();
+
+    reservationForm.addEventListener('change', (ev) => {
+      if (!(horaHidden instanceof HTMLInputElement)) return;
+      const t = ev.target;
+      if (t instanceof HTMLInputElement && t.matches('input[data-reserva-slot]') && t.checked)
+        horaHidden.value = t.value;
+    });
+
+    syncReservationSlotsFromFecha();
 
     reservationForm.addEventListener('submit', async (submitEv) => {
       submitEv.preventDefault();
       hideReservationFormAlert();
-      syncReservationHoraMinFromFecha();
+      syncReservationSlotsFromFecha();
 
       const nombreEl = reservationForm.querySelector('input[name="nombre"]');
       const telEl = reservationForm.querySelector('input[name="telefono"]');
       const fechaEl = reservationForm.querySelector('input[name="fecha"]');
       const horaEl = reservationForm.querySelector('input[name="hora"]');
       const personasEl = reservationForm.querySelector('input[name="personas"]');
+      const firstHoraSlotInput = reservationForm.querySelector('input[data-reserva-slot]:not(:disabled)');
       /** @type {{ campo: string; mensaje: string; input?: HTMLElement }[]} */
       const issues = [];
 
@@ -782,13 +893,12 @@ const reservationN8nWebhookUrl =
       else {
         const todayStrCheck = new Date().toISOString().slice(0, 10);
         if (fechaEl.value === todayStrCheck) {
-          const dh = new Date();
-          const nowHMSubmit = `${String(dh.getHours()).padStart(2, '0')}:${String(dh.getMinutes()).padStart(2, '0')}`;
+          const nowHMSubmit = getNowHM();
           if (nowHMSubmit > RESERVA_HORA_HASTA)
             issues.push({
               campo: 'fecha',
               mensaje:
-                'Para hoy ya no hay reservas (el horario permitido llega hasta las 23:00). Elige otra fecha.',
+                `Para hoy ya no hay reservas online (último turno disponible hasta las ${RESERVA_HORA_HASTA}). Elige otra fecha.`,
               input: fechaEl,
             });
         }
@@ -796,14 +906,29 @@ const reservationN8nWebhookUrl =
 
       if (!(horaEl instanceof HTMLInputElement))
         issues.push({ campo: 'hora', mensaje: 'Campo hora no existe en el formulario.' });
-      else if (!horaEl.value)
-        issues.push({ campo: 'hora', mensaje: 'Sin hora — elige la hora prevista para la mesa.', input: horaEl });
+      else if (!horaEl.value.trim())
+        issues.push({
+          campo: 'hora',
+          mensaje: 'Selecciona un horario en Comida o en Cena.',
+          input: firstHoraSlotInput instanceof HTMLElement ? firstHoraSlotInput : horaEl,
+        });
       else {
-        if (horaEl.value < RESERVA_HORA_DESDE || horaEl.value > RESERVA_HORA_HASTA)
-          issues.push({ campo: 'hora', mensaje: 'La hora debe estar entre las 9:00 y las 23:00.', input: horaEl });
-        const horaMin = horaEl.getAttribute('min');
-        if (horaEl.value >= RESERVA_HORA_DESDE && horaEl.value <= RESERVA_HORA_HASTA && horaMin && horaEl.value < horaMin)
-          issues.push({ campo: 'hora', mensaje: 'Para hoy, la hora no puede ser anterior a la hora actual.', input: horaEl });
+        if (!RESERVA_SLOTS_SET.has(horaEl.value))
+          issues.push({
+            campo: 'hora',
+            mensaje: `Elige una hora entre las opciones disponibles (${RESERVA_HORA_DESDE}–${RESERVA_HORA_HASTA}).`,
+            input: firstHoraSlotInput instanceof HTMLElement ? firstHoraSlotInput : horaEl,
+          });
+        const todayStrCheck = new Date().toISOString().slice(0, 10);
+        if (fechaEl instanceof HTMLInputElement && fechaEl.value === todayStrCheck) {
+          const nowHMSubmit = getNowHM();
+          if (horaEl.value < nowHMSubmit)
+            issues.push({
+              campo: 'hora',
+              mensaje: 'Para hoy, elige un horario igual o posterior a la hora actual.',
+              input: firstHoraSlotInput instanceof HTMLElement ? firstHoraSlotInput : horaEl,
+            });
+        }
       }
 
       let personasNum = NaN;
@@ -849,31 +974,6 @@ const reservationN8nWebhookUrl =
         detalle_alergias: alergico ? (detalleAlergias || null) : null,
       };
 
-      console.info('[Reserva] Información válida. Enviando solicitud:', payloadN8n);
-
-      if (reservationN8nWebhookUrl) {
-        try {
-          const resN8n = await fetch(reservationN8nWebhookUrl, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify(payloadN8n),
-          });
-          if (!resN8n.ok) {
-            const bodyText = await resN8n.text().catch(() => '');
-            console.error('[Reserva] n8n webhook error HTTP', resN8n.status, bodyText.slice(0, 800));
-          } else {
-            console.info('[Reserva] Payload recibido por n8n (HTTP', resN8n.status + ').');
-          }
-        } catch (err) {
-          console.error('[Reserva] Fallo de red o CORS al llamar al webhook n8n:', err);
-        }
-      } else {
-        console.warn(
-          '[Reserva] Sin PUBLIC_N8N_RESERVA_WEBHOOK_URL — configura la URL del Webhook en .env para enviar datos a n8n.',
-        );
-      }
-
       const bodyLines = [
         'Hola, quiero reservar mesa en Sabor & Salsa.',
         '',
@@ -889,8 +989,56 @@ const reservationN8nWebhookUrl =
             ]
           : []),
       ];
+      const waText = bodyLines.join('\n');
 
-      window.open(`https://wa.me/${RESERVATION_WA}?text=${encodeURIComponent(bodyLines.join('\n'))}`, '_blank', 'noopener,noreferrer');
+      const openReservationWhatsApp = () => {
+        window.open(`https://wa.me/${RESERVATION_WA}?text=${encodeURIComponent(waText)}`, '_blank', 'noopener,noreferrer');
+      };
+
+      /** @param {string} bodyText */
+      const n8nHintFromBody = (bodyText) => {
+        const u = bodyText.toLowerCase();
+        if (u.includes('respond to webhook'))
+          return 'En n8n el flujo necesita un nodo Respond to Webhook enlazado al Webhook (o activa la respuesta automática en el nodo Webhook). Revisa también que la URL sea la de Producción y que el flujo esté activo.';
+        return 'Revisa en n8n que el flujo esté activo, que la URL del Webhook sea la correcta y que no falle ningún nodo previo.';
+      };
+
+      if (reservationN8nWebhookUrl) {
+        try {
+          const resN8n = await fetch(reservationN8nWebhookUrl, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payloadN8n),
+          });
+          const bodyText = await resN8n.text().catch(() => '');
+          if (!resN8n.ok) {
+            let serverMsg = '';
+            try {
+              const j = JSON.parse(bodyText);
+              if (j && typeof j.message === 'string') serverMsg = j.message;
+            } catch {
+              serverMsg = bodyText.trim().slice(0, 400);
+            }
+            const hint = n8nHintFromBody(serverMsg || bodyText);
+            showReservationSendError(`No se pudo registrar la reserva (error ${resN8n.status}).`, [serverMsg || 'Respuesta sin detalle del servidor.', hint]);
+            return;
+          }
+          hideReservationFormAlert();
+          openReservationWhatsApp();
+        } catch {
+          showReservationSendError(
+            'No se pudo conectar con el servidor de reservas.',
+            [
+              'Comprueba tu conexión; si hay error de red o bloqueador, prueba desde otro navegador.',
+              'Si el fallo sigue igual, revisa en n8n la URL del Webhook, CORS y que el workflow esté publicado.',
+            ],
+          );
+          return;
+        }
+      } else {
+        openReservationWhatsApp();
+      }
     });
   }
 
