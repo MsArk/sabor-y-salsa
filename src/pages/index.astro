@@ -668,7 +668,9 @@ const reservationSlotsCena = [
                 name="detalle_alergias" rows="2" placeholder="Indica las alergias o advertencias relevantes para cocina"></textarea>
             </label>
             <div class="pt-4">
-              <button type="submit" class="metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong">
+              <button id="reserva-submit-btn"
+                type="submit"
+                class="metallic-gradient text-on-primary font-label font-bold px-8 py-4 rounded-lg uppercase tracking-widest btn-hover-strong disabled:pointer-events-none disabled:opacity-55">
                 Confirmar Reserva
               </button>
             </div>
@@ -712,13 +714,19 @@ const reservationSlotsCena = [
   }, { threshold: 0.2 });
   revealNodes.forEach((node) => observer.observe(node));
 
-  /** Reserva: validación, mensajes en el formulario y envío por WhatsApp */
+  /** Reserva: validación, mensajes en el formulario y envío al webhook (n8n). */
   const reservationForm = document.getElementById('reserva-form');
   const reservationFormAlert = document.getElementById('reserva-form-alert');
+  const reservationAlertClassesError =
+    'hidden rounded-xl border border-error/35 bg-error-container/25 px-4 py-3 text-sm text-on-error-container [&_strong]:font-semibold [&_strong]:text-on-error-container';
+  const reservationAlertClassesSuccess =
+    'rounded-xl border border-primary/40 bg-primary/10 px-4 py-3 text-sm text-on-surface [&_strong]:font-semibold';
+  const reservationAlertClassesPending =
+    'rounded-xl border border-outline/45 bg-surface-container-highest/50 px-4 py-3 text-sm text-on-surface-variant';
 
   const hideReservationFormAlert = () => {
     if (!(reservationFormAlert instanceof HTMLElement)) return;
-    reservationFormAlert.classList.add('hidden');
+    reservationFormAlert.className = reservationAlertClassesError;
     reservationFormAlert.textContent = '';
     reservationFormAlert.setAttribute('aria-hidden', 'true');
   };
@@ -728,6 +736,7 @@ const reservationSlotsCena = [
    */
   const showReservationFormIssues = (issues) => {
     if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.className = reservationAlertClassesError.replace(/^hidden /, '');
     reservationFormAlert.classList.remove('hidden');
     reservationFormAlert.removeAttribute('aria-hidden');
 
@@ -766,6 +775,7 @@ const reservationSlotsCena = [
   /** Fallo después de pasar validación (webhook / red). No usa la lista tipo “Por completar”. */
   const showReservationSendError = (title, paragraphs) => {
     if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.className = reservationAlertClassesError.replace(/^hidden /, '');
     reservationFormAlert.classList.remove('hidden');
     reservationFormAlert.removeAttribute('aria-hidden');
 
@@ -786,10 +796,47 @@ const reservationSlotsCena = [
     reservationFormAlert.replaceChildren(h, box);
     reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   };
+
+  const showReservationSubmitSuccess = () => {
+    if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.className = reservationAlertClassesSuccess;
+    reservationFormAlert.removeAttribute('aria-hidden');
+    reservationFormAlert.classList.remove('hidden');
+
+    const h = document.createElement('p');
+    h.className = 'font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-2';
+    h.textContent = 'Reserva enviada';
+
+    const p = document.createElement('p');
+    p.className = 'text-sm leading-relaxed text-on-surface/90';
+    p.textContent =
+      'Tu solicitud se ha registrado correctamente. Si hace falta confirmación, te contactaremos.';
+
+    reservationFormAlert.replaceChildren(h, p);
+    reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+
+  /** Mientras dura la petición al webhook */
+  const showReservationSendingStatus = () => {
+    if (!(reservationFormAlert instanceof HTMLElement)) return;
+    reservationFormAlert.className = reservationAlertClassesPending;
+    reservationFormAlert.removeAttribute('aria-hidden');
+    reservationFormAlert.classList.remove('hidden');
+
+    const h = document.createElement('p');
+    h.className = 'font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-2';
+    h.textContent = 'Enviando…';
+
+    const p = document.createElement('p');
+    p.className = 'text-sm leading-relaxed text-on-surface/85';
+    p.textContent = 'Estamos enviando tu reserva al servidor; no cierres la página.';
+
+    reservationFormAlert.replaceChildren(h, p);
+    reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
   const allergyCheckbox = document.getElementById('reserva-alergico');
   const allergyWrap = document.getElementById('reserva-alergias-wrap');
   const allergyDetail = document.getElementById('reserva-alergias-detalle');
-  const RESERVATION_WA = '34639810204';
 
   const syncReservationAllergyField = () => {
     const show = allergyCheckbox instanceof HTMLInputElement && allergyCheckbox.checked;
@@ -859,6 +906,25 @@ const reservationSlotsCena = [
     });
 
     syncReservationSlotsFromFecha();
+
+    const reservationSubmitBtn = reservationForm.querySelector('#reserva-submit-btn');
+
+    const setReservationSubmitBusy = (busy) => {
+      if (!(reservationSubmitBtn instanceof HTMLButtonElement)) return;
+      if (busy) {
+        if (!(reservationSubmitBtn.dataset.labelDefault || '').trim())
+          reservationSubmitBtn.dataset.labelDefault =
+            reservationSubmitBtn.textContent.trim() || 'Confirmar Reserva';
+        reservationSubmitBtn.disabled = true;
+        reservationSubmitBtn.setAttribute('aria-busy', 'true');
+        reservationSubmitBtn.textContent = 'Enviando…';
+        return;
+      }
+      reservationSubmitBtn.disabled = false;
+      reservationSubmitBtn.removeAttribute('aria-busy');
+      reservationSubmitBtn.textContent =
+        reservationSubmitBtn.dataset.labelDefault?.trim() || 'Confirmar Reserva';
+    };
 
     reservationForm.addEventListener('submit', async (submitEv) => {
       submitEv.preventDefault();
@@ -974,27 +1040,6 @@ const reservationSlotsCena = [
         detalle_alergias: alergico ? (detalleAlergias || null) : null,
       };
 
-      const bodyLines = [
-        'Hola, quiero reservar mesa en Sabor & Salsa.',
-        '',
-        `Nombre: ${nombreOk}`,
-        `Teléfono: ${telOk}`,
-        `Fecha: ${fechaOk}`,
-        `Hora: ${horaOk}`,
-        `Personas: ${personasNum}`,
-        ...(alergico
-          ? [
-              '',
-              `Alergias / intolerancias: sí${detalleAlergias ? `. ${detalleAlergias}` : ''}`,
-            ]
-          : []),
-      ];
-      const waText = bodyLines.join('\n');
-
-      const openReservationWhatsApp = () => {
-        window.open(`https://wa.me/${RESERVATION_WA}?text=${encodeURIComponent(waText)}`, '_blank', 'noopener,noreferrer');
-      };
-
       /** @param {string} bodyText */
       const n8nHintFromBody = (bodyText) => {
         const u = bodyText.toLowerCase();
@@ -1003,41 +1048,54 @@ const reservationSlotsCena = [
         return 'Revisa en n8n que el flujo esté activo, que la URL del Webhook sea la correcta y que no falle ningún nodo previo.';
       };
 
-      if (reservationN8nWebhookUrl) {
-        try {
-          const resN8n = await fetch(reservationN8nWebhookUrl, {
-            method: 'POST',
-            mode: 'cors',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify(payloadN8n),
-          });
-          const bodyText = await resN8n.text().catch(() => '');
-          if (!resN8n.ok) {
-            let serverMsg = '';
-            try {
-              const j = JSON.parse(bodyText);
-              if (j && typeof j.message === 'string') serverMsg = j.message;
-            } catch {
-              serverMsg = bodyText.trim().slice(0, 400);
-            }
-            const hint = n8nHintFromBody(serverMsg || bodyText);
-            showReservationSendError(`No se pudo registrar la reserva (error ${resN8n.status}).`, [serverMsg || 'Respuesta sin detalle del servidor.', hint]);
-            return;
+      if (!reservationN8nWebhookUrl) {
+        showReservationSendError(
+          'No está configurado el envío automático.',
+          [
+            'Falta la variable PUBLIC_N8N_RESERVA_WEBHOOK_URL en el entorno donde se construye el sitio (por ejemplo «.env»).',
+            'Define la URL de producción del Webhook en n8n y vuelve a generar la web.',
+          ],
+        );
+        return;
+      }
+
+      showReservationSendingStatus();
+      setReservationSubmitBusy(true);
+
+      try {
+        const resN8n = await fetch(reservationN8nWebhookUrl, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payloadN8n),
+        });
+        const bodyText = await resN8n.text().catch(() => '');
+        if (!resN8n.ok) {
+          let serverMsg = '';
+          try {
+            const j = JSON.parse(bodyText);
+            if (j && typeof j.message === 'string') serverMsg = j.message;
+          } catch {
+            serverMsg = bodyText.trim().slice(0, 400);
           }
-          hideReservationFormAlert();
-          openReservationWhatsApp();
-        } catch {
-          showReservationSendError(
-            'No se pudo conectar con el servidor de reservas.',
-            [
-              'Comprueba tu conexión; si hay error de red o bloqueador, prueba desde otro navegador.',
-              'Si el fallo sigue igual, revisa en n8n la URL del Webhook, CORS y que el workflow esté publicado.',
-            ],
-          );
+          const hint = n8nHintFromBody(serverMsg || bodyText);
+          showReservationSendError(`No se pudo registrar la reserva (error ${resN8n.status}).`, [serverMsg || 'Respuesta sin detalle del servidor.', hint]);
           return;
         }
-      } else {
-        openReservationWhatsApp();
+        showReservationSubmitSuccess();
+        reservationForm.reset();
+        syncReservationSlotsFromFecha();
+        syncReservationAllergyField();
+      } catch {
+        showReservationSendError(
+          'No se pudo conectar con el servidor de reservas.',
+          [
+            'Comprueba tu conexión; si hay error de red o bloqueador, prueba desde otro navegador.',
+            'Si el fallo sigue igual, revisa en n8n la URL del Webhook, CORS y que el workflow esté publicado.',
+          ],
+        );
+      } finally {
+        setReservationSubmitBusy(false);
       }
     });
   }
