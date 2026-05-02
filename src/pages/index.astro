@@ -3,6 +3,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Nav from "@/shared/components/Nav.astro";
 import Footer from "@/shared/components/Footer.astro";
 import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
+import MenuCartaCarousel from "@/features/carta/components/MenuCartaCarousel";
+import {
+  calientesSlides,
+  entrantesSlides,
+} from "@/features/carta/data/carta-carousel-slides";
 
 /** Producción Webhook URL del flujo n8n (nodo Webhook). */
 const reservationN8nWebhookUrl =
@@ -40,8 +45,11 @@ const reservationSlotsCena = [
   <Nav />
   <main>
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden" id="inicio">
-      <div class="absolute inset-0 z-0">
+    <section
+      class="relative flex min-h-[100dvh] items-center justify-center overflow-x-hidden px-0 pb-8 pt-[var(--site-header-height)] md:pb-12"
+      id="inicio"
+    >
+      <div class="absolute inset-0 z-0 overflow-hidden">
         <img alt="Sabor &amp; Salsa Interior" class="w-full h-full object-cover opacity-60 scale-105"
           src="/img/hero-interior.jpg" />
         <div class="absolute inset-0 bg-gradient-to-b from-surface/40 via-surface/60 to-surface"></div>
@@ -51,7 +59,7 @@ const reservationSlotsCena = [
         <div class="meteor m2" aria-hidden="true"></div>
         <div class="meteor m3" aria-hidden="true"></div>
       </div>
-      <div class="relative z-10 text-center max-w-4xl px-6 reveal in">
+      <div class="relative z-10 text-center max-w-4xl px-6 mt-6 reveal in">
         <span class="font-label text-primary uppercase tracking-[0.4em] text-xs mb-6 block">Est. Lima <span data-current-year></span></span>
         <h1 class="hero-title font-headline text-6xl md:text-8xl lg:text-9xl font-bold text-on-surface leading-none tracking-tighter mb-8">
           SABOR <span class="italic font-normal text-primary">&amp;</span> SALSA
@@ -143,130 +151,26 @@ const reservationSlotsCena = [
             Un viaje sensorial por los distritos gastronomicos de Lima.
           </p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 md:items-stretch gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-stretch gap-6">
           <!-- Entrantes -->
-          <div class="md:h-full min-h-0 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+          <div class="lg:h-full min-h-0 min-w-0 bg-surface-container-high p-5 sm:p-8 rounded-xl flex flex-col glow-card">
             <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
               <img alt="Entrantes" class="w-full h-full object-cover" src="/img/entrantes.png" />
             </div>
             <div>
               <h3 class="font-headline text-2xl font-bold mb-2">ENTRANTES</h3>
               <span class="carta-chip carta-chip--entrantes">Para empezar el ritmo</span>
-              <div
-                class="menu-carta-carousel"
-                role="region"
-                aria-roledescription="carrusel"
-                aria-label="Lista de entrantes"
-                tabindex="0"
-                data-menu-carousel
-              >
-                <div class="menu-carta-carousel__viewport overflow-hidden rounded-lg">
-                  <div
-                    class="flex items-start transition-transform duration-300 motion-reduce:transition-none"
-                    style="transition-timing-function: var(--motion-snap)"
-                    data-carousel-track
-                  >
-                    <div class="min-w-full shrink-0 space-y-3 pr-1" data-carousel-panel>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Tequeños</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Crujientes palitos rellenos de queso fundido.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">12 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Yuca frita</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Yuca dorada con salsa huancaina.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">12 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de alitas</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Alitas fritas con patatas fritas.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">15 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Causa limeña</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Papa amarilla con aji amarillo y relleno de pollo.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">15 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Salchipapas</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Patatas fritas con hot dogs y salsas.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">10 €</span>
-                      </div>
-                    </div>
-                    <div class="min-w-full shrink-0 space-y-3 pl-1" data-carousel-panel>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de patatas</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Patatas fritas.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">7 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Porción de arroz</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Arroz blanco.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">5 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Torreznos</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Desde Soria a tu estómago.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">12,5 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Croquetas</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Con toque ibérico.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">13 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Anticuchos</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Anticuchos de ternera, acompañados con crema a la Huancaina.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold">15 €</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center justify-between gap-3 mt-6 pt-6 border-t border-outline-variant/15">
-                  <button
-                    type="button"
-                    class="menu-carta-carousel__btn shrink-0 flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/25 text-primary transition-colors hover:border-primary hover:bg-primary/10 disabled:pointer-events-none disabled:opacity-25 disabled:hover:border-outline-variant/25 disabled:hover:bg-transparent"
-                    aria-label="Entrantes anteriores"
-                    data-carousel-prev
-                  >
-                    <span aria-hidden class="material-symbols-outlined text-xl">chevron_left</span>
-                  </button>
-                  <div class="flex justify-center gap-2 min-h-6 flex-1 mx-2" data-carousel-dots></div>
-                  <button
-                    type="button"
-                    class="menu-carta-carousel__btn shrink-0 flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/25 text-primary transition-colors hover:border-primary hover:bg-primary/10 disabled:pointer-events-none disabled:opacity-25 disabled:hover:border-outline-variant/25 disabled:hover:bg-transparent"
-                    aria-label="Entrantes siguientes"
-                    data-carousel-next
-                  >
-                    <span aria-hidden class="material-symbols-outlined text-xl">chevron_right</span>
-                  </button>
-                </div>
-                <p class="sr-only" aria-live="polite" data-carousel-status aria-atomic="true"></p>
-              </div>
+              <MenuCartaCarousel
+                client:visible
+                slides={entrantesSlides}
+                ariaLabel="Lista de entrantes"
+                prevLabel="Entrantes anteriores"
+                nextLabel="Entrantes siguientes"
+              />
             </div>
           </div>
           <!-- Platos Calientes -->
-          <div class="md:h-full min-h-0 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+          <div class="lg:h-full min-h-0 min-w-0 bg-surface-container-high p-5 sm:p-8 rounded-xl flex flex-col glow-card">
             <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
               <img alt="Platos Calientes - Street Food Latino" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                 src="/img/platos-calientes.png" />
@@ -274,167 +178,17 @@ const reservationSlotsCena = [
             <div>
               <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">PLATOS CALIENTES</h3>
               <span class="carta-chip carta-chip--calientes">Fuego en cocina</span>
-              <div
-                class="menu-carta-carousel"
-                role="region"
-                aria-roledescription="carrusel"
-                aria-label="Lista de platos calientes"
-                tabindex="0"
-                data-menu-carousel
-              >
-                <div class="menu-carta-carousel__viewport overflow-hidden rounded-lg">
-                  <div
-                    class="flex items-start transition-transform duration-300 motion-reduce:transition-none"
-                    style="transition-timing-function: var(--motion-snap)"
-                    data-carousel-track
-                  >
-                    <div class="min-w-full shrink-0 space-y-3 pr-1" data-carousel-panel>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Lomo Saltado</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Wok a fuego extremadamente alto (punto de humo).</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">22 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Chaufa de Pollo</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Delicioso arroz fusión peruana-oriental.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">18 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Chaufa de Carne</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Delicioso arroz fusión peruana-oriental.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">20 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Chaufa de Marisco</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Fusión peruana-oriental. Con sabor peruano.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">25 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Arroz con Marisco</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Tipico arroz peruano con mixtura de marisco.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">25 €</span>
-                      </div>
-                    </div>
-                    <div class="min-w-full shrink-0 space-y-3 px-1" data-carousel-panel>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Duo Marino</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Cheviche de pescado y con chicharron de pescado.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">25 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Trio Marino</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Tres deliciosas versiones de nuestro mar.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">35 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Parrilla</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Nuestra típica parrilla con mixturas pollo, chuletas de cerdo, filetes de ternera, anticuchos y patatas a la parrilla.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">40 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea personal</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado con yuquitas fritas y nuestra deciciosa salsa criolla de cebolla.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">25 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea mixta personal</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado, aros de calamar y camarones empanizados con yuquitas fritas y su nuestra deciciosa salsa criolla de cebolla.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">28 €</span>
-                      </div>
-                    </div>
-                    <div class="min-w-full shrink-0 space-y-3 px-1" data-carousel-panel>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea mixta familiar</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado, aros de calamar y camarones empanizados con yuquitas fritas y su nuestra deciciosa salsa criolla de cebolla.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">80 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Jalea familiar</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Crocantes trozos de pescado con yuquitas fritas y nuestra deciciosa salsa criolla de cebolla.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">77,5 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Mostrito</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Cuarto de pollo a la brasa, patatas fritas y su rico chaufa.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">20 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Pollada peruana</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Deliciosa pollada acompañada de sus patatas a la parrilla, ensalda y cremas.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">20 €</span>
-                      </div>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Pollo broster</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Crujiente pollo broster, acompañada de patatas fritas, ensalda y cremas.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">20 €</span>
-                      </div>
-                    </div>
-                    <div class="min-w-full shrink-0 space-y-3 pl-1" data-carousel-panel>
-                      <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                        <div class="max-w-md">
-                          <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Entrecot</h3>
-                          <p class="font-body text-sm text-on-surface-variant">Delicioso entrocot acompañado de patatas a la parilla y cremas.</p>
-                        </div>
-                        <span class="font-headline text-primary font-bold shrink-0">20 €</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center justify-between gap-3 mt-6 pt-6 border-t border-outline-variant/15">
-                  <button
-                    type="button"
-                    class="menu-carta-carousel__btn shrink-0 flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/25 text-primary transition-colors hover:border-primary hover:bg-primary/10 disabled:pointer-events-none disabled:opacity-25 disabled:hover:border-outline-variant/25 disabled:hover:bg-transparent"
-                    aria-label="Platos calientes anteriores"
-                    data-carousel-prev
-                  >
-                    <span aria-hidden class="material-symbols-outlined text-xl">chevron_left</span>
-                  </button>
-                  <div class="flex justify-center gap-2 min-h-6 flex-1 mx-2 flex-wrap" data-carousel-dots></div>
-                  <button
-                    type="button"
-                    class="menu-carta-carousel__btn shrink-0 flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant/25 text-primary transition-colors hover:border-primary hover:bg-primary/10 disabled:pointer-events-none disabled:opacity-25 disabled:hover:border-outline-variant/25 disabled:hover:bg-transparent"
-                    aria-label="Platos calientes siguientes"
-                    data-carousel-next
-                  >
-                    <span aria-hidden class="material-symbols-outlined text-xl">chevron_right</span>
-                  </button>
-                </div>
-                <p class="sr-only" aria-live="polite" data-carousel-status aria-atomic="true"></p>
-              </div>
+              <MenuCartaCarousel
+                client:visible
+                slides={calientesSlides}
+                ariaLabel="Lista de platos calientes"
+                prevLabel="Platos calientes anteriores"
+                nextLabel="Platos calientes siguientes"
+              />
             </div>
           </div>
           <!-- Platos Fríos -->
-          <div class="md:h-full min-h-0 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+          <div class="lg:h-full min-h-0 min-w-0 bg-surface-container-high p-5 sm:p-8 rounded-xl flex flex-col glow-card">
             <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
               <img alt="Platos Fríos - Ceviches y Tiraditos" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                 src="/img/platos-frios.png" />
@@ -443,29 +197,29 @@ const reservationSlotsCena = [
               <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">PLATOS FRÍOS</h3>
               <span class="carta-chip carta-chip--frios">Del mar a la mesa</span>
               <div class="space-y-3">
-                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                  <div class="max-w-md">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-start menu-option-card rounded-lg py-2 border border-transparent">
+                  <div class="min-w-0">
                     <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche clásico personal</h3>
                     <p class="font-body text-sm text-on-surface-variant">Pescado marinado en jugo de limón, cebolla y especias.</p>
                   </div>
                   <span class="font-headline text-cyan-400 font-bold shrink-0">22,5 €</span>
                 </div>
-                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                  <div class="max-w-md">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-start menu-option-card rounded-lg py-2 border border-transparent">
+                  <div class="min-w-0">
                     <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche clásico familiar</h3>
                     <p class="font-body text-sm text-on-surface-variant">Pescado marinado en jugo de limón, cebolla y especias.</p>
                   </div>
                   <span class="font-headline text-cyan-400 font-bold shrink-0">70 €</span>
                 </div>
-                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                  <div class="max-w-md">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-start menu-option-card rounded-lg py-2 border border-transparent">
+                  <div class="min-w-0">
                     <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche mixto personal</h3>
                     <p class="font-body text-sm text-on-surface-variant">Pescado, calamar y camarón marinado en jugo de limón, cebolla y especias.</p>
                   </div>
                   <span class="font-headline text-cyan-400 font-bold shrink-0">25 €</span>
                 </div>
-                <div class="flex justify-between items-start menu-option-card rounded-lg px-3 py-2 border border-transparent">
-                  <div class="max-w-md">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-start menu-option-card rounded-lg py-2 border border-transparent">
+                  <div class="min-w-0">
                     <h3 class="font-headline text-xl font-bold text-on-surface mb-1">Ceviche mixto familiar</h3>
                     <p class="font-body text-sm text-on-surface-variant">Pescado, calamar y camarón marinado en jugo de limón, cebolla y especias.</p>
                   </div>
@@ -475,7 +229,7 @@ const reservationSlotsCena = [
             </div>
           </div>
           <!-- Postres -->
-          <div class="md:h-full min-h-0 bg-surface-container-high p-8 rounded-xl flex flex-col glow-card">
+          <div class="lg:h-full min-h-0 min-w-0 bg-surface-container-high p-5 sm:p-8 rounded-xl flex flex-col glow-card">
             <div class="h-48 mb-6 overflow-hidden rounded-lg shrink-0">
               <img alt="Postres" class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                 src="/img/postres.png" />
@@ -484,21 +238,21 @@ const reservationSlotsCena = [
               <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">POSTRES</h3>
               <span class="carta-chip carta-chip--postres">El gustito</span>
               <div class="space-y-3">
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-center menu-option-card rounded-lg py-2 border border-transparent">
                   <span class="font-headline text-lg font-bold text-on-surface">Tres leches</span>
-                  <span class="font-headline text-primary font-bold">6 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">6 €</span>
                 </div>
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-center menu-option-card rounded-lg py-2 border border-transparent">
                   <span class="font-headline text-lg font-bold text-on-surface">Tarta de chocolate</span>
-                  <span class="font-headline text-primary font-bold">6 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">6 €</span>
                 </div>
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-center menu-option-card rounded-lg py-2 border border-transparent">
                   <span class="font-headline text-lg font-bold text-on-surface">Tarta helada</span>
-                  <span class="font-headline text-primary font-bold">6 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">6 €</span>
                 </div>
-                <div class="flex justify-between items-center menu-option-card rounded-lg px-3 py-2 border border-transparent">
+                <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 items-center menu-option-card rounded-lg py-2 border border-transparent">
                   <span class="font-headline text-lg font-bold text-on-surface">Copa de helado</span>
-                  <span class="font-headline text-primary font-bold">7,5 €</span>
+                  <span class="font-headline text-primary font-bold shrink-0">7,5 €</span>
                 </div>
               </div>
             </div>
@@ -1153,237 +907,6 @@ const reservationSlotsCena = [
   }
 
   const reduceMotionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  /**
-   * Carruseles con bucle visual suave (último ↔ primero): clones del último y primer grupo en el DOM.
-   * Si prefers-reduced-motion: ciclo instantáneo sin clones.
-   */
-  document.querySelectorAll("[data-menu-carousel]").forEach((root) => {
-    const track = root.querySelector("[data-carousel-track]");
-    const prev = root.querySelector("[data-carousel-prev]");
-    const next = root.querySelector("[data-carousel-next]");
-    const dotsContainer = root.querySelector("[data-carousel-dots]");
-    const status = root.querySelector("[data-carousel-status]");
-    const originals = track ? [...track.querySelectorAll("[data-carousel-panel]")] : [];
-
-    if (!(track instanceof HTMLElement) || !(prev instanceof HTMLButtonElement) || !(next instanceof HTMLButtonElement) || !dotsContainer || originals.length === 0)
-      return;
-
-    const total = originals.length;
-    const useSmoothLoop = total >= 2 && !reduceMotionMq.matches;
-
-    if (useSmoothLoop) {
-      const cloneLast = originals[total - 1].cloneNode(true);
-      const cloneFirst = originals[0].cloneNode(true);
-      for (const c of [cloneLast, cloneFirst]) {
-        if (c instanceof HTMLElement) {
-          c.removeAttribute("data-carousel-panel");
-          c.setAttribute("aria-hidden", "true");
-          c.tabIndex = -1;
-        }
-      }
-      track.insertBefore(cloneLast, originals[0]);
-      track.appendChild(cloneFirst);
-    }
-
-    /** Con bucle suave: DOM 0 clone-último, 1…total reales, total+1 clone-primero */
-    let slideDomIndex = useSmoothLoop ? 1 : 0;
-    let locked = false;
-    const dotButtons = [];
-
-    const viewportEl = root.querySelector(":scope > .menu-carta-carousel__viewport");
-
-    const syncCarouselViewportHeight = () => {
-      if (!(viewportEl instanceof HTMLElement) || !(track instanceof HTMLElement)) return;
-      const panel = track.children[slideDomIndex];
-      if (!(panel instanceof HTMLElement)) {
-        viewportEl.style.height = "";
-        return;
-      }
-      viewportEl.style.height = `${Math.ceil(panel.scrollHeight)}px`;
-    };
-
-    let resizeTO = 0;
-    window.addEventListener(
-      "resize",
-      () => {
-        window.clearTimeout(resizeTO);
-        resizeTO = window.setTimeout(syncCarouselViewportHeight, 100);
-      },
-      { passive: true },
-    );
-
-    if (typeof ResizeObserver !== "undefined") {
-      const ro = new ResizeObserver(syncCarouselViewportHeight);
-      ro.observe(root);
-    }
-
-    const logicalStable = () => {
-      if (!useSmoothLoop) return Math.max(0, Math.min(total - 1, slideDomIndex));
-      if (slideDomIndex === total + 1) return 0;
-      if (slideDomIndex === 0) return total - 1;
-      return slideDomIndex - 1;
-    };
-
-    const announce = () => {
-      const logical = logicalStable();
-      if (status) status.textContent = `Grupo ${logical + 1} de ${total}`;
-      dotButtons.forEach((btn, i) => {
-        btn.setAttribute("aria-current", i === logical ? "true" : "false");
-      });
-    };
-
-    const setTranslate = (domIdx, instant) => {
-      const noAnim = instant || reduceMotionMq.matches;
-      track.style.transition = noAnim ? "none" : "";
-      track.style.transform = `translateX(${-domIdx * 100}%)`;
-      slideDomIndex = domIdx;
-
-      const flushHeight = () => {
-        requestAnimationFrame(syncCarouselViewportHeight);
-      };
-
-      flushHeight();
-
-      if (instant && reduceMotionMq.matches) return;
-
-      if (instant && !reduceMotionMq.matches) {
-        void track.offsetHeight;
-        requestAnimationFrame(() => {
-          track.style.transition = "";
-          syncCarouselViewportHeight();
-        });
-      }
-    };
-
-    const onNavigateDone = () => {
-      if (useSmoothLoop) {
-        if (slideDomIndex === total + 1) setTranslate(1, true);
-        else if (slideDomIndex === 0) setTranslate(total, true);
-      }
-      locked = false;
-      announce();
-    };
-
-    const goAnimated = (targetDomIdx) => {
-      if (locked || targetDomIdx === slideDomIndex) return;
-      locked = true;
-      setTranslate(targetDomIdx, reduceMotionMq.matches);
-      announce();
-
-      if (reduceMotionMq.matches) {
-        onNavigateDone();
-        return;
-      }
-
-      let done = false;
-      const handleEnd = (e) => {
-        if (done || e.target !== track || e.propertyName !== "transform") return;
-        done = true;
-        track.removeEventListener("transitionend", handleEnd);
-        onNavigateDone();
-      };
-      track.addEventListener("transitionend", handleEnd);
-      window.setTimeout(() => {
-        if (done || !locked) return;
-        done = true;
-        track.removeEventListener("transitionend", handleEnd);
-        onNavigateDone();
-      }, 340);
-    };
-
-    const normalizeIfOnClone = () => {
-      if (!useSmoothLoop) return;
-      if (slideDomIndex === total + 1) setTranslate(1, true);
-      else if (slideDomIndex === 0) setTranslate(total, true);
-    };
-
-    for (let i = 0; i < total; i += 1) {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "menu-carta-carousel__dot";
-      b.setAttribute("aria-label", `Ir al grupo ${i + 1} de ${total}`);
-      const targetLogical = i;
-      b.addEventListener("click", () => {
-        if (locked) return;
-
-        if (!useSmoothLoop) {
-          slideDomIndex = targetLogical;
-          setTranslate(slideDomIndex, reduceMotionMq.matches);
-          announce();
-          return;
-        }
-
-        normalizeIfOnClone();
-
-        const targetDom = targetLogical + 1;
-
-        if (slideDomIndex === targetDom) return;
-
-        if (slideDomIndex === total && targetLogical === 0) {
-          goAnimated(total + 1);
-          return;
-        }
-        if (slideDomIndex === 1 && targetLogical === total - 1) {
-          goAnimated(0);
-          return;
-        }
-
-        goAnimated(targetDom);
-      });
-
-      dotsContainer.appendChild(b);
-      dotButtons.push(b);
-    }
-
-    const step = (direction) => {
-      if (locked || total <= 1) return;
-
-      if (!useSmoothLoop) {
-        const wrapsBackward = direction < 0 && slideDomIndex === 0;
-        const wrapsForward = direction > 0 && slideDomIndex === total - 1;
-        slideDomIndex = (slideDomIndex + direction + total) % total;
-        setTranslate(slideDomIndex, wrapsBackward || wrapsForward);
-        announce();
-        return;
-      }
-
-      normalizeIfOnClone();
-
-      if (direction > 0)
-        goAnimated(slideDomIndex === total ? total + 1 : slideDomIndex + 1);
-
-      else
-        goAnimated(slideDomIndex <= 1 ? 0 : slideDomIndex - 1);
-    };
-
-    prev.addEventListener("click", () => step(-1));
-    next.addEventListener("click", () => step(1));
-
-    reduceMotionMq.addEventListener("change", () => {
-      track.style.transition = reduceMotionMq.matches ? "none" : "";
-      locked = false;
-    });
-
-    root.addEventListener("keydown", (e) => {
-      if (!root.contains(document.activeElement)) return;
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        normalizeIfOnClone();
-        step(1);
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        normalizeIfOnClone();
-        step(-1);
-      }
-    });
-
-    locked = false;
-    slideDomIndex = useSmoothLoop ? 1 : 0;
-    setTranslate(useSmoothLoop ? 1 : 0, true);
-    announce();
-    syncCarouselViewportHeight();
-  });
 
   const hero = document.getElementById("inicio");
   const orbs = hero ? hero.querySelectorAll(".hero-burst-orb") : [];

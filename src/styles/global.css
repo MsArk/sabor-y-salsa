@@ -79,6 +79,8 @@
 /* ─── Custom CSS (style.css original) ─── */
 
 :root {
+  /* Altura del nav fijo (#site-nav-stack); JS la actualiza en Nav.astro */
+  --site-header-height: 7.5rem;
   --spark-gold: #f2ca50;
   --spark-orange: #ff8f3d;
   --spark-crimson: #ff5f3d;
@@ -93,6 +95,10 @@
   --hover-card-bg: rgba(242, 202, 80, 0.06);
   --hover-cta-lift: -3px;
   --hover-cta-scale: 1.03;
+}
+
+html {
+  scroll-padding-top: var(--site-header-height);
 }
 
 .material-symbols-outlined {
@@ -375,12 +381,29 @@
     border-radius: 0.5rem;
   }
 
-  .menu-carta-carousel__dot {
-    @apply h-1.5 min-w-4 max-w-8 shrink-0 cursor-pointer rounded-full border-0 p-0 transition-colors bg-outline-variant/45;
+  /** Flechas agrupadas a la izquierda + barra de progreso (scrollProgress de Embla). */
+  .menu-carta-carousel__progress-track {
+    height: 0.25rem;
+    border-radius: 999px;
+    background: rgba(153, 144, 124, 0.35);
+    overflow: hidden;
   }
 
-  .menu-carta-carousel__dot[aria-current="true"] {
-    @apply bg-primary;
+  .menu-carta-carousel__progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      var(--spark-gold, #f2ca50) 0%,
+      rgba(255, 223, 112, 0.95) 100%
+    );
+    box-shadow: 0 0 12px rgba(242, 202, 80, 0.28);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-carta-carousel__progress-fill {
+      transition: none !important;
+    }
   }
 
   .menu-carta-carousel__viewport {
@@ -393,17 +416,45 @@
     }
   }
 
-  /** Carta (#carta): grid 50/50 — texto puede encoger, precio siempre completo a la derecha */
-  #carta .menu-option-card.flex.justify-between {
-    @apply gap-3;
+  /**
+   * Carrusel carta: translateX(-n×100%) usa el ancho del track (= viewport).
+   * Cada panel debe ser exactamente 100% de ese ancho y permitir encoger texto (min-w-0).
+   */
+  #carta .menu-carta-carousel {
+    @apply w-full min-w-0 max-w-full;
   }
-  #carta .menu-option-card.flex.justify-between > div:first-child {
-    @apply min-w-0 flex-1 pr-2;
+
+  #carta .menu-carta-carousel__viewport {
+    @apply w-full max-w-full min-w-0;
   }
-  #carta .menu-option-card.flex.justify-between > span:first-child.font-headline:not(:only-child) {
-    @apply min-w-0 flex-1 pr-2;
+
+  #carta .menu-carta-carousel .menu-carta-embla__container {
+    @apply flex w-full min-w-0 items-start;
   }
-  #carta .menu-option-card.flex.justify-between > span:last-child.font-headline {
-    @apply shrink-0 tabular-nums text-right;
+
+  #carta .menu-carta-carousel .menu-carta-embla__slide {
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  #carta .menu-carta-carousel .menu-option-card p {
+    overflow-wrap: break-word;
+  }
+
+  #carta .menu-option-card.rounded-lg {
+    min-width: 0;
+  }
+
+  /** Filas de platos: grid en HTML (las utilities flex ganaban a display:grid del layer components). */
+  #carta .menu-option-card > div:first-child {
+    @apply min-w-0 max-w-full;
+  }
+
+  #carta .menu-option-card > span:first-child.font-headline:not(:only-child) {
+    @apply min-w-0 self-center;
+  }
+
+  #carta .menu-option-card > span:last-child.font-headline {
+    @apply tabular-nums text-right whitespace-nowrap justify-self-end;
   }
 }

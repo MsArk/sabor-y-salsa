@@ -111,9 +111,11 @@ const links = [
   const mobileMenu = document.getElementById("mobile-menu");
   const navStack = document.getElementById("site-nav-stack");
 
-  function layoutMobileMenu() {
-    if (!mobileMenu || !navStack) return;
+  function syncNavLayout() {
+    if (!navStack) return;
     const h = navStack.getBoundingClientRect().height;
+    document.documentElement.style.setProperty("--site-header-height", `${h}px`);
+    if (!mobileMenu) return;
     mobileMenu.style.top = `${h}px`;
     mobileMenu.style.height = `calc(100dvh - ${h}px)`;
   }
@@ -123,7 +125,7 @@ const links = [
       const expanded = mobileToggle.getAttribute("aria-expanded") === "true";
       mobileToggle.setAttribute("aria-expanded", String(!expanded));
       mobileMenu.classList.toggle("hidden");
-      if (!mobileMenu.classList.contains("hidden")) layoutMobileMenu();
+      if (!mobileMenu.classList.contains("hidden")) syncNavLayout();
     });
 
     mobileMenu.querySelectorAll("a").forEach((link) => {
@@ -134,6 +136,6 @@ const links = [
     });
   }
 
-  window.addEventListener("resize", layoutMobileMenu);
-  layoutMobileMenu();
+  window.addEventListener("resize", syncNavLayout);
+  syncNavLayout();
 </script>
