@@ -1,0 +1,73 @@
+---
+/** Umbral base en px; el script lo combina con ~42% del alto de ventana. */
+const thresholdPx = 380;
+---
+
+<button
+  type="button"
+  id="scroll-to-top"
+  class="scroll-to-top-fab fixed bottom-6 right-5 z-[90] flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-primary/35 metallic-gradient text-on-primary shadow-[0_6px_24px_rgba(0,0,0,0.35),0_0_20px_rgba(242,202,80,0.18)] md:bottom-8 md:right-8 md:h-14 md:w-14 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+  aria-label="Volver arriba"
+  data-threshold={thresholdPx}
+>
+  <span class="material-symbols-outlined text-[26px] leading-none" aria-hidden="true">arrow_upward</span>
+</button>
+
+<style>
+  .scroll-to-top-fab {
+    transition:
+      opacity 0.3s cubic-bezier(0.2, 0.9, 0.16, 1),
+      transform 0.3s cubic-bezier(0.2, 0.9, 0.16, 1),
+      filter 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px) scale(0.96);
+  }
+  .scroll-to-top-fab.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+  .scroll-to-top-fab.is-visible:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px) scale(1.05);
+  }
+  .scroll-to-top-fab.is-visible:active {
+    transform: translateY(0) scale(0.98);
+  }
+</style>
+
+<script>
+  const fab = document.getElementById("scroll-to-top");
+  if (fab instanceof HTMLButtonElement) {
+    const dataThreshold = fab.dataset.threshold;
+    const baseThreshold = dataThreshold ? Number.parseInt(dataThreshold, 10) : 400;
+
+    const getThreshold = () => Math.max(280, Math.min(baseThreshold, window.innerHeight * 0.42));
+
+    const update = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      fab.classList.toggle("is-visible", y > getThreshold());
+    };
+
+    let scheduled = false;
+    const onScroll = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => {
+        scheduled = false;
+        update();
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
+
+    fab.addEventListener("click", () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      fab.blur();
+    });
+  }
+</script>
