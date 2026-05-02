@@ -517,7 +517,16 @@ import LocationMapEmbed from "@/shared/components/LocationMapEmbed.astro";
         <aside class="lg:col-span-5 flex flex-col gap-6 lg:h-full">
           <div class="bg-surface p-8 rounded-xl border border-outline-variant/20 glow-card lg:flex-1">
             <h3 class="font-headline text-3xl font-bold mb-4">Ubicacion</h3>
-            <p class="text-on-surface-variant mb-4">Calle Guadaira 14, Local nº 3 Madrid, España</p>
+            <p class="text-on-surface-variant mb-4">
+              <a
+                class="underline decoration-primary/35 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                href="https://maps.app.goo.gl/qL7hbrxwEwLQjCGH6"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Calle Guadaira 14, Local nº 3 Madrid, España
+              </a>
+            </p>
             <p class="font-label text-[10px] uppercase tracking-[0.18em] text-primary">Lun-Dom · 12PM - 12AM</p>
             <div class="mt-6">
               <LocationMapEmbed />
