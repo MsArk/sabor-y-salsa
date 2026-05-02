@@ -797,7 +797,11 @@ const reservationSlotsCena = [
     reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   };
 
-  const showReservationSubmitSuccess = () => {
+  /**
+   * Respuesta típica del webhook de reservas (n8n / backend).
+   * @param {null | { ok?: boolean; message?: string; email_sent?: boolean; calendar_event_created?: boolean }} api
+   */
+  const showReservationSubmitSuccess = (api) => {
     if (!(reservationFormAlert instanceof HTMLElement)) return;
     reservationFormAlert.className = reservationAlertClassesSuccess;
     reservationFormAlert.removeAttribute('aria-hidden');
@@ -807,12 +811,46 @@ const reservationSlotsCena = [
     h.className = 'font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-2';
     h.textContent = 'Reserva enviada';
 
+    const defaultMsg =
+      'Tu solicitud se ha registrado correctamente. Si hace falta confirmación, te contactaremos.';
+    const mainText =
+      api && typeof api.message === 'string' && api.message.trim() ? api.message.trim() : defaultMsg;
+
     const p = document.createElement('p');
     p.className = 'text-sm leading-relaxed text-on-surface/90';
-    p.textContent =
-      'Tu solicitud se ha registrado correctamente. Si hace falta confirmación, te contactaremos.';
+    p.textContent = mainText;
 
-    reservationFormAlert.replaceChildren(h, p);
+    const parts = [h, p];
+
+    if (api && typeof api === 'object') {
+      const detailLines = [];
+      if (typeof api.email_sent === 'boolean') {
+        detailLines.push(
+          api.email_sent
+            ? 'Correo de confirmación enviado.'
+            : 'No se pudo enviar el correo automático; si hace falta, te contactaremos.',
+        );
+      }
+      if (typeof api.calendar_event_created === 'boolean') {
+        detailLines.push(
+          api.calendar_event_created
+            ? 'Evento creado en el calendario del restaurante.'
+            : 'No se pudo crear el evento en calendario; te avisaremos si hace falta.',
+        );
+      }
+      if (detailLines.length > 0) {
+        const ul = document.createElement('ul');
+        ul.className = 'mt-3 text-sm leading-relaxed text-on-surface/80 space-y-1.5 list-disc pl-5';
+        for (const line of detailLines) {
+          const li = document.createElement('li');
+          li.textContent = line;
+          ul.append(li);
+        }
+        parts.push(ul);
+      }
+    }
+
+    reservationFormAlert.replaceChildren(...parts);
     reservationFormAlert.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   };
 
@@ -1070,19 +1108,33 @@ const reservationSlotsCena = [
           body: JSON.stringify(payloadN8n),
         });
         const bodyText = await resN8n.text().catch(() => '');
-        if (!resN8n.ok) {
-          let serverMsg = '';
+        /** @type {null | { ok?: boolean; message?: string; email_sent?: boolean; calendar_event_created?: boolean }} */
+        let reservaJson = null;
+        if (bodyText.trim()) {
           try {
             const j = JSON.parse(bodyText);
-            if (j && typeof j.message === 'string') serverMsg = j.message;
+            if (j && typeof j === 'object' && !Array.isArray(j)) reservaJson = j;
           } catch {
-            serverMsg = bodyText.trim().slice(0, 400);
+            /* cuerpo no JSON */
           }
+        }
+        if (!resN8n.ok) {
+          let serverMsg = '';
+          if (reservaJson && typeof reservaJson.message === 'string') serverMsg = reservaJson.message;
+          else serverMsg = bodyText.trim().slice(0, 400);
           const hint = n8nHintFromBody(serverMsg || bodyText);
           showReservationSendError(`No se pudo registrar la reserva (error ${resN8n.status}).`, [serverMsg || 'Respuesta sin detalle del servidor.', hint]);
           return;
         }
-        showReservationSubmitSuccess();
+        if (reservaJson && reservaJson.ok === false) {
+          const serverMsg =
+            typeof reservaJson.message === 'string' && reservaJson.message.trim()
+              ? reservaJson.message.trim()
+              : 'La reserva no se completó.';
+          showReservationSendError('No se pudo completar la reserva.', [serverMsg]);
+          return;
+        }
+        showReservationSubmitSuccess(reservaJson);
         reservationForm.reset();
         syncReservationSlotsFromFecha();
         syncReservationAllergyField();
