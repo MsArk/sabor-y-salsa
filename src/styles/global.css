@@ -355,6 +355,11 @@ html {
     @apply inline-block text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-5 w-fit;
   }
 
+  .carta-chip--desayunos {
+    @apply bg-yellow-800;
+    box-shadow: 0 0 0 1px rgba(234, 179, 8, 0.22);
+  }
+
   .carta-chip--entrantes {
     @apply bg-amber-900;
     box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2);
