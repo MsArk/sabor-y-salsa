@@ -459,7 +459,7 @@ html {
     @apply min-w-0 self-center;
   }
 
-  #carta .menu-option-card > span:last-child.font-headline {
+  #carta .menu-option-card > span:last-child.font-headline:not(:only-child) {
     @apply tabular-nums text-right whitespace-nowrap justify-self-end;
   }
 }
