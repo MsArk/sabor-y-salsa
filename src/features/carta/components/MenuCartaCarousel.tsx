@@ -43,6 +43,11 @@ export default function MenuCartaCarousel({
     [slides.length, reduceMotion],
   );
 
+  const totalItems = useMemo(
+    () => slides.reduce((count, slide) => count + slide.length, 0),
+    [slides],
+  );
+
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -103,8 +108,9 @@ export default function MenuCartaCarousel({
   }, [emblaApi]);
 
   const canNav = snapCount > 1;
+  const showNav = totalItems > 5 && canNav;
   const statusText = canNav ? `Grupo ${selectedIndex + 1} de ${snapCount}` : "";
-  const progressRatio = canNav
+  const progressRatio = showNav
     ? Math.min(1, Math.max(0, scrollProgress))
     : 1;
   const progressPercent = Math.round(progressRatio * 100);
@@ -167,46 +173,50 @@ export default function MenuCartaCarousel({
         </div>
       </div>
 
-      <div className="menu-carta-carousel__nav mt-6 box-border flex w-full min-w-0 items-center gap-3 pt-6 border-t border-outline-variant/15 sm:gap-4">
-        <div className="menu-carta-carousel__arrows flex shrink-0 items-center gap-2">
-          <button
-            type="button"
-            className="menu-carta-carousel__btn flex size-11 shrink-0 items-center justify-center rounded-full border border-outline-variant/35 text-on-surface transition-colors hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-25"
-            aria-label={prevLabel}
-            disabled={!canNav}
-            onClick={scrollPrev}
+      {showNav ? (
+        <div className="menu-carta-carousel__nav mt-6 box-border flex w-full min-w-0 items-center gap-3 pt-6 border-t border-outline-variant/15 sm:gap-4">
+          <div className="menu-carta-carousel__arrows flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              className="menu-carta-carousel__btn flex size-11 shrink-0 items-center justify-center rounded-full border border-outline-variant/35 text-on-surface transition-colors hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-25"
+              aria-label={prevLabel}
+              disabled={!canNav}
+              onClick={scrollPrev}
+            >
+              <ChevronLeft className="size-5" aria-hidden />
+            </button>
+            <button
+              type="button"
+              className="menu-carta-carousel__btn flex size-11 shrink-0 items-center justify-center rounded-full border border-outline-variant/35 text-on-surface transition-colors hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-25"
+              aria-label={nextLabel}
+              disabled={!canNav}
+              onClick={scrollNext}
+            >
+              <ChevronRight className="size-5" aria-hidden />
+            </button>
+          </div>
+          <div
+            className="menu-carta-carousel__progress min-h-11 min-w-0 flex-1 py-4"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progressPercent}
+            aria-valuetext={statusText || "Único grupo"}
           >
-            <ChevronLeft className="size-5" aria-hidden />
-          </button>
-          <button
-            type="button"
-            className="menu-carta-carousel__btn flex size-11 shrink-0 items-center justify-center rounded-full border border-outline-variant/35 text-on-surface transition-colors hover:border-primary hover:text-primary disabled:pointer-events-none disabled:opacity-25"
-            aria-label={nextLabel}
-            disabled={!canNav}
-            onClick={scrollNext}
-          >
-            <ChevronRight className="size-5" aria-hidden />
-          </button>
-        </div>
-        <div
-          className="menu-carta-carousel__progress min-h-11 min-w-0 flex-1 py-4"
-          role="progressbar"
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-valuenow={progressPercent}
-          aria-valuetext={statusText || "Único grupo"}
-        >
-          <div className="menu-carta-carousel__progress-track">
-            <div
-              className="menu-carta-carousel__progress-fill motion-safe:transition-[width] motion-safe:duration-150 motion-safe:ease-out"
-              style={{ width: `${progressPercent}%` }}
-            />
+            <div className="menu-carta-carousel__progress-track">
+              <div
+                className="menu-carta-carousel__progress-fill motion-safe:transition-[width] motion-safe:duration-150 motion-safe:ease-out"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <p className="sr-only" aria-live="polite" aria-atomic="true">
-        {statusText}
-      </p>
+      ) : null}
+      {showNav ? (
+        <p className="sr-only" aria-live="polite" aria-atomic="true">
+          {statusText}
+        </p>
+      ) : null}
     </div>
   );
 }
